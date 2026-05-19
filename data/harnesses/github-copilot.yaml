@@ -21,76 +21,76 @@ platforms:
 implementations:
   - implementationId: copilot-instructions-md
     platforms: [vscode, jetbrains, cli, visual-studio, xcode, eclipse]
-    notes: "Placed in .github/copilot-instructions.md"
+    notes: 'Placed in .github/copilot-instructions.md'
   - implementationId: copilot-path-instructions
     platforms: [vscode, jetbrains, cli]
-    notes: ".github/instructions/*.instructions.md with applyTo glob patterns"
+    notes: '.github/instructions/*.instructions.md with applyTo glob patterns'
   - implementationId: agents-md
     platforms: [cli, vscode, jetbrains]
-    notes: "Supported as a cross-tool instruction format"
+    notes: 'Supported as a cross-tool instruction format'
   - implementationId: create-instructions-cmd
     platforms: [vscode]
-    notes: "VS Code only — generates instructions by analyzing workspace"
+    notes: 'VS Code only — generates instructions by analyzing workspace'
   - implementationId: copilot-builtin-tools
     platforms: [vscode, jetbrains, cli, visual-studio, xcode]
-    notes: "File editing, terminal, codebase search in agent mode"
+    notes: 'File editing, terminal, codebase search in agent mode'
   - implementationId: copilot-mcp
     platforms: [vscode, jetbrains, cli, visual-studio, xcode, eclipse]
-    notes: "MCP servers in agent mode; local + remote (OAuth/PAT); GitHub MCP built into Copilot CLI"
+    notes: 'MCP servers in agent mode; local + remote (OAuth/PAT); GitHub MCP built into Copilot CLI'
   - implementationId: copilot-agent-hooks
     platforms: [cli, github-web]
-    notes: ".github/hooks/*.json — supports preToolUse, postToolUse, stop, and related events; used by Copilot CLI and the cloud coding agent"
+    notes: '.github/hooks/*.json — supports preToolUse, postToolUse, stop, and related events; used by Copilot CLI and the cloud coding agent'
   - implementationId: copilot-slash-commands
     platforms: [vscode, jetbrains, cli]
-    notes: "VS Code has the most commands; JetBrains has a subset; CLI: /agent, /model, /mcp, /lsp, /feedback, /help, /clear, /login"
+    notes: 'VS Code has the most commands; JetBrains has a subset; CLI: /agent, /model, /mcp, /lsp, /feedback, /help, /clear, /login'
   - implementationId: skill-md
-    platforms: [vscode, jetbrains, cli]
-    notes: "Searches .github/skills/, .claude/skills/, .agents/skills/"
+    platforms: [vscode, jetbrains, cli, visual-studio]
+    notes: 'Searches .github/skills/, .claude/skills/, .agents/skills/'
   - implementationId: copilot-skills
-    platforms: [vscode, jetbrains, cli]
-    notes: "Copilot-specific: argument-hint frontmatter, personal skills in ~/.copilot/skills/"
+    platforms: [vscode, jetbrains, cli, visual-studio]
+    notes: 'Copilot-specific: argument-hint frontmatter, personal skills in ~/.copilot/skills/'
   - implementationId: copilot-prompt-files
-    platforms: [vscode, jetbrains, visual-studio, xcode]
-    notes: ".prompt.md files in .github/prompts/ — custom slash commands"
+    platforms: [vscode, jetbrains, visual-studio]
+    notes: '.prompt.md files in .github/prompts/ — custom slash commands'
   - implementationId: copilot-subagents
-    platforms: [vscode, cli, github-web]
-    notes: "Custom agents via .github/agents/*.agent.md, invoked with /agent in CLI; cloud coding agent on GitHub"
+    platforms: [vscode, cli, visual-studio, github-web]
+    notes: 'Custom agents via .github/agents/*.agent.md, invoked with /agent in CLI; Visual Studio also ships built-in agents (@debug, @profiler, @test, @vs); cloud coding agent on GitHub'
   - implementationId: copilot-context
     platforms: [vscode, jetbrains, cli]
-    notes: "@workspace, @file, #codebase — fullest in VS Code"
+    notes: '@workspace, @file, #codebase — fullest in VS Code'
   - implementationId: copilot-settings
     platforms: [vscode, jetbrains, cli, visual-studio, xcode, eclipse]
-    notes: "IDE settings + organization policies on GitHub.com"
+    notes: 'IDE settings + organization policies on GitHub.com'
   - implementationId: copilot-inline-completions
     platforms: [vscode, jetbrains, visual-studio, xcode, eclipse]
-    notes: "Real-time ghost text suggestions as you type"
+    notes: 'Real-time ghost text suggestions as you type'
   - implementationId: copilot-chat-panel
     platforms: [vscode, jetbrains, visual-studio, xcode, eclipse, github-web]
-    notes: "Dedicated chat interface in the IDE"
+    notes: 'Dedicated chat interface in the IDE'
   - implementationId: copilot-cli
     platforms: [cli]
-    notes: "Agentic CLI with approval modes (--allow-tool/--deny-tool/--allow-all-tools), custom agents via /agent, MCP, and file editing"
+    notes: 'Agentic CLI with approval modes (--allow-tool/--deny-tool/--allow-all-tools), custom agents via /agent, MCP, and file editing'
   - implementationId: copilot-memory
     platforms: [vscode, jetbrains, cli]
-    notes: "Copilot Memory: persistent repo-level and user-level memory (public preview)"
+    notes: 'Copilot Memory: persistent repo-level and user-level memory (public preview)'
   - implementationId: copilot-agent-modes
     platforms: [vscode, jetbrains, cli, visual-studio, xcode, github-web]
-    notes: "Chat, agent (autonomous), and cloud coding agent on GitHub"
+    notes: 'Chat, agent (autonomous), and cloud coding agent on GitHub'
   - implementationId: copilot-extensions
     platforms: [vscode, jetbrains]
-    notes: "Marketplace extensions and .github/agents/*.agent.md custom agents"
+    notes: 'Marketplace extensions and .github/agents/*.agent.md custom agents'
   - implementationId: copilot-code-review
     platforms: [vscode, jetbrains, github-web, visual-studio, xcode]
-    notes: "Agentic review with auto-fix via coding agent"
+    notes: 'Agentic review with auto-fix via coding agent'
   - implementationId: copilot-git
     platforms: [vscode, jetbrains, cli, github-web]
-    notes: "Deep GitHub integration — issues, PRs, Actions"
+    notes: 'Deep GitHub integration — issues, PRs, Actions'
   - implementationId: copilot-checkpoints
-    platforms: [vscode, jetbrains]
-    notes: "Editor undo + branch-based rollback for coding agent"
+    platforms: [vscode, jetbrains, visual-studio]
+    notes: 'Editor undo + branch-based rollback for coding agent; Visual Studio has checkpoint/restore UI in agent mode'
   - implementationId: copilot-privacy
     platforms: [vscode, jetbrains, cli, visual-studio, xcode, eclipse, github-web]
-    notes: "Cloud-based, enterprise no-retention option"
+    notes: 'Cloud-based, enterprise no-retention option'
   - implementationId: copilot-models
     platforms: [vscode, jetbrains, cli, visual-studio, xcode]
-    notes: "Claude Sonnet 4.5 (CLI default), Claude Sonnet 4, GPT-5, GPT-4.1, Gemini 2.5 Pro — auto-selection or manual, varies by plan"
+    notes: 'Claude Sonnet 4.5 (CLI default), Claude Sonnet 4, GPT-5, GPT-4.1, Gemini 2.5 Pro — auto-selection or manual, varies by plan'
