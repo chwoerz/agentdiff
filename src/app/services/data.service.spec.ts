@@ -217,3 +217,80 @@ describe("DataService", () => {
     expect(results.harnesses.length).toBe(0);
   });
 });
+
+describe("getFullMatrix", () => {
+  it("should return a row for each feature", () => {
+    const service = new DataService(null as any);
+    service.loadData({
+      features: [
+        { id: "f1", name: "Feature 1", description: "", category: "cat", sortOrder: 1 },
+        { id: "f2", name: "Feature 2", description: "", category: "cat", sortOrder: 2 },
+      ],
+      implementations: [
+        { id: "impl1", name: "Impl 1", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false },
+        { id: "impl2", name: "Impl 2", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false },
+        { id: "impl3", name: "Impl 3", featureId: "f2", description: "", example: "", syntax: "", docUrl: "", userExtensible: false },
+      ],
+      harnesses: [
+        {
+          id: "h1", name: "Harness 1", icon: "h1.svg", website: "", platforms: [{ id: "cli", name: "CLI" }],
+          implementations: [
+            { implementation: { id: "impl1", name: "Impl 1", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false }, platforms: ["cli"], notes: "note1" },
+            { implementation: { id: "impl3", name: "Impl 3", featureId: "f2", description: "", example: "", syntax: "", docUrl: "", userExtensible: false }, platforms: ["cli"], notes: "" },
+          ],
+        },
+        {
+          id: "h2", name: "Harness 2", icon: "h2.svg", website: "", platforms: [{ id: "cli", name: "CLI" }],
+          implementations: [
+            { implementation: { id: "impl1", name: "Impl 1", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false }, platforms: ["cli"], notes: "" },
+            { implementation: { id: "impl2", name: "Impl 2", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false }, platforms: ["cli"], notes: "" },
+          ],
+        },
+      ],
+    });
+
+    const matrix = service.getFullMatrix();
+
+    expect(matrix.harnesses).toHaveLength(2);
+    expect(matrix.rows).toHaveLength(2);
+
+    const row1 = matrix.rows[0];
+    expect(row1.feature.id).toBe("f1");
+    expect(row1.totalImplementations).toBe(2);
+    expect(row1.cells[0].supportedCount).toBe(1); // h1
+    expect(row1.cells[1].supportedCount).toBe(2); // h2
+
+    const row2 = matrix.rows[1];
+    expect(row2.feature.id).toBe("f2");
+    expect(row2.totalImplementations).toBe(1);
+    expect(row2.cells[0].supportedCount).toBe(1); // h1
+    expect(row2.cells[1].supportedCount).toBe(0); // h2
+  });
+
+  it("should include implementation details in cells", () => {
+    const service = new DataService(null as any);
+    service.loadData({
+      features: [
+        { id: "f1", name: "F1", description: "", category: "cat", sortOrder: 1 },
+      ],
+      implementations: [
+        { id: "impl1", name: "Impl 1", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false },
+      ],
+      harnesses: [
+        {
+          id: "h1", name: "H1", icon: "h1.svg", website: "", platforms: [{ id: "cli", name: "CLI" }],
+          implementations: [
+            { implementation: { id: "impl1", name: "Impl 1", featureId: "f1", description: "", example: "", syntax: "", docUrl: "", userExtensible: false }, platforms: ["cli"], notes: "Some note" },
+          ],
+        },
+      ],
+    });
+
+    const matrix = service.getFullMatrix();
+    const cell = matrix.rows[0].cells[0];
+    expect(cell.implementations).toHaveLength(1);
+    expect(cell.implementations[0].implementationName).toBe("Impl 1");
+    expect(cell.implementations[0].platforms).toEqual(["cli"]);
+    expect(cell.implementations[0].notes).toBe("Some note");
+  });
+});

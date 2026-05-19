@@ -9,6 +9,10 @@ import {
   ComparisonMatrix,
   ComparisonRow,
   ComparisonCell,
+  FullMatrix,
+  FullMatrixRow,
+  FullMatrixCell,
+  FullMatrixCellImpl,
 } from "../models/data.models";
 
 export interface SearchResults {
@@ -81,6 +85,43 @@ export class DataService {
     });
 
     return { feature, harnesses, rows };
+  }
+
+  getFullMatrix(): FullMatrix {
+    const features = this.getFeatures();
+    const harnesses = this.data.harnesses;
+
+    const rows: FullMatrixRow[] = features.map((feature) => {
+      const implementations = this.getImplementationsForFeature(feature.id);
+      const implIds = new Set(implementations.map((i) => i.id));
+
+      const cells: FullMatrixCell[] = harnesses.map((harness) => {
+        const matched = harness.implementations.filter((hi) =>
+          implIds.has(hi.implementation.id)
+        );
+        return {
+          harnessId: harness.id,
+          harnessName: harness.name,
+          harnessIcon: harness.icon,
+          supportedCount: matched.length,
+          totalCount: implementations.length,
+          implementations: matched.map((hi) => ({
+            implementationId: hi.implementation.id,
+            implementationName: hi.implementation.name,
+            platforms: hi.platforms,
+            notes: hi.notes,
+          })),
+        };
+      });
+
+      return {
+        feature,
+        totalImplementations: implementations.length,
+        cells,
+      };
+    });
+
+    return { harnesses, rows };
   }
 
   search(query: string): SearchResults {
