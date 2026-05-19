@@ -9,32 +9,39 @@ import { MatrixTooltipComponent } from "../components/matrix-tooltip.component";
   imports: [RouterLink, MatrixTooltipComponent],
   template: `
     <div class="max-w-full">
-      <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-900 mb-2">Feature Matrix</h1>
-        <p class="text-gray-600">
-          Hover any cell to see implementation details. Click to explore.
-        </p>
+      <div class="mb-3 flex items-baseline justify-between">
+        <h1 class="text-xl font-bold text-gray-900">Feature Matrix</h1>
+        <div class="flex items-center gap-4 text-xs text-gray-400">
+          <div class="flex items-center gap-1">
+            <span class="inline-flex w-3 h-3 rounded-full bg-green-100 border border-green-300"></span>
+            Supported
+          </div>
+          <div class="flex items-center gap-1">
+            <span class="inline-flex w-3 h-3 rounded-full bg-gray-100 border border-gray-200"></span>
+            None
+          </div>
+        </div>
       </div>
 
       <div class="overflow-x-auto border border-gray-200 rounded-lg">
-        <table class="w-full border-collapse">
+        <table class="w-full border-collapse text-xs">
           <thead>
             <tr>
-              <th class="sticky left-0 z-10 bg-gray-50 border-b border-r border-gray-200 px-4 py-3 text-left text-sm font-semibold text-gray-700 min-w-[200px]">
+              <th class="sticky left-0 z-10 bg-gray-50 border-b border-r border-gray-200 px-3 py-2 text-left font-semibold text-gray-700 whitespace-nowrap">
                 Feature
               </th>
               @for (harness of matrix.harnesses; track harness.id) {
-                <th class="border-b border-gray-200 px-3 py-3 text-center min-w-[120px]">
+                <th class="border-b border-gray-200 px-2 py-2 text-center whitespace-nowrap">
                   <a
                     [routerLink]="['/harness', harness.id]"
-                    class="inline-flex flex-col items-center gap-1.5 hover:text-blue-600"
+                    class="inline-flex items-center gap-1 hover:text-blue-600"
                   >
                     <img
                       [src]="'assets/icons/' + harness.icon"
                       [alt]="harness.name"
-                      class="w-6 h-6"
+                      class="w-4 h-4"
                     />
-                    <span class="text-xs font-semibold text-gray-700">{{ harness.name }}</span>
+                    <span class="font-semibold text-gray-700">{{ harness.name }}</span>
                   </a>
                 </th>
               }
@@ -42,37 +49,32 @@ import { MatrixTooltipComponent } from "../components/matrix-tooltip.component";
           </thead>
           <tbody>
             @for (row of matrix.rows; track row.feature.id; let odd = $odd) {
-              <tr [class]="odd ? 'bg-gray-50/50' : 'bg-white'">
-                <td class="sticky left-0 z-10 border-r border-b border-gray-200 px-4 py-3"
+              <tr [class]="odd ? 'bg-gray-50/50' : 'bg-white'" class="hover:bg-blue-50/40">
+                <td class="sticky left-0 z-10 border-r border-b border-gray-100 px-3 py-1.5 whitespace-nowrap"
                     [class]="odd ? 'bg-gray-50' : 'bg-white'">
                   <a
                     [routerLink]="['/compare', row.feature.id]"
-                    class="text-sm font-medium text-gray-900 hover:text-blue-600"
+                    class="font-medium text-gray-900 hover:text-blue-600"
                   >
                     {{ row.feature.name }}
                   </a>
-                  <p class="text-xs text-gray-400 mt-0.5">
-                    {{ row.totalImplementations }} impl.
-                  </p>
                 </td>
                 @for (cell of row.cells; track cell.harnessId) {
                   <td
-                    class="relative border-b border-gray-200 px-3 py-3 text-center cursor-pointer group"
+                    class="border-b border-gray-100 px-2 py-1.5 text-center cursor-pointer"
                     (mouseenter)="showTooltip(row.feature.id, cell.harnessId, $event)"
                     (mouseleave)="hideTooltip()"
                     (click)="navigateToFeature(row.feature.id)"
                   >
-                    <div class="flex items-center justify-center">
-                      @if (cell.supportedCount === 0) {
-                        <span class="inline-flex w-8 h-8 rounded-full bg-gray-100 border border-gray-200 items-center justify-center text-gray-300 text-xs">
-                          &mdash;
-                        </span>
-                      } @else {
-                        <span class="inline-flex w-8 h-8 rounded-full bg-green-100 border border-green-300 items-center justify-center text-green-700 text-xs font-bold">
-                          {{ cell.supportedCount }}
-                        </span>
-                      }
-                    </div>
+                    @if (cell.supportedCount === 0) {
+                      <span class="inline-flex w-6 h-6 rounded-full bg-gray-100 items-center justify-center text-gray-300 text-[10px]">
+                        &mdash;
+                      </span>
+                    } @else {
+                      <span class="inline-flex w-6 h-6 rounded-full bg-green-100 items-center justify-center text-green-700 text-[10px] font-bold">
+                        {{ cell.supportedCount }}
+                      </span>
+                    }
                   </td>
                 }
               </tr>
@@ -93,17 +95,6 @@ import { MatrixTooltipComponent } from "../components/matrix-tooltip.component";
           />
         </div>
       }
-
-      <div class="mt-4 flex items-center gap-6 text-xs text-gray-500">
-        <div class="flex items-center gap-1.5">
-          <span class="inline-flex w-4 h-4 rounded-full bg-green-100 border border-green-300 items-center justify-center text-green-700 text-[8px] font-bold">N</span>
-          Supported (N implementations)
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="inline-flex w-4 h-4 rounded-full bg-gray-100 border border-gray-200 items-center justify-center text-gray-300 text-[8px]">&mdash;</span>
-          Not supported
-        </div>
-      </div>
     </div>
   `,
 })
