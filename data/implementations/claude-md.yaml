@@ -17,7 +17,7 @@ example: |
   - Use vitest for unit tests
   - Place tests next to source files as `*.spec.ts`
 syntax: markdown
-docUrl: https://docs.anthropic.com/en/docs/claude-code/claude-md
+docUrl: https://docs.claude.com/en/docs/claude-code/claude-md
 userExtensible: true
 extensibilityNote: "Create CLAUDE.md in any directory for scoped instructions"
 customExample: |

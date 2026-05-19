@@ -2,50 +2,62 @@ id: claude-plugins
 name: Claude Code Plugins
 featureId: plugins
 description: >
-  Claude Code supports plugins via --plugin-dir (local directory) and
-  --plugin-url (remote URL). Plugins bundle skills, MCP servers, and settings
-  into a distributable package. This is a newer feature (May 2026+) that
-  enables sharing custom configurations and capabilities across teams and
-  projects.
+  Claude Code plugins bundle commands, skills, agents, hooks, and MCP servers
+  into a distributable package. Plugins are installed from marketplaces via
+  /plugin install <name>@<marketplace>, and marketplaces are managed with
+  /plugin marketplace add. For local development, --plugin-dir loads a plugin
+  from a directory. Plugins enable sharing custom configurations and
+  capabilities across teams and projects.
 example: |
-  # Load a local plugin:
-  claude --plugin-dir ./my-plugin
+  # Install from a registered marketplace:
+  /plugin install plugin-dev@claude-code-marketplace
 
-  # Load a remote plugin:
-  claude --plugin-url https://example.com/plugin
+  # Add a custom marketplace:
+  /plugin marketplace add my-team-marketplace https://example.com/marketplace.json
+
+  # Local development:
+  claude --plugin-dir /path/to/my-plugin
 
   # Plugin directory structure:
   # my-plugin/
-  #   plugin.json          — Plugin manifest
-  #   skills/              — Skill markdown files
-  #   settings.json        — Default settings
-  #   mcp-servers.json     — MCP server configs
+  #   .claude-plugin/
+  #     plugin.json          — Plugin manifest (required)
+  #   commands/              — Slash commands (.md files)
+  #   agents/                — Subagent definitions (.md files)
+  #   skills/                — Agent skills (SKILL.md per subdir)
+  #   hooks/
+  #     hooks.json           — Event handler configuration
+  #   .mcp.json              — MCP server definitions
+  #   scripts/               — Helper scripts
 
   # plugin.json
   {
     "name": "my-team-plugin",
     "version": "1.0.0",
-    "description": "Shared conventions for our team",
-    "skills": ["skills/*.md"],
-    "mcpServers": "mcp-servers.json",
-    "settings": "settings.json"
+    "description": "Shared conventions for our team"
   }
 syntax: json
-docUrl: https://docs.anthropic.com/en/docs/claude-code/plugins
+docUrl: https://docs.claude.com/en/docs/claude-code/plugins
 userExtensible: true
-extensibilityNote: "Create plugins bundling skills, MCP servers, and settings"
+extensibilityNote: 'Author plugins bundling commands, agents, skills, hooks, and MCP servers; distribute via marketplaces'
 customExample: |
   # Plugin directory structure:
   my-team-plugin/
-    plugin.json          # Plugin manifest
+    .claude-plugin/
+      plugin.json          # Required manifest
+    commands/
+      deploy.md            # /deploy slash command
+    agents/
+      reviewer.md          # Custom subagent
     skills/
-      code-review.md     # Custom skill
-      deploy.md          # Custom skill
-    mcp-servers/
-      internal-api/      # Bundled MCP server
-    settings.json        # Default settings
-  
-  # Install:
+      code-review/
+        SKILL.md           # Custom skill
+    hooks/
+      hooks.json           # Event handlers
+    .mcp.json              # MCP server defs
+
+  # Install for local dev:
   claude --plugin-dir ./my-team-plugin
-  # Or from URL:
-  claude --plugin-url https://example.com/plugin
+
+  # Or distribute via marketplace:
+  /plugin install my-team-plugin@my-team-marketplace

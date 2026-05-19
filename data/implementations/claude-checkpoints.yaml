@@ -2,34 +2,32 @@ id: claude-checkpoints
 name: Claude Code Checkpoints
 featureId: checkpoints
 description: >
-  Automatic internal file-state snapshots (NOT git commits) created every
-  user prompt. Individual tool invocations can be rejected to undo changes.
-  Roll back to any checkpoint in the session. Only tracks changes via
-  Claude's editing tools (Edit, Write), not Bash commands.
+  Automatic internal file-state snapshots created before each user prompt.
+  Checkpoints persist across sessions (auto-cleaned with sessions after 30 days,
+  configurable). Use the /rewind command or press Esc twice to open the rewind
+  menu, where you can restore code, conversation, both, or summarize from/up to
+  a chosen point. Checkpoints only track files modified by Claude's editing
+  tools (Edit, Write, NotebookEdit) — not files changed by Bash commands or
+  edits made outside the current session. Not a replacement for git.
 example: |
-  # Automatic checkpoints — no configuration needed:
+  # Automatic checkpoints — no configuration needed
 
-  # 1. Claude proposes an edit to src/app.ts
-  #    → Checkpoint created automatically (internal snapshot)
+  # Open the rewind menu:
+  /rewind
+  # ...or press Esc + Esc
 
-  # 2. User can reject the change:
-  #    "Undo that last edit"
-  #    → Claude rolls back to the checkpoint
+  # In the menu, choose:
+  #   Restore code and conversation — revert both
+  #   Restore conversation          — keep current code, rewind chat
+  #   Restore code                  — revert files, keep conversation
+  #   Summarize from here           — compress later messages
+  #   Summarize up to here          — compress earlier messages
 
-  # 3. Roll back multiple changes:
-  #    "Undo everything since we started working on auth"
-  #    → Claude restores to earlier checkpoint
-
-  # In the CLI, individual tool calls show:
-  # [Read] src/app.ts ✓
-  # [Edit] src/app.ts — Accept? (y/n/undo)
-  #   n → Change is rejected, file restored
-
-  # Checkpoints are NOT git commits:
-  # They are aggressive auto-save points for Claude's changes
-  # Only file edits via Claude tools are tracked
-  # Shell commands (Bash tool) are not checkpointed
+  # Limitations:
+  # - Files modified by Bash (rm, mv, cp) are NOT tracked
+  # - Manual edits outside the session are NOT captured
+  # - Use git for permanent history; checkpoints are session-level undo
 syntax: text
-docUrl: https://docs.anthropic.com/en/docs/claude-code/checkpoints
+docUrl: https://docs.claude.com/en/docs/claude-code/checkpointing
 userExtensible: false
-extensibilityNote: "Automatic internal checkpoints; no custom configuration"
+extensibilityNote: 'Automatic; no custom configuration. Cleanup window is configurable via session retention settings.'

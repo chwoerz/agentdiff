@@ -4,9 +4,11 @@ featureId: code-review
 description: >
   OpenCode does not have a dedicated code review feature. Users can ask the
   agent to analyze diffs, review changes, or examine specific files for
-  issues. The agent uses its standard tools (file:read, shell:exec for git
-  diff, lsp:diagnostics) to provide review-like feedback. No structured
-  review workflow or PR integration exists.
+  issues. The agent uses its standard tools (`read`, `bash` for git diff,
+  `grep`, and optionally the experimental `lsp`) to provide review-like
+  feedback. No structured review workflow or inline PR commenting exists,
+  though the `opencode github` and `opencode pr` CLIs provide some GitHub
+  integration.
 example: |
   # No dedicated review command — use natural language:
 
@@ -17,17 +19,16 @@ example: |
 
   "Check src/auth/ for security issues"
   # Agent reads files in the directory
-  # Uses LSP diagnostics for type errors
+  # Optionally uses the experimental lsp tool for code intel
   # Analyzes code for common security patterns
 
   "Compare this branch against main"
   # Agent runs: git diff main...HEAD
   # Summarizes changes and identifies concerns
 
-  # No PR integration or inline commenting
-  # No structured review output format
-  # Relies on agent's general analysis capabilities
+  # No inline PR commenting or structured review output format.
+  # `opencode github` / `opencode pr` provide some GitHub integration.
 syntax: text
 docUrl: https://opencode.ai/docs
 userExtensible: false
-extensibilityNote: "No dedicated review; uses standard tools for review-like feedback"
+extensibilityNote: 'No dedicated review; uses standard tools for review-like feedback'

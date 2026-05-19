@@ -3,36 +3,41 @@ name: Copilot Models
 featureId: model-selection
 description: >
   GitHub Copilot supports multiple AI model vendors with auto-selection as
-  the default. Available models include GPT-4.1, GPT-5, GPT-5 mini, GPT-5.4
-  Codex, GPT-5.5, Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5,
-  Gemini 3.1 Pro, Gemini 3 Flash, and Gemini 2.5 Pro. The model can be
-  selected via a dropdown in the IDE chat panel or /model in the CLI.
-  Available models vary by subscription plan. The CLI defaults to Claude
-  Sonnet 4.5. Starting June 2026, billing moves from request-based to
-  usage-based with model-specific multipliers.
+  the default. Anthropic models include Claude Haiku 4.5, Claude Sonnet
+  4.5, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.6, Claude Opus
+  4.6 fast mode (preview), and Claude Opus 4.7. OpenAI models include
+  GPT-4.1, GPT-5 mini, GPT-5.2, GPT-5.2-Codex, GPT-5.3-Codex, GPT-5.4,
+  GPT-5.4 mini, GPT-5.4 nano (ask mode only — no agent/edit), and GPT-5.5.
+  Google provides Gemini 2.5 Pro. The list changes frequently — the
+  canonical reference is the GitHub Copilot supported-models doc. Models
+  can be selected via a dropdown in the IDE chat panel or `/model` in the
+  CLI. Availability varies by subscription plan.
 example: |
   # VS Code / JetBrains model selection:
   # Click the model name in the chat panel header
 
   # CLI model selection:
-  /model claude-sonnet-4-5
-  /model gpt-5
+  /model
+  # (Interactive picker)
 
   # Auto model selection (default):
-  # Copilot automatically picks the best model for the task
-  # Prioritizes: GPT-4.1, GPT-5 mini, Claude Haiku 4.5, Claude Sonnet 4.5
+  # Copilot automatically picks a model for the task.
 
-  # Available models (varies by plan):
-  # OpenAI:    GPT-4.1, GPT-5, GPT-5 mini, GPT-5.4 Codex, GPT-5.5
-  # Anthropic: Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.5
-  # Google:    Gemini 3.1 Pro, Gemini 3 Flash, Gemini 2.5 Pro
+  # Available models by vendor (verified against the official
+  # supported-models reference; check the docs for the current list):
+  # OpenAI:    GPT-4.1, GPT-5 mini, GPT-5.2, GPT-5.2-Codex,
+  #            GPT-5.3-Codex, GPT-5.4, GPT-5.4 mini,
+  #            GPT-5.4 nano (ask only), GPT-5.5
+  # Anthropic: Claude Haiku 4.5, Claude Sonnet 4.5, Claude Sonnet 4.6,
+  #            Claude Opus 4.5, Claude Opus 4.6,
+  #            Claude Opus 4.6 fast mode (preview), Claude Opus 4.7
+  # Google:    Gemini 2.5 Pro
 
   # Model availability by plan:
-  # Free:       Limited models (GPT-5 mini, Gemini Flash)
-  # Pro:        Most models
-  # Pro+:       All models including premium (Opus, GPT-5.5)
-  # Enterprise: All models, custom model policies
+  # Free:       Limited models
+  # Pro / Pro+: Most models (premium models on Pro+)
+  # Enterprise: All models with custom policies
 syntax: text
 docUrl: https://docs.github.com/en/copilot/reference/ai-models/supported-models
 userExtensible: false
-extensibilityNote: "Predefined models from OpenAI, Anthropic, Google; auto-selection available"
+extensibilityNote: 'Predefined models from OpenAI, Anthropic, Google; auto-selection available'

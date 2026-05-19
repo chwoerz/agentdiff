@@ -2,36 +2,62 @@ id: claude-cli
 name: Claude Code CLI
 featureId: cli-features
 description: >
-  Terminal-based CLI with interactive REPL, non-interactive mode (--print),
-  stdin piping, JSON output (--output-format json), session management
-  (--resume, --continue), multi-directory context (--add-dir), and model
-  selection (--model). Built for both human use and scripting.
+  Terminal-based CLI with rich subcommand surface area. Core commands include
+  interactive `claude`, single-shot `claude -p`, conversation continue/resume
+  (`-c`, `-r`), background sessions (`--bg`, `claude agents`, `claude attach`,
+  `claude logs`, `claude stop`, `claude respawn`), `claude mcp`, `claude
+  plugin`, `claude auth login/logout/status`, `claude install`, `claude
+  setup-token`, and `claude remote-control`. Supports JSON/stream-json
+  input/output, multi-directory context (`--add-dir`), permission modes,
+  effort levels, model selection, dynamic agent definition (`--agents`),
+  plugin loading (`--plugin-dir`, `--plugin-url`), and bare mode (`--bare`)
+  that skips auto-discovery for fast scripted runs.
 example: |
-  # Interactive mode (default):
+  # Interactive:
   claude
+  claude "explain this project"
 
-  # Non-interactive / single-shot:
-  claude --print "Explain this error" < error.log
-
-  # Pipe input:
-  cat src/app.ts | claude --print "Review this code"
+  # Single-shot / print mode:
+  claude -p "Explain this error" < error.log
+  cat src/app.ts | claude -p "Review this code"
 
   # JSON output for scripting:
-  claude --print --output-format json "List all TODO comments"
+  claude -p --output-format json "List all TODO comments"
 
-  # Resume previous session:
-  claude --resume          # resume last session
-  claude --continue        # continue last conversation
+  # Continue / resume:
+  claude -c                              # continue most recent
+  claude -r "auth-refactor" "Finish PR"  # resume by name/ID
+  claude --resume abc123 --fork-session  # branch a session
+
+  # Background sessions:
+  claude --bg "investigate the flaky test"
+  claude agents                          # monitor/dispatch
+  claude attach <id>
+  claude logs <id>
+  claude stop <id>
 
   # Multi-directory context:
   claude --add-dir ../shared-lib --add-dir ../common
 
-  # Model selection:
+  # Model & effort:
+  claude --model sonnet
   claude --model claude-opus-4-7
-
-  # Effort level:
   claude --effort high
+
+  # Permission modes:
+  claude --permission-mode plan          # default|acceptEdits|plan|auto|dontAsk|bypassPermissions
+  claude --dangerously-skip-permissions  # = bypassPermissions
+
+  # Plugins for the session:
+  claude --plugin-dir ./my-plugin
+  claude --plugin-url https://example.com/plugin.zip
+
+  # Dynamic subagent:
+  claude --agents '{"reviewer":{"description":"Reviews code","prompt":"You are a code reviewer"}}'
+
+  # Fast scripted calls:
+  claude --bare -p "query"               # skip hooks/skills/plugins/MCP/CLAUDE.md
 syntax: bash
-docUrl: https://docs.anthropic.com/en/docs/claude-code/cli
+docUrl: https://docs.claude.com/en/docs/claude-code/cli-reference
 userExtensible: false
-extensibilityNote: "Core CLI is fixed; extend via plugins, skills, and MCP servers"
+extensibilityNote: 'Core CLI is fixed; extend via plugins, skills, agents, hooks, and MCP servers'

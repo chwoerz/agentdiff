@@ -27,6 +27,6 @@ example: |
   # 5. File reading on demand
   # Claude reads specific files when referenced or needed
 syntax: bash
-docUrl: https://docs.anthropic.com/en/docs/claude-code/context
+docUrl: https://docs.claude.com/en/docs/claude-code/context
 userExtensible: true
 extensibilityNote: "Extend context via CLAUDE.md files, MCP servers, and custom skills"

@@ -2,34 +2,44 @@ id: copilot-settings
 name: Copilot Settings
 featureId: configuration
 description: >
-  GitHub Copilot is configured through multiple layers: VS Code settings.json
-  for editor behavior, JetBrains preferences for plugin settings, organization
-  policies on GitHub.com for enterprise controls, and CLI configuration via
-  gh config. Settings control which features are enabled, model selection,
-  content exclusions, and MCP server configuration.
+  GitHub Copilot is configured across multiple layers: VS Code settings.json
+  for editor/chat behavior, JetBrains preferences for plugin settings,
+  organization policies on GitHub.com for enterprise controls, and CLI
+  configuration for the Copilot CLI. MCP servers are NOT configured in
+  settings.json — they live in `.vscode/mcp.json` (workspace) or the user
+  `mcp.json` file (see Copilot MCP). Common settings keys are documented in
+  the VS Code Copilot settings reference.
 example: |
-  // VS Code settings.json
+  // VS Code settings.json — examples (not exhaustive)
   {
+    // Enable/disable inline suggestions per language
     "github.copilot.enable": {
       "*": true,
       "plaintext": false,
       "markdown": true
     },
-    "github.copilot.chat.agent.enabled": true,
-    "github.copilot.chat.mcpServers": {
-      "my-server": {
-        "command": "node",
-        "args": ["server.js"]
-      }
-    },
-    "github.copilot.selectedCompletionModel": "gpt-4o"
+
+    // Chat / agent behavior
+    "chat.checkpoints.enabled": true,
+    "chat.agent.enabled": true,
+
+    // Customization file discovery (defaults shown)
+    "chat.promptFilesLocations": { ".github/prompts": true },
+    "chat.instructionsFilesLocations": { ".github/instructions": true },
+    "chat.agentFilesLocations": { ".github/agents": true },
+    "chat.hookFilesLocations": {
+      ".github/hooks": true,
+      ".claude/settings.json": true
+    }
   }
 
-  # Organization policy (GitHub.com → Settings → Copilot):
-  # - Enable/disable for members
+  // MCP servers live in .vscode/mcp.json or the user mcp.json — NOT here.
+
+  # Organization policies (GitHub.com → Settings → Copilot):
+  # - Enable/disable Copilot features per team
   # - Allow/block suggestions matching public code
   # - Content exclusion patterns
 syntax: json
-docUrl: https://docs.github.com/en/copilot/managing-copilot/configure-personal-settings
+docUrl: https://code.visualstudio.com/docs/copilot/reference/copilot-settings
 userExtensible: true
-extensibilityNote: "Configure via IDE settings, organization policies, and CLI config"
+extensibilityNote: 'Configure via IDE settings, organization policies, and CLI config; MCP lives in mcp.json'

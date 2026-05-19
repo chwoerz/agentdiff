@@ -2,20 +2,40 @@ id: copilot-privacy
 name: Copilot Privacy
 featureId: privacy
 description: >
-  Code sent to GitHub/Microsoft cloud. Business/Enterprise: no code retention
-  by default. Individual: code may be retained unless opted out. Org-level
-  content exclusion policies for paths and repos. Enterprise adds IP indemnity
-  and audit logs. Public code matching filter available.
+  Prompts and code context are sent to GitHub/Microsoft Copilot services.
+  For Copilot Business and Copilot Enterprise, prompts and suggestions are
+  not retained and are not used to train the foundation models. For Copilot
+  Free/Pro/Pro+, prompts and suggestions may be used to improve the product
+  unless the user opts out in their GitHub settings. Content exclusion
+  policies (org/repo level) prevent Copilot inline completions and chat from
+  using matching files as context — but note that Copilot cloud agent
+  currently does not honor content exclusions. A public-code matching filter
+  can block suggestions that match public code. Enterprise plans add IP
+  indemnity and audit logs.
 example: |
-  # Content exclusion (GitHub.com → Settings → Copilot):
-  # Exclude paths: "**/.env", "**/secrets/**"
-  # Exclude entire repositories
+  # Content exclusion (org or repo settings → Copilot → Content exclusion):
+  # Glob patterns for paths to exclude, e.g.:
+  #   **/.env
+  #   **/secrets/**
+  #   config/credentials.*
 
-  # Privacy by plan:
-  # Individual — code may be retained, opt-out available
-  # Business   — no retention, org policies
-  # Enterprise — no retention, exclusions, IP indemnity, audit logs
+  # Opt out of prompt/suggestion training (Free/Pro/Pro+):
+  # GitHub.com → Settings → Copilot → Policies →
+  # "Allow GitHub to use my data for product improvements" → off
+
+  # Public-code matching filter (org/enterprise policy):
+  # Blocks suggestions matching public code (with optional reference info).
+
+  # Plan summary:
+  # Free / Pro / Pro+ — prompts may be used for product improvement
+  #                     unless opted out; no IP indemnity
+  # Business          — no retention/training; content exclusion;
+  #                     audit logs
+  # Enterprise        — Business + IP indemnity + enterprise audit logs
+
+  # Caveat: cloud agent does NOT respect content exclusions —
+  # it can read and modify excluded files in its workflow.
 syntax: text
-docUrl: https://docs.github.com/en/copilot/managing-copilot/managing-copilot-policies
+docUrl: https://docs.github.com/en/copilot/how-tos/configure-personal-settings/manage-data-collection
 userExtensible: true
-extensibilityNote: "Configure content exclusion policies at org level"
+extensibilityNote: 'Configure content exclusion and policies at the org/enterprise level on GitHub.com'

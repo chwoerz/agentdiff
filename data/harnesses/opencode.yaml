@@ -4,64 +4,64 @@ icon: opencode.svg
 website: https://opencode.ai
 platforms:
   - id: cli
-    name: CLI
+    name: CLI / TUI
   - id: desktop
-    name: Desktop App
+    name: Desktop App (Beta)
   - id: ide
-    name: IDE Extension
+    name: Third-party IDE Integrations
 
 implementations:
   - implementationId: agents-md
     platforms: [cli, desktop, ide]
-    notes: "Primary instruction format, supports directory hierarchy"
+    notes: 'Primary instruction format, supports directory hierarchy'
   - implementationId: opencode-builtin-tools
     platforms: [cli, desktop, ide]
-    notes: "read, write, edit, bash, grep, glob, lsp, webfetch, websearch, and more"
+    notes: 'bash, edit, write, read, grep, glob, apply_patch, skill, todowrite, webfetch, websearch, question, plus experimental lsp'
   - implementationId: opencode-mcp
     platforms: [cli, desktop, ide]
-    notes: "Configured via opencode.json"
+    notes: 'Configured via opencode.json (local + remote servers)'
   - implementationId: opencode-hooks
     platforms: [cli, desktop, ide]
-    notes: "~30 lifecycle events via JS/TS plugin system (dot notation)"
+    notes: '20+ lifecycle events via JS/TS plugin system (e.g. tool.execute.before, sessionCreated, provider.update)'
   - implementationId: skill-md
     platforms: [cli, desktop, ide]
-    notes: "Searches .opencode/skills/, .claude/skills/, .agents/skills/"
+    notes: 'Searches .opencode/skills/, .claude/skills/, .agents/skills/'
   - implementationId: opencode-commands
     platforms: [cli, desktop, ide]
-    notes: "/init, /undo, /redo, /share, /help, plus custom commands"
+    notes: '/init, /undo, /redo, /share, /help, plus custom commands; @file for file references and @agent (e.g. @explore, @general) to invoke subagents'
   - implementationId: opencode-context
     platforms: [cli, desktop, ide]
-    notes: "LSP integration, file watching, git status"
+    notes: 'LSP integration, file watching, git status; @file fuzzy-search references inline file contents into the prompt'
   - implementationId: opencode-settings
     platforms: [cli, desktop, ide]
-    notes: "opencode.json with 75+ provider configs"
+    notes: 'opencode.json; provider catalog sourced from models.dev (~100 providers)'
   - implementationId: opencode-cli
     platforms: [cli]
-    notes: "Go-based TUI with multi-session support"
+    notes: 'Go TUI on a TypeScript core (client/server) with multi-session support'
   - implementationId: opencode-memory
     platforms: [cli, desktop, ide]
-    notes: "Sessions in SQLite; AGENTS.md for persistent project context"
+    notes: 'Sessions in SQLite; AGENTS.md for persistent project context'
   - implementationId: opencode-agent-modes
     platforms: [cli, desktop, ide]
-    notes: "Build (default) and Plan primary modes; General, Explore, Scout sub-agents"
+    notes: 'Primary agents: build (default) and plan (toggle with Tab). Built-in subagents: general, explore (read-only), and scout (read-only docs/deps research) — all enabled. Invoke subagents via @agent mentions.'
   - implementationId: opencode-plugins
     platforms: [cli, desktop, ide]
-    notes: "JS/TS plugin system with custom tools and commands"
+    notes: 'JS/TS plugin system with custom tools and commands'
   - implementationId: opencode-code-review
     platforms: [cli, desktop, ide]
-    notes: "No dedicated review — ask agent to analyze diffs"
+    notes: 'No dedicated review — ask agent to analyze diffs'
   - implementationId: opencode-git
     platforms: [cli, desktop, ide]
-    notes: "Basic git via shell commands, no direct GitHub API"
+    notes: 'Git via the bash tool; `opencode github` / `opencode pr` wrap basic GitHub workflows'
   - implementationId: opencode-undo
     platforms: [cli, desktop, ide]
-    notes: "/undo and /redo for file-level rollback"
+    notes: '/undo and /redo for file-level rollback'
   - implementationId: opencode-privacy
     platforms: [cli, desktop, ide]
-    notes: "Open source, local-first, supports offline models"
+    notes: 'Open source, local-first, supports offline models'
   - implementationId: opencode-models
     platforms: [cli, desktop, ide]
-    notes: "75+ providers including local models via Ollama"
+    notes: 'Provider catalog from models.dev (~100 providers), including local models via Ollama'
   - implementationId: opencode-subagents
     platforms: [cli, desktop, ide]
-    notes: "General, Explore, Scout subagents; custom via plugins"
+    notes: 'Built-in subagents: general, explore (read-only), and scout (read-only docs/deps research) — all enabled. Invoke with @general / @explore / @scout; define custom subagents via plugins or .opencode/agents/*.md.'

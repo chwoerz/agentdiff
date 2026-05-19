@@ -2,45 +2,33 @@ id: copilot-extensions
 name: Copilot Extensions
 featureId: plugins
 description: >
-  GitHub Copilot supports extensions through the VS Code/JetBrains marketplace
-  and custom agent definitions. Marketplace extensions like @docker and @azure
-  add domain-specific capabilities. Custom agents are defined as .agent.md
-  files in .github/agents/, allowing teams to create specialized agents with
-  scoped tools, model selection, and custom instructions.
+  Copilot Extensions are third-party integrations built as GitHub Apps or
+  VS Code chat participant extensions. In VS Code/JetBrains chat they are
+  invoked via @-mention (e.g. @docker, @azure, @github) and surface
+  domain-specific tools, skills, and context. They are distinct from custom
+  agents (`.agent.md` files), which are user/team-defined personas selected
+  from the agents dropdown. For programmatic tool integration, prefer MCP
+  servers; for in-IDE chat participants and marketplace distribution, use
+  Copilot Extensions.
 example: |
-  # Marketplace extensions (invoked via @-mention in chat):
+  # Marketplace extensions in chat (VS Code/JetBrains @-mentions):
   @docker Optimize my Dockerfile for production
   @azure Deploy this app to Azure Container Apps
-  @github Create an issue for this bug
+  @github Summarize the open PRs on this repo
 
-  # Custom agent definition:
-  # .github/agents/reviewer.agent.md
-  ---
-  name: reviewer
-  description: Code review specialist
-  tools: [read_file, search_code, list_files]
-  model: claude-sonnet-4-5
-  ---
+  # Discover/install:
+  # - VS Code: Extensions view → search for Copilot chat participants
+  # - GitHub Marketplace → Copilot Extensions category
+  # - GitHub Apps you install can also register as Copilot Extensions
 
-  Review code for security, performance, and style.
-  Never modify files directly — only report findings.
-
-  # Use custom agent in chat:
-  @reviewer Check the auth module for vulnerabilities
-syntax: json
-docUrl: https://docs.github.com/en/copilot/building-copilot-extensions
+  # Build your own Copilot Extension:
+  # - Implement the Copilot Extensions API (GitHub App backend), or
+  # - Contribute a chat participant from a VS Code extension.
+syntax: text
+docUrl: https://docs.github.com/en/copilot/concepts/build-copilot-extensions/about-building-copilot-extensions
 userExtensible: true
-extensibilityNote: "Build custom agents via .github/agents/*.agent.md or marketplace extensions"
+extensibilityNote: 'Install from the marketplace, or build your own as a GitHub App / VS Code chat participant'
 customExample: |
-  # .github/agents/db-expert.agent.md
-  ---
-  name: Database Expert
-  description: Specializes in SQL optimization and schema design
-  tools: [read_file, search_code, run_terminal_command]
-  ---
-
-  You are a database expert. Focus on query performance,
-  indexing strategies, and schema normalization.
-
-  # Usage in chat:
-  # @db-expert How can I optimize this slow query?
+  # Example: invoking an installed marketplace extension in chat:
+  @docker Why is my container exiting with code 137?
+  @sentry Show the most recent unresolved errors for service api

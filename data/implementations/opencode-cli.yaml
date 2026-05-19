@@ -2,28 +2,33 @@ id: opencode-cli
 name: OpenCode CLI
 featureId: cli-features
 description: >
-  OpenCode is a Go-based terminal UI (TUI) with a rich interactive interface.
-  Features include multi-session tabs for working on different tasks in
-  parallel, /model to switch AI models mid-session, /agent to switch between
-  agent modes, real-time streaming output, and a visual diff viewer. The TUI
-  provides a more polished terminal experience than a basic REPL.
+  OpenCode is a client/server agent with a Go TUI on a TypeScript core.
+  The terminal UI provides multi-session support, `/models` to switch AI
+  models mid-session, agent switching with Tab (build ↔ plan), real-time
+  streaming output, visual diff viewer, and @file fuzzy-search to inline
+  file contents.
 example: |
   # Start OpenCode:
   opencode
 
   # The TUI provides:
-  # - Multi-session tabs (Ctrl+T new, Ctrl+W close)
+  # - Multi-session support
   # - Real-time streaming response
   # - Visual diff viewer for file changes
-  # - Status bar with model/mode info
+  # - Status bar with model/agent info
+  # - Tab to toggle primary agent (build ↔ plan)
+  # - @file fuzzy-search to reference files in a prompt
+  # - @agent mentions to invoke subagents (e.g. @explore, @general)
 
-  # In-session commands:
-  /model anthropic/claude-sonnet-4-20250514
-  /agent plan
-  /compact
+  # In-session commands (selection):
+  /models      # interactive model picker
+  /init        # analyze project and create AGENTS.md
   /undo
   /redo
-  /clear
+  /share
+  /help
+  /compact     # summarize and compact current session
+  /sessions    # list / resume sessions (aliases /resume, /continue)
 
   # Environment setup:
   export ANTHROPIC_API_KEY=sk-ant-...
@@ -31,4 +36,4 @@ example: |
 syntax: bash
 docUrl: https://opencode.ai/docs/cli
 userExtensible: false
-extensibilityNote: "Core TUI is fixed; extend via plugins for custom commands"
+extensibilityNote: 'Core TUI is fixed; extend via plugins for custom commands'

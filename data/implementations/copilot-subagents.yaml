@@ -1,20 +1,23 @@
 id: copilot-subagents
-name: Copilot Subagents & Fleet
+name: Copilot Custom Agents
 featureId: subagents
 description: >
-  GitHub Copilot supports multi-agent orchestration with custom agents defined
-  in .github/agents/*.agent.md. The /fleet command in Copilot CLI decomposes
-  tasks into parallel subagents, identifies dependencies, and dispatches
-  independent work items simultaneously. Custom agents have scoped tools and
-  prompts — the runtime matches intent against agent descriptions and runs
-  matching sub-agents with context isolation. The Coding Agent runs fully
-  autonomously in GitHub Actions for cloud-based execution.
+  Custom agents are defined as `.agent.md` files with YAML frontmatter
+  (description, name, tools, agents, model, user-invocable,
+  disable-model-invocation, target, handoffs, hooks) and a Markdown body.
+  Stored in `.github/agents/` (workspace), `.claude/agents/` (Claude format),
+  or `~/.copilot/agents` (user). In VS Code chat they are selected from the
+  agents dropdown (not via @-mention); in the Copilot CLI they are picked
+  with `/agent`. An agent can delegate to other agents as subagents by
+  including the `agent` tool plus an `agents:` list. The cloud Coding Agent
+  runs autonomously in GitHub Actions and can be assigned issues directly.
 example: |
   # .github/agents/security-reviewer.agent.md
   ---
-  name: security-reviewer
+  name: Security Reviewer
   description: Reviews code changes for security vulnerabilities
-  tools: [read_file, search_code, list_files]
+  tools: ['search/codebase', 'search/usages', 'web/fetch']
+  model: Claude Sonnet 4.5
   ---
 
   You are a security specialist. Review changes for:
@@ -23,30 +26,25 @@ example: |
   - Insecure deserialization
   - Missing input validation at system boundaries
 
-  # Using /fleet for parallel execution in CLI:
-  /fleet Implement the auth module: create the middleware,
-  write tests, and update the API docs
+  # In VS Code chat: pick "Security Reviewer" from the agents dropdown.
+  # In the Copilot CLI: run `/agent` and select it.
 
-  # Copilot decomposes into parallel subagents:
-  # → Agent 1: implement middleware
-  # → Agent 2: write tests (waits for Agent 1)
-  # → Agent 3: update docs (independent)
-
-  # /fleet limitations:
-  # - Subagents share filesystem (no file locking)
-  # - Subagents don't inherit the orchestrator's chat history
-  # - If two subagents write to the same file, last one wins
-  # - Dependency graph tracked in SQLite database
+  # Orchestration via subagents:
+  # ---
+  # name: Feature Builder
+  # tools: ['agent']
+  # agents: ['Researcher', 'Implementer']
+  # ---
 syntax: markdown
-docUrl: https://docs.github.com/en/copilot/how-tos/copilot-sdk/use-copilot-sdk/custom-agents
+docUrl: https://code.visualstudio.com/docs/copilot/customization/custom-agents
 userExtensible: true
-extensibilityNote: "Create custom agents in .github/agents/*.agent.md with scoped tools and prompts"
+extensibilityNote: 'Create .agent.md files in .github/agents/ (or .claude/agents/, ~/.copilot/agents) with scoped tools, model, and handoffs'
 customExample: |
   # .github/agents/db-expert.agent.md
   ---
-  name: db-expert
+  name: DB Expert
   description: Specializes in SQL optimization and schema design
-  tools: [read_file, search_code, run_terminal_command]
+  tools: ['search/codebase', 'edit', 'run/terminal']
   ---
 
   You are a database expert. Focus on:

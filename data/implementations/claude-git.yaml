@@ -30,6 +30,6 @@ example: |
   gh issue list --label bug
   gh issue view 42
 syntax: bash
-docUrl: https://docs.anthropic.com/en/docs/claude-code/git
+docUrl: https://docs.claude.com/en/docs/claude-code/git
 userExtensible: false
 extensibilityNote: "Uses standard git/gh tools; behavior guided via CLAUDE.md"

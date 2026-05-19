@@ -2,15 +2,18 @@ id: claude-settings
 name: Claude Code Settings
 featureId: configuration
 description: >
-  Claude Code uses a layered settings system with three levels: global
-  (~/.claude/settings.json) for user preferences, project (.claude/settings.json)
-  committed to the repo for team-shared configuration, and local
-  (.claude/settings.local.json) for personal overrides not committed to git.
-  Settings control permissions, allowed/blocked tools, environment variables,
-  MCP servers, and hooks.
+  Claude Code uses a layered settings system with four scopes: managed
+  (organization-wide, via MDM, registry, or managed-settings.json), user
+  (~/.claude/settings.json) for personal preferences across all projects,
+  project (.claude/settings.json) committed to the repo for team-shared
+  configuration, and local (.claude/settings.local.json, gitignored) for
+  personal overrides. Settings control permissions (allow/ask/deny rules),
+  environment variables, model, hooks, plugins, and many other behaviors.
+  Run `/config` in the REPL for a tabbed Settings UI.
 example: |
   // .claude/settings.json (project-level, committed)
   {
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
     "permissions": {
       "allow": [
         "Bash(npm run *)",
@@ -20,23 +23,24 @@ example: |
         "Write"
       ],
       "deny": [
-        "Bash(rm -rf *)"
+        "Bash(rm -rf *)",
+        "Read(./.env)",
+        "Read(./secrets/**)"
       ]
     },
-    "allowedTools": ["mcp__postgres__query"],
     "env": {
       "NODE_ENV": "development"
-    }
+    },
+    "model": "claude-sonnet-4-6"
   }
 
-  // ~/.claude/settings.json (global, user-level)
+  // ~/.claude/settings.json (user-level)
   {
     "permissions": {
       "allow": ["WebSearch", "WebFetch"]
-    },
-    "theme": "dark"
+    }
   }
 syntax: json
-docUrl: https://docs.anthropic.com/en/docs/claude-code/settings
+docUrl: https://docs.claude.com/en/docs/claude-code/settings
 userExtensible: true
-extensibilityNote: "Three-tier settings: global, project (shared), and local (personal)"
+extensibilityNote: 'Four-tier settings: managed, user, project (shared), and local (personal)'

@@ -1,13 +1,20 @@
 id: copilot-path-instructions
-name: ".instructions.md (applyTo)"
+name: '.instructions.md (applyTo)'
 featureId: instructions
 description: >
-  Path-specific instruction files in .github/instructions/. Each file has YAML
-  frontmatter with an applyTo glob pattern that scopes the instructions to
-  matching files. Multiple files can stack. Without applyTo, the file is ignored.
+  Path-scoped instruction files. `*.instructions.md` files live in
+  `.github/instructions/` (workspace) or `~/.copilot/instructions/` (user);
+  VS Code searches subfolders recursively. Optional YAML frontmatter:
+  `name`, `description`, `applyTo` (glob, relative to workspace root).
+  Files with an `applyTo` pattern are applied automatically when the agent
+  works on matching files; without `applyTo` they are not auto-applied but
+  can still be attached manually to a chat request. Multiple instruction
+  files combine (no guaranteed order). Claude-format rules in `.claude/rules`
+  use a `paths` array instead of `applyTo`.
 example: |
   # .github/instructions/typescript.instructions.md
   ---
+  description: TypeScript & React conventions
   applyTo: "**/*.ts,**/*.tsx"
   ---
 
@@ -31,6 +38,6 @@ example: |
   Use vitest. Prefer integration tests over unit tests.
   Never mock the database — use test containers.
 syntax: markdown
-docUrl: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+docUrl: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
 userExtensible: true
-extensibilityNote: "Create .instructions.md files in .github/instructions/ with applyTo glob patterns"
+extensibilityNote: 'Create .instructions.md files under .github/instructions/ with applyTo glob patterns'

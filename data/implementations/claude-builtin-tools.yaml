@@ -2,11 +2,15 @@ id: claude-builtin-tools
 name: Claude Code Built-in Tools
 featureId: tools
 description: >
-  30+ built-in tools invoked automatically. Core: Read, Edit, Write, Bash,
-  Grep, Glob, Agent, Skill, WebSearch, WebFetch, NotebookEdit, AskUserQuestion.
-  Also: task management (TaskCreate/Update/List), Monitor, EnterPlanMode,
-  EnterWorktree, ToolSearch, ScheduleWakeup. User approves or rejects each
-  invocation.
+  ~30 built-in tools invoked automatically. Core file/shell: Read, Edit, Write,
+  Bash, Glob, Grep, NotebookEdit, PowerShell. Web: WebSearch, WebFetch.
+  Planning/agents: Agent, EnterPlanMode, ExitPlanMode, Skill, AskUserQuestion.
+  Task management (replaces deprecated TodoWrite as of v2.1.142): TaskCreate,
+  TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate. Worktrees: EnterWorktree,
+  ExitWorktree. Scheduling: CronCreate, CronDelete, CronList. Collaboration:
+  TeamCreate, TeamDelete, SendMessage, RemoteTrigger, PushNotification, Monitor.
+  MCP: ListMcpResourcesTool, ReadMcpResourceTool, WaitForMcpServers, ToolSearch.
+  Misc: LSP, ShareOnboardingGuide. User approves or rejects each invocation.
 example: |
   # Claude automatically uses tools during conversation:
 
@@ -21,10 +25,12 @@ example: |
   # Tools can be restricted in settings:
   # .claude/settings.json
   {
-    "allowedTools": ["Read", "Edit", "Write", "Bash"],
-    "blockedTools": ["WebFetch"]
+    "permissions": {
+      "allow": ["Read", "Edit", "Write", "Bash(npm test:*)"],
+      "deny": ["WebFetch", "Bash(rm:*)"]
+    }
   }
 syntax: json
-docUrl: https://docs.anthropic.com/en/docs/claude-code/tools
+docUrl: https://docs.claude.com/en/docs/claude-code/tools-reference
 userExtensible: false
-extensibilityNote: "Built-in tools are fixed; extend via MCP servers for custom tools"
+extensibilityNote: 'Built-in tools are fixed; extend via MCP servers, plugins, or skills for custom capabilities'

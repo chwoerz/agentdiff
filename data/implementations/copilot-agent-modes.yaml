@@ -2,53 +2,54 @@ id: copilot-agent-modes
 name: Copilot Agent Modes
 featureId: agent-modes
 description: >
-  GitHub Copilot operates in multiple modes: Chat mode for Q&A and explanations,
-  Agent mode (VS Code, JetBrains, CLI) for multi-step tasks with tool use,
-  Coding Agent (cloud) for fully autonomous execution via GitHub Actions, and
-  CLI-specific plan/autopilot modes. The CLI supports plan mode (Shift+Tab)
-  for outlining work before executing, and autopilot mode for autonomous task
-  completion. The Coding Agent can be assigned issues, creates branches,
-  makes changes, opens draft PRs, runs self-review with security scanning,
-  and iterates on CI feedback — all without a local IDE.
+  Copilot offers several agent surfaces. In the IDE chat, choose an agent
+  from the agents dropdown — built-in options include Ask (Q&A), Agent
+  (multi-step edits and tool use), and Plan (read-only planning). The
+  Copilot CLI runs the same agent loop in the terminal with per-tool
+  approval, controlled via --allow-tool / --deny-tool / --allow-all-tools.
+  Copilot cloud agent (formerly "coding agent") runs autonomously on
+  GitHub Actions runners — assign the "Copilot" user to an issue or mention
+  `@copilot` in a PR comment, and it researches the repo, makes commits on
+  a branch, and opens a draft PR. Third-party agents (Claude Agent preview,
+  OpenAI Codex) can also run inside VS Code chat with your Copilot subscription.
 example: |
-  # Chat mode — Q&A, no tool use:
-  "Explain how React hooks work"
+  # IDE: select agent from the agents dropdown in the chat view
+  # Built-in: Ask | Agent | Plan
+  # Plus: any .agent.md custom agents and third-party agents
 
-  # Agent mode — multi-step with tools (VS Code/JetBrains/CLI):
-  # Toggle agent mode in the chat panel dropdown
+  # Cmd/Ctrl+Shift+I — switch to agent mode quickly
   "Add input validation to the registration form"
   # Agent: searches codebase → edits files → runs tests → iterates
 
-  # CLI plan mode (Shift+Tab):
-  # Outlines the work before executing
-  # Shift+Tab again → autopilot mode (autonomous completion)
+  # Plan mode (read-only): research and produce an implementation plan
+  /plan refactor the auth module to use OAuth2
 
-  # Coding Agent — cloud-based, fully autonomous:
-  # Assign an issue on GitHub.com:
-  @github-copilot implement this feature
+  # CLI permission control:
+  copilot                                  # default: per-tool approval
+  copilot --allow-all-tools                # bypass approvals (use with care)
+  copilot --allow-tool shell --deny-tool 'shell(rm *)'
 
-  # Coding Agent workflow:
-  # 1. Creates a branch from the issue
-  # 2. Makes changes using GitHub Actions runner
-  # 3. Self-reviews with Copilot code review
-  # 4. Runs security scanning (code, secrets, dependencies)
-  # 5. Opens a draft PR with the changes
-  # 6. Runs CI and iterates on failures
-  # 7. Requests human review when ready
+  # Cloud agent (GitHub.com):
+  # 1. On an issue, set Assignees → "Copilot"
+  # 2. Copilot creates a branch in a GitHub Actions runner,
+  #    makes commits, opens a draft PR
+  # 3. Iterate by mentioning @copilot in a PR comment
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-agent-mode
+docUrl: https://code.visualstudio.com/docs/copilot/agents/overview
 userExtensible: true
-extensibilityNote: "Create custom agents via .github/agents/*.agent.md"
+extensibilityNote: 'Create custom agents in .github/agents/*.agent.md (project) or ~/.copilot/agents (user); selected from the agents dropdown'
 customExample: |
   # .github/agents/security-reviewer.agent.md
   ---
-  name: Security Reviewer
-  description: Reviews code for security vulnerabilities
-  tools: [read_file, search_code, list_files]
+  name: security-reviewer
+  description: Reviews code for security vulnerabilities. Read-only.
+  tools: [read, search]
+  model: claude-sonnet-4
   ---
 
   You are a security expert. Analyze code for OWASP Top 10
   vulnerabilities, injection flaws, and authentication issues.
-  Never suggest changes — only report findings.
+  Never modify files — only report findings with file:line references.
 
-  # Usage in chat: @security-reviewer check this PR
+  # Usage: pick "security-reviewer" from the agents dropdown,
+  # then send your prompt.

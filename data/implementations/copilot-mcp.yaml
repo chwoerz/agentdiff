@@ -2,27 +2,34 @@ id: copilot-mcp
 name: Copilot MCP Support
 featureId: mcp-servers
 description: >
-  Configured in VS Code settings.json under github.copilot.chat.mcpServers,
-  with similar support in JetBrains and the CLI. MCP tools become available
-  to the agent alongside built-in tools. Supports stdio transport.
+  Configured via an mcp.json file — workspace-level at .vscode/mcp.json or
+  user-level via the "MCP: Open User Configuration" command. The top-level
+  key is "servers" (not "mcpServers"); each entry supports stdio and remote
+  HTTP transports. Servers can also be installed from the Extensions view
+  (@mcp filter) or via "code --add-mcp". Also available in JetBrains and
+  the Copilot CLI.
 example: |
-  // VS Code settings.json
+  // .vscode/mcp.json (workspace) or user mcp.json
   {
-    "github.copilot.chat.mcpServers": {
-      "filesystem": {
-        "command": "npx",
-        "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"]
+    "servers": {
+      "github": {
+        "type": "http",
+        "url": "https://api.githubcopilot.com/mcp"
       },
-      "brave-search": {
+      "playwright": {
         "command": "npx",
-        "args": ["-y", "@modelcontextprotocol/server-brave-search"],
-        "env": {
-          "BRAVE_API_KEY": "${input:braveApiKey}"
-        }
+        "args": ["-y", "@microsoft/mcp-server-playwright"]
+      },
+      "filesystem": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"]
       }
     }
   }
+
+  // Use input variables for secrets — do not hardcode API keys.
 syntax: json
-docUrl: https://docs.github.com/en/copilot/customizing-copilot/extending-copilot-mcp
+docUrl: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
 userExtensible: true
-extensibilityNote: "Add MCP servers via IDE settings for custom tool integrations"
+extensibilityNote: 'Add MCP servers in .vscode/mcp.json, user mcp.json, or via the Extensions view'

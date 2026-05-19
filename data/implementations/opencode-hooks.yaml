@@ -2,58 +2,57 @@ id: opencode-hooks
 name: OpenCode Plugin Hooks
 featureId: hooks
 description: >
-  OpenCode supports ~30 lifecycle event hooks via its JavaScript/TypeScript
-  plugin system. Hooks use dot notation for event names and cover file changes,
-  tool invocations, sessions, permissions, LSP diagnostics, shell environment,
-  and TUI interactions. Plugins export named functions that return a hooks
-  object.
+  OpenCode exposes ~20 lifecycle hooks via its JavaScript/TypeScript plugin
+  system. Hook names use a mix of camelCase (sessionCreated, messageCreated,
+  toolExecuted) and dot notation (tool.execute.before, tool.execute.after,
+  provider.update, model.update, permission.asked, chat.params). Plugins
+  return a Hooks object whose keys are hook names and whose values are
+  async functions receiving the event payload.
 example: |
-  // opencode-plugin/index.ts
-  export const MyHooks = async (ctx) => ({
-    hooks: {
-      "tool.execute.before": async (event) => {
-        console.log(`About to call: ${event.tool}`);
-      },
-      "tool.execute.after": async (event) => {
-        if (event.tool === "write") {
-          await ctx.exec("npm run lint");
-        }
-      },
-      "session.created": async () => {
-        console.log("Session started");
-      }
-    }
-  });
+  // my-plugin.ts
+  import type { Plugin } from "@opencode-ai/plugin"
 
-  // Available hook events (dot notation):
-  // command.executed
-  // file.edited, file.watcher.updated
-  // lsp.client.diagnostics, lsp.updated
-  // message.part.removed, message.part.updated
-  // message.removed, message.updated
-  // permission.asked, permission.replied
-  // session.created, session.compacted, session.deleted
-  // session.diff, session.error, session.idle
-  // session.status, session.updated
-  // shell.env
+  const MyHooks: Plugin = async ({ $ }) => ({
+    "tool.execute.before": async (input, output) => {
+      // Mutate or veto the tool call before it runs
+      if (input.tool === "read" && output.args.filePath.includes(".env")) {
+        throw new Error("Do not read .env files")
+      }
+    },
+    "tool.execute.after": async (input, output) => {
+      if (input.tool === "write" || input.tool === "edit") {
+        await $`npm run lint`
+      }
+    },
+    async sessionCreated(session) {
+      console.log(`Session ${session.id} started`)
+    }
+  })
+
+  export default MyHooks
+
+  // Selected hook events:
+  // init
+  // sessionCreated, messageCreated, toolExecuted, event, config
   // tool.execute.before, tool.execute.after
-  // tui.prompt.append, tui.command.execute, tui.toast.show
-  // experimental.session.compacting
+  // permission.asked, permission.replied
+  // provider.update, model.update
+  // chat.params
 syntax: typescript
 docUrl: https://opencode.ai/docs/plugins
 userExtensible: true
-extensibilityNote: "Register custom hook handlers via JavaScript/TypeScript plugins"
+extensibilityNote: "Register hook handlers via JavaScript/TypeScript plugins (default export)"
 customExample: |
-  // my-plugin/index.ts
-  export const LintPlugin = async (ctx) => ({
-    hooks: {
-      "file.edited": async (event) => {
-        if (event.path.endsWith(".ts")) {
-          await ctx.exec("npx", ["eslint", "--fix", event.path]);
-        }
-      },
-      "session.created": async () => {
-        console.log("Session started at", new Date().toISOString());
+  // plugins/lint-on-edit.ts
+  import type { Plugin } from "@opencode-ai/plugin"
+
+  const LintPlugin: Plugin = async ({ $ }) => ({
+    "tool.execute.after": async (input) => {
+      if ((input.tool === "edit" || input.tool === "write") &&
+          input.args.filePath?.endsWith(".ts")) {
+        await $`npx eslint --fix ${input.args.filePath}`
       }
     }
-  });
+  })
+
+  export default LintPlugin

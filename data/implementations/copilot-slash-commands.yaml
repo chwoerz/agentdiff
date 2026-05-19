@@ -2,34 +2,43 @@ id: copilot-slash-commands
 name: Copilot Built-in Slash Commands
 featureId: skills
 description: >
-  GitHub Copilot includes built-in slash commands for common workflows.
-  VS Code has the fullest set: /explain, /fix, /tests, /doc,
-  /create-instructions, /new, /search, and /create-skill. JetBrains supports
-  a subset. The CLI has its own commands via gh copilot suggest and explain.
-  These built-in commands are not user-extensible, but users CAN create custom
-  slash commands via Prompt Files (.prompt.md) and Agent Skills (SKILL.md).
+  GitHub Copilot Chat includes built-in slash commands for common workflows.
+  The exact set varies by surface (VS Code, Visual Studio, JetBrains, Xcode,
+  GitHub.com web chat, CLI). VS Code has the fullest set, including /explain,
+  /fix, /tests, /new, /fixTestFailure, /help, and /clear. JetBrains supports a
+  smaller subset. The Copilot CLI has its own slash commands (/model, /mcp,
+  /compact, /context, /feedback, /allow-all, /yolo). Built-in chat commands are
+  not user-extensible directly, but users can author custom commands via prompt
+  files (.prompt.md) and skills (SKILL.md) in supported surfaces.
 example: |
-  # VS Code Copilot Chat built-in slash commands:
+  # VS Code Copilot Chat built-in slash commands (verified):
+  /clear           — Start a new chat session
+  /explain         — Explain how the code in your active editor works
+  /fix             — Propose a fix for problems in the selected code
+  /fixTestFailure  — Find and fix a failing test
+  /help            — Quick reference and basics of using GitHub Copilot
+  /new             — Create a new project
+  /tests           — Generate unit tests for the selected code
 
-  /explain    — Explain selected code or a concept
-  /fix        — Suggest a fix for problems in selected code
-  /tests      — Generate unit tests for selected code
-  /doc        — Generate documentation for selected code
-  /new        — Scaffold a new project or file
-  /search     — Search the workspace for relevant code
-  /skills     — List and manage agent skills
-  /create-skill — AI-assisted skill creation
-
-  # Usage in chat:
-  /tests Write vitest tests for the UserService class
+  # Visual Studio adds:
+  /doc        — Add documentation comment for this symbol
+  /optimize   — Analyze and improve running time of the selected code
 
   # JetBrains supports:
-  /explain, /fix, /tests, /doc
+  /explain, /fix, /help, /tests
 
-  # CLI:
-  gh copilot suggest "undo last git commit"
-  gh copilot explain "git rebase -i HEAD~3"
+  # Xcode supports:
+  /doc, /explain, /fix, /simplify, /tests
+
+  # GitHub.com web chat:
+  /clear, /delete, /new, /rename
+
+  # Copilot CLI slash commands:
+  /model, /mcp, /compact, /context, /feedback, /allow-all, /yolo
+
+  # Usage:
+  /tests Write vitest tests for the UserService class
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-slash-commands
+docUrl: https://docs.github.com/en/copilot/reference/cheat-sheet
 userExtensible: false
-extensibilityNote: "Built-in commands are predefined; create custom commands via Prompt Files and Agent Skills instead"
+extensibilityNote: 'Built-in chat commands are predefined per surface; author custom commands via prompt files (.prompt.md) and SKILL.md skills where supported'

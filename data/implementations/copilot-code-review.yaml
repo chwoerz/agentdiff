@@ -2,40 +2,39 @@ id: copilot-code-review
 name: Copilot Code Review
 featureId: code-review
 description: >
-  GitHub Copilot offers agentic code review on GitHub.com and in the IDE.
-  On pull requests, Copilot can be added as a reviewer and provides inline
-  comments with suggested fixes. The Coding Agent self-reviews its own
-  changes using Copilot code review before opening PRs, and runs security
-  scanning (code scanning, secret scanning, dependency vulnerability checks)
-  directly in its workflow. The Coding Agent can automatically fix review
-  feedback. Agentic review gathers full repository context rather than just
-  reviewing the diff in isolation.
+  GitHub Copilot can review pull requests on GitHub.com (and review uncommitted
+  changes in VS Code, Visual Studio, JetBrains, Xcode). On GitHub.com, add
+  "Copilot" as a reviewer and Copilot leaves inline comments — often with
+  one-click suggested changes. Copilot always leaves a "Comment" review (never
+  "Approve" or "Request changes"), so it does not count toward required
+  approvals. When a comment has a suggestion, clicking "Implement suggestion"
+  drafts a request to the Copilot cloud agent, which opens a new PR applying
+  the fix. Customizable via `.github/copilot-instructions.md` and
+  `.github/instructions/**/*.instructions.md` (first 4000 chars only).
 example: |
-  # On GitHub.com PR:
-  # Click "Reviewers" → Add "Copilot" as reviewer
-  # Copilot analyzes the PR and leaves inline comments:
+  # GitHub.com PR:
+  # 1. Open the PR → Reviewers menu → select "Copilot"
+  # 2. Wait ~30s for inline review comments
+  # 3. Apply suggested changes one-by-one or as a batch commit
+  # 4. Click "Implement suggestion" to dispatch the cloud agent
+  #    to address feedback in a new PR
 
-  # src/auth/login.ts:42
-  # ⚠️ Suggestion: This SQL query is vulnerable to injection.
-  # Use parameterized queries instead.
-  # [Apply fix] — click to auto-apply the suggestion
+  # GitHub CLI:
+  gh pr create --reviewer @copilot
+  gh pr edit 42 --add-reviewer @copilot
 
-  # In VS Code agent mode:
-  "Review the changes in this PR"
-  # Agent reads the diff, gathers context, provides feedback
+  # VS Code:
+  # - Editor: select code → right-click → Generate Code → Review
+  # - Source Control view → "Copilot Code Review - Uncommitted Changes"
+  # Comments appear inline and in the Problems panel.
 
-  # Auto-fix via Coding Agent:
-  # When review comments are left, the coding agent can
-  # automatically create commits addressing the feedback
+  # Re-request review after pushing changes:
+  # Click the sync icon next to "Copilot" in the Reviewers menu.
 
-  # Agentic review features:
-  # - Full repo context (not just diff)
-  # - Inline suggestions with apply buttons
-  # - Auto-fix capability
-  # - Self-review before opening PRs (Coding Agent)
-  # - Security scanning (code, secrets, dependencies)
-  # - Security and performance analysis
+  # Custom review instructions (.github/copilot-instructions.md):
+  # "When performing a code review, focus on readability and
+  #  avoid nested ternary operators."
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/code-review
-userExtensible: false
-extensibilityNote: "Built-in PR review on GitHub.com and in IDE"
+docUrl: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review
+userExtensible: true
+extensibilityNote: 'Customize with repository custom instructions; enable automatic review per repo/org'

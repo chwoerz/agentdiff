@@ -2,21 +2,44 @@ id: claude-privacy
 name: Claude Code Privacy
 featureId: privacy
 description: >
-  Code sent to Anthropic API (TLS 1.2+). Commercial plans (Team, Enterprise):
-  not used for training. Consumer plans (Free, Pro, Max): may train unless
-  opted out. Enterprise offers data retention controls. .claudeignore excludes
-  sensitive files. No local/offline mode.
+  Code is sent to Anthropic (or your configured provider — Bedrock, Vertex,
+  Foundry, Claude Platform on AWS) over TLS 1.2+. Commercial plans (Team,
+  Enterprise, API): data is not used to train models unless the org opts into
+  the Development Partner Program. Consumer plans (Free, Pro, Max): may be
+  used for training unless you opt out at claude.ai/settings/data-privacy-controls.
+  Retention: 30 days standard for commercial; 5 years for consumers who allow
+  training, 30 days otherwise. Zero Data Retention available for Enterprise.
+  Local session transcripts cached under ~/.claude/projects/ for 30 days
+  (configurable via cleanupPeriodDays). File access is controlled via
+  permission rules in settings (deny rules, additionalDirectories), not via
+  a single .claudeignore file. Telemetry/error reporting can be disabled via
+  DISABLE_TELEMETRY, DISABLE_ERROR_REPORTING, DISABLE_FEEDBACK_COMMAND, or
+  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. No local/offline mode.
 example: |
-  # .claudeignore — exclude files (gitignore syntax)
-  .env
-  .env.*
-  **/secrets/
-  credentials.json
-  *.pem
-  *.key
-  dist/
-  node_modules/
+  # Deny sensitive paths via .claude/settings.json permissions:
+  {
+    "permissions": {
+      "deny": [
+        "Read(./.env)",
+        "Read(./.env.*)",
+        "Read(./secrets/**)",
+        "Read(./**/credentials.json)",
+        "Read(./**/*.pem)",
+        "Read(./**/*.key)"
+      ]
+    }
+  }
+
+  # Disable telemetry / error reporting / feedback:
+  export DISABLE_TELEMETRY=1
+  export DISABLE_ERROR_REPORTING=1
+  export DISABLE_FEEDBACK_COMMAND=1
+  # Or all non-essential at once:
+  export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+
+  # Clear local transcripts for a project:
+  claude project purge ~/work/repo
 syntax: text
-docUrl: https://docs.anthropic.com/en/docs/claude-code/privacy
+docUrl: https://docs.claude.com/en/docs/claude-code/data-usage
 userExtensible: true
-extensibilityNote: "Create .claudeignore to exclude files; configure data retention via enterprise"
+extensibilityNote: 'Restrict file access via permissions.deny rules; disable telemetry via env vars; enable ZDR for Enterprise'

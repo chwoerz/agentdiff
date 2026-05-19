@@ -2,26 +2,38 @@ id: copilot-builtin-tools
 name: Copilot Agent Mode Tools
 featureId: tools
 description: >
-  Agent mode tools: file editing, terminal commands, codebase search. VS Code
-  has the full set, JetBrains a comparable subset, CLI has full agent
-  capabilities. Tools run with user confirmation by default.
+  In VS Code agent mode, Copilot has access to built-in tool sets that the
+  model invokes as needed: #read (readFile, problems, terminalLastCommand,
+  terminalSelection, notebook cell output), #search (codebase, fileSearch,
+  textSearch, listDirectory, usages, changes, githubRepo, githubTextSearch),
+  #edit (createFile, createDirectory, editFiles, editNotebook), #execute
+  (runInTerminal, getTerminalOutput, createAndRunTask, runNotebookCell,
+  testFailure), #web (fetch), #agent (runSubagent), and others like
+  #todos, #vscode/runCommand, #vscode/installExtension. Tool calls require
+  user approval by default; permission levels control this. JetBrains has a
+  comparable subset. The CLI exposes shell, file, and edit tools through the
+  same agent loop.
 example: |
-  # In VS Code Copilot agent mode, the AI can:
-
-  # 1. Edit files directly in the editor
-  # 2. Run terminal commands
-  # 3. Search across the workspace with @workspace
-
-  # Example agent mode interaction:
+  # Agent mode example (VS Code):
   User: "Add a health check endpoint to the Express app"
 
-  # Copilot agent:
-  # - Searches codebase for existing routes
-  # - Creates src/routes/health.ts
-  # - Adds route registration in app.ts
-  # - Runs `npm test` in terminal
-  # - Shows diff for approval
+  # The agent autonomously invokes built-in tools:
+  # 1. #search/codebase     — find existing routes
+  # 2. #read/readFile       — load src/app.ts
+  # 3. #edit/createFile     — src/routes/health.ts
+  # 4. #edit/editFiles      — register the route in app.ts
+  # 5. #execute/runInTerminal — npm test
+  # 6. #read/problems       — check for diagnostics
+  # Each tool call surfaces an approval prompt unless auto-approved.
+
+  # Reference a specific tool inline:
+  #search/codebase find all error handlers
+  #execute/runInTerminal npm run lint
+  #web/fetch https://example.com/api  # summarize this page
+
+  # Permission levels (per session):
+  # Default Approvals | Bypass Approvals | Autopilot (Preview)
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-agent-mode
-userExtensible: false
-extensibilityNote: "Agent mode tools are fixed; extend via MCP servers or extensions"
+docUrl: https://code.visualstudio.com/docs/copilot/agents/agent-tools
+userExtensible: true
+extensibilityNote: 'Extend with MCP servers (#-tools from the server), VS Code chat tool extensions, or custom agents that restrict tools'

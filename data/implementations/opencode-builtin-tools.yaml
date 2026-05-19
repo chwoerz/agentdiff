@@ -2,40 +2,46 @@ id: opencode-builtin-tools
 name: OpenCode Built-in Tools
 featureId: tools
 description: >
-  OpenCode provides a set of built-in tools using simple names (no namespace
-  prefixes): read (view files), write (create/overwrite files), edit (targeted
-  string replacements), bash (execute shell commands), grep (regex search),
-  glob (find files by pattern), lsp (language server diagnostics, experimental),
-  apply_patch (apply patches), skill (load skill content), todowrite (manage
-  todo lists), webfetch (fetch web content), websearch (search the web), and
-  question (ask user questions). All tools are available across the CLI,
-  desktop app, and IDE extension. Tools can be extended via the plugin system.
+  OpenCode ships a set of built-in tools with simple, unnamespaced names:
+  bash (shell), edit (exact-string replacements), write (create/overwrite
+  files), read (file contents with line ranges), grep (ripgrep-backed
+  regex search), glob (file pattern matching), apply_patch (patch
+  application), skill (load a SKILL.md), todowrite (task lists), webfetch
+  (fetch a URL), websearch (Exa-backed web search, requires
+  OPENCODE_ENABLE_EXA=1 or the OpenCode provider), question (ask the user),
+  and lsp (experimental LSP code intelligence, requires
+  OPENCODE_EXPERIMENTAL_LSP_TOOL=true). The implicit Task tool used to
+  invoke subagents is gated by the `task` permission key. Tool behavior is
+  controlled per-agent via the `permission` field.
 example: |
-  # OpenCode's built-in tools in action:
-
-  # read — Read file contents (supports line ranges)
-  # write — Create new files or overwrite existing ones
-  # edit — Modify files using exact string replacements
-  # bash — Execute shell commands
-  # grep — Search file contents using regex
-  # glob — Find files by pattern matching
-  # lsp — Language server diagnostics (experimental)
-  # apply_patch — Apply patches to files
-  # skill — Load skill content into conversation
-  # todowrite — Manage todo lists during sessions
-  # webfetch — Fetch and read web pages
-  # websearch — Search the web for information
-  # question — Ask user questions during execution
+  # OpenCode's built-in tools (simple, unnamespaced):
+  # bash         — Execute shell commands
+  # edit         — Modify files using exact string replacements
+  # write        — Create new files or overwrite existing ones
+  # read         — Read file contents (supports line ranges)
+  # grep         — Search file contents (regex, ripgrep)
+  # glob         — Find files by pattern matching
+  # apply_patch  — Apply patch files
+  # skill        — Load a SKILL.md into the conversation
+  # todowrite    — Maintain a task list
+  # webfetch     — Fetch and read web pages
+  # websearch    — Search the web via Exa (OPENCODE_ENABLE_EXA=1)
+  # question     — Ask the user a structured question
+  # lsp          — LSP code intelligence (experimental, opt-in)
+  #
+  # Subagent invocation goes through the Task tool, gated by
+  # the `task` permission key.
 
   # Tools are invoked automatically by the AI:
-  User: "Fix the TypeScript errors in auth.ts"
+  User: "Fix the failing tests in auth.test.ts"
 
   # OpenCode:
-  # 1. lsp — gets current errors
-  # 2. read — reads the file
-  # 3. edit — fixes the issues
-  # 4. lsp — verifies errors are resolved
+  # 1. read  — reads the test file
+  # 2. bash  — runs the test to capture the failure
+  # 3. read  — reads the source under test
+  # 4. edit  — applies a fix
+  # 5. bash  — re-runs the tests to verify
 syntax: text
 docUrl: https://opencode.ai/docs/tools
 userExtensible: true
-extensibilityNote: "Built-in tools extensible via plugins; add custom tools with the plugin system"
+extensibilityNote: 'Constrain tools per agent via `permission`; extend via custom tools and MCP servers'

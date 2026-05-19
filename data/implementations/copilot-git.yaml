@@ -2,38 +2,40 @@ id: copilot-git
 name: Copilot Git & GitHub Integration
 featureId: git-integration
 description: >
-  GitHub Copilot has the tightest GitHub integration of any AI harness. The
-  Coding Agent can be assigned issues directly, creates branches automatically,
-  makes changes via GitHub Actions runners, opens draft PRs, runs CI, and
-  iterates on failures. In the IDE, agent mode can create commits and PRs.
-  This deep integration makes the full issue-to-PR workflow possible without
-  a local environment.
+  GitHub Copilot has tight GitHub integration. Copilot cloud agent (formerly
+  "coding agent") can be assigned issues by setting "Copilot" as the assignee,
+  works in an ephemeral GitHub Actions runner, creates a branch, makes commits,
+  and opens a draft pull request. Mention `@copilot` in a PR comment to ask
+  it to iterate. In VS Code, Copilot can generate commit messages and PR
+  titles/descriptions, and the `@github` chat participant answers questions
+  about issues and pull requests. The GitHub CLI extension `gh copilot suggest`
+  generates shell commands.
 example: |
-  # Coding Agent: Issue → Branch → PR workflow:
+  # 1. Cloud agent: assign an issue to Copilot on GitHub.com
+  #    (Assignees dropdown → "Copilot"). Copilot then:
+  #    - Creates a branch (e.g. copilot/<issue>)
+  #    - Works in a GitHub Actions runner
+  #    - Opens a draft PR when ready
+  #    - Iterates when @copilot is mentioned in PR comments
 
-  # 1. Assign an issue to Copilot on GitHub.com:
-  @github-copilot implement this feature
+  # 2. Ask the cloud agent to iterate on an open PR:
+  @copilot please address the review comments
 
-  # 2. Coding Agent automatically:
-  #    - Creates a branch: copilot/issue-42
-  #    - Reads the issue description
-  #    - Makes code changes (GitHub Actions runner)
-  #    - Opens a draft PR
-  #    - Runs CI checks
-  #    - Iterates on failures
-  #    - Marks ready for review
+  # 3. In VS Code:
+  #    - Source Control view → sparkle icon → "Generate Commit Message"
+  #    - "Generate Pull Request Title and Description" in the PR view
+  #    - #changes attaches uncommitted changes to a chat prompt
+  #    - @github participant answers PR/issue questions:
+  @github What are the open PRs assigned to me?
 
-  # IDE agent mode:
-  "Create a PR for the changes on this branch"
-  # Agent: stages changes, commits, pushes, creates PR
-
-  # CLI:
+  # 4. GitHub CLI extension:
+  gh extension install github/gh-copilot
   gh copilot suggest "revert the last merge commit"
+  gh copilot explain "git rebase -i HEAD~3"
 
-  # PR interaction in chat:
-  @github Summarize PR #42
-  @github What issues does PR #42 close?
+  # 5. Request a Copilot code review via CLI:
+  gh pr create --reviewer @copilot
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-coding-agent
+docUrl: https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent
 userExtensible: false
-extensibilityNote: "Deep GitHub integration is built-in"
+extensibilityNote: 'Extend cloud agent via custom instructions, MCP servers, custom agents, hooks, and skills'

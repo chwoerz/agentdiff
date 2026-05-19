@@ -2,29 +2,34 @@ id: copilot-context
 name: Copilot Context References
 featureId: context-providers
 description: >
-  Uses @-mentions and #-references for context in chat. VS Code: @workspace,
-  @file, @terminal, @problems. Hash alternatives: #codebase, #file, #selection.
-  JetBrains supports a subset. Context indexed locally by the IDE.
+  In VS Code chat, context is attached via `#`-mentions for files, folders,
+  symbols, and built-in tools (the canonical syntax), and `@`-mentions for
+  chat participants like `@github`, `@terminal`, and `@vscode` which handle
+  domain-specific requests. Use the "Add Context..." button or drag-and-drop
+  to attach files, folders, problems, or editor selections. Built-in tools
+  include `#codebase`, `#selection`, `#changes`, `#githubRepo`, and many
+  more under tool sets like `#read`, `#search`, `#edit`, `#execute`, `#web`.
+  JetBrains supports a smaller subset of context controls.
 example: |
-  # VS Code Copilot Chat context references:
+  # VS Code Copilot Chat context:
 
-  # @-mentions for context sources:
-  @workspace How is authentication implemented?
-  @file:src/auth/login.ts Explain this file
-  @terminal What caused the last error?
-  @problems Fix the TypeScript errors
-
-  # #-references for specific content:
-  #codebase Find all API endpoints
-  #file:package.json What dependencies are installed?
+  # #-mentions for files, folders, symbols, and built-in tools:
+  #file:src/auth/login.ts Explain this file
+  #codebase Where are the API endpoints?
   #selection Refactor this code
+  #changes Summarize my uncommitted changes
+  #githubRepo:octocat/hello-world Find the entry point
+  #web/fetch https://example.com/api Summarize this page
 
-  # JetBrains supports:
-  # @workspace, @file (JetBrains-specific syntax)
+  # @-mentions invoke chat participants:
+  @github What are the open PRs assigned to me?
+  @terminal list the 5 largest files in this workspace
+  @vscode how do I enable word wrapping?
 
-  # Combine references:
-  @workspace @file:src/types.ts Add a new User type
+  # "Add Context..." button: pick files, symbols, selection,
+  # terminal output, problems, source control commits, etc.
+  # Drag & drop also works from the Explorer, Search, or Problems panel.
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/using-context-in-copilot-chat
+docUrl: https://code.visualstudio.com/docs/copilot/chat/copilot-chat-context
 userExtensible: true
-extensibilityNote: "Use @-mentions and #-references to control context; extend via extensions"
+extensibilityNote: 'Add tools via MCP servers or VS Code chat tool extensions; reference them with #-mentions'

@@ -2,23 +2,41 @@ id: claude-skills
 name: Claude Code Skills
 featureId: skills
 description: >
-  Claude Code discovers SKILL.md files in .claude/skills/<name>/ (project)
-  and ~/.claude/skills/<name>/ (user). Skills are invoked via the Skill tool
-  or matched automatically by description. Plugins can also register skills
-  via --plugin-dir or --plugin-url.
+  Skills are markdown files (SKILL.md) with YAML frontmatter that extend
+  Claude's capabilities. Discovered in .claude/skills/<name>/ (project),
+  ~/.claude/skills/<name>/ (user), plugins' skills/ directories, and managed
+  settings. Custom commands have been merged into skills: a file at
+  .claude/commands/foo.md and a skill at .claude/skills/foo/SKILL.md both
+  create /foo. Skills can be invoked manually with /<skill-name> or
+  auto-loaded by Claude based on the description field. Claude Code ships
+  bundled skills (/simplify, /batch, /debug, /loop, /claude-api). Skills
+  follow the Agent Skills open standard and support supporting files,
+  argument substitution ($ARGUMENTS, $0, $1), dynamic context injection
+  (!`cmd`), running in a forked subagent (context: fork), preloaded into
+  subagents, and per-skill hooks.
 example: |
+  # ~/.claude/skills/summarize-changes/SKILL.md
+  ---
+  description: Summarizes uncommitted changes and flags anything risky.
+  allowed-tools: Bash(git *)
+  ---
+
+  ## Current changes
+
+  !`git diff HEAD`
+
+  ## Instructions
+
+  Summarize the diff above in 2-3 bullets, then list any risks.
+
+  # Invocation:
+  /summarize-changes
+  # or auto-triggered when user says "what changed?"
+
   # Skill paths:
-  .claude/skills/<name>/SKILL.md         # project-level
-  ~/.claude/skills/<name>/SKILL.md       # user-level
-
-  # Invocation in conversation:
-  User: "/test-driven-development"
-  # → Skill tool loads .claude/skills/test-driven-development/SKILL.md
-
-  # Automatic matching:
-  User: "Deploy to staging"
-  # → Claude matches skill by description and invokes it
+  .claude/skills/<name>/SKILL.md         # project
+  ~/.claude/skills/<name>/SKILL.md       # user
 syntax: text
-docUrl: https://docs.anthropic.com/en/docs/claude-code/skills
+docUrl: https://docs.claude.com/en/docs/claude-code/skills
 userExtensible: true
-extensibilityNote: "Create SKILL.md files in .claude/skills/<name>/ subdirectories"
+extensibilityNote: 'Create SKILL.md files in .claude/skills/<name>/ subdirectories or bundle them in plugins'

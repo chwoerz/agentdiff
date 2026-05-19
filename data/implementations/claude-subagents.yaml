@@ -2,39 +2,52 @@ id: claude-subagents
 name: Claude Code Subagents
 featureId: subagents
 description: >
-  Claude Code spawns subagents via the Agent tool — isolated Claude sessions
-  with their own context window. Built-in subagent types include Explore
-  (read-only codebase search), general-purpose (full tool access), Plan
-  (architecture), and claude-code-guide (help with Claude Code itself).
-  Subagents can run in parallel, each in its own git worktree for file
-  isolation. The parent agent controls planning and integration while
-  specialists handle bounded tasks. Subagents cannot spawn other subagents.
-  Custom subagent types can be defined in .claude/agents/*.md.
+  Claude Code spawns subagents via the Agent tool (renamed from Task in
+  v2.1.63) — isolated Claude sessions with their own context window,
+  system prompt, tool restrictions, and permissions. Built-in subagent
+  types: Explore (read-only, Haiku-powered codebase search), Plan
+  (read-only research used during plan mode), general-purpose (full tool
+  access), plus helpers statusline-setup and claude-code-guide. Subagents
+  can run in parallel, optionally in their own git worktree
+  (isolation: worktree). They cannot spawn other subagents. Subagents can
+  also persist memory across sessions (memory: user|project|local) and
+  preload skills via the skills frontmatter field. Custom subagent types
+  are defined in .claude/agents/*.md (project) or ~/.claude/agents/*.md
+  (user), bundled in plugins, deployed via managed settings, or passed
+  inline with --agents JSON. Use --agent <name> to run the whole session
+  as a subagent.
 example: |
-  # Spawning a subagent from a skill or conversation:
-  Agent({
-    description: "Review migration safety",
-    subagent_type: "general-purpose",
-    prompt: "Review migration 0042_user_schema.sql for safety...",
-    isolation: "worktree"
-  })
+  # Custom subagent: .claude/agents/code-reviewer.md
+  ---
+  name: code-reviewer
+  description: Reviews code for quality and best practices
+  tools: Read, Glob, Grep
+  model: sonnet
+  memory: project
+  ---
 
-  # Parallel subagents (multiple Agent calls in one message):
-  Agent({ description: "Run tests", prompt: "..." })
-  Agent({ description: "Lint check", prompt: "..." })
+  You are a code reviewer. Analyze changes for quality, security, and
+  best practices.
+
+  # Spawning a subagent from conversation:
+  "Use the code-reviewer subagent on the auth module"
+  # or @-mention:
+  @code-reviewer (agent) look at the auth changes
+
+  # Run whole session as that agent:
+  claude --agent code-reviewer
 
   # Built-in subagent types:
-  # - Explore: read-only, fast search (grep, glob, read)
-  # - general-purpose: full tool access
-  # - Plan: architecture and design
-  # - claude-code-guide: help with Claude Code features
+  # - Explore         — read-only, Haiku-powered, skips CLAUDE.md
+  # - Plan            — read-only, used in plan mode, skips CLAUDE.md
+  # - general-purpose — full tool access, inherits model
 syntax: text
-docUrl: https://docs.anthropic.com/en/docs/claude-code/sub-agents
+docUrl: https://docs.claude.com/en/docs/claude-code/sub-agents
 userExtensible: true
-extensibilityNote: "Skills can orchestrate custom subagent workflows; custom subagent types via Agent SDK"
+extensibilityNote: 'Define custom subagent types in .claude/agents/*.md, bundle in plugins, deploy via managed settings, or pass via --agents JSON'
 customExample: |
   # Custom subagent orchestration via a skill:
-  # .claude/skills/parallel-review.md
+  # .claude/skills/parallel-review/SKILL.md
   ---
   name: parallel-review
   description: Run security and performance reviews in parallel

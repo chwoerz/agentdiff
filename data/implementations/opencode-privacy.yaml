@@ -14,15 +14,17 @@ example: |
   # - Anthropic (Claude) — not used for training
   # - OpenAI (GPT) — enterprise no-retention available
   # - Google (Gemini) — enterprise controls available
-  # - Any of 75+ supported providers
+  # - Any of ~100 providers sourced from models.dev
 
   # Fully offline with local models:
-  # opencode.json
+  // opencode.json
   {
+    "$schema": "https://opencode.ai/config.json",
+    "model": "ollama/codellama:34b",
     "provider": {
-      "name": "ollama",
-      "model": "codellama:34b",
-      "baseUrl": "http://localhost:11434"
+      "ollama": {
+        "options": { "baseURL": "http://localhost:11434/v1" }
+      }
     }
   }
 
@@ -33,8 +35,8 @@ example: |
   # - Full code privacy guaranteed
 
   # Open source — audit the code yourself:
-  # https://github.com/opencode-ai/opencode
+  # https://github.com/opencode-ai/opencode (and forks)
 syntax: json
-docUrl: https://opencode.ai/docs/privacy
+docUrl: https://opencode.ai/docs
 userExtensible: true
 extensibilityNote: "Choose any provider; use local models via Ollama for full offline operation"

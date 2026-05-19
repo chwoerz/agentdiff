@@ -2,15 +2,27 @@ id: copilot-checkpoints
 name: Copilot Checkpoints
 featureId: checkpoints
 description: >
-  IDE undo (Ctrl+Z / Cmd+Z) for reverting agent edits. Agent mode shows
-  diffs before applying — user can reject changes. The Coding Agent works
-  on a copilot/* branch that can be discarded entirely. No session-level
-  checkpoint or multi-file atomic undo.
+  VS Code Copilot Chat supports checkpoints: when chat.checkpoints.enabled is
+  set, VS Code snapshots affected files before each chat request. Hover a past
+  request and click "Restore Checkpoint" to roll the workspace back to that
+  point; a Redo button reappears if you want to undo the restore. You can also
+  edit a previous request, which reverts changes made by that request and all
+  subsequent ones. The Coding Agent works on a copilot/* branch that can be
+  discarded entirely. Checkpoints are temporary and do not replace Git.
 example: |
-  # IDE agent mode: Ctrl+Z / Cmd+Z to undo edits
-  # Coding Agent: changes on copilot/* branch — delete branch to rollback
-  # No session-level checkpoints — each edit undone individually
+  // settings.json — enable checkpoints
+  {
+    "chat.checkpoints.enabled": true,
+    "chat.checkpoints.showFileChanges": true
+  }
+
+  # In the Chat view:
+  # - Hover any past request → "Restore Checkpoint"
+  # - After restoring → "Redo" button to reapply
+  # - "Fork Conversation" to branch from a checkpoint
+
+  # Coding Agent: changes live on a copilot/* branch — delete to roll back.
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-agent-mode
+docUrl: https://code.visualstudio.com/docs/copilot/chat/chat-checkpoints
 userExtensible: false
-extensibilityNote: "IDE undo and branch-based rollback; no custom checkpoints"
+extensibilityNote: 'Built-in; toggle via chat.checkpoints.enabled. No custom checkpoint providers.'

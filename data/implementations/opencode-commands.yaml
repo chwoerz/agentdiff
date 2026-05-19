@@ -2,33 +2,51 @@ id: opencode-commands
 name: OpenCode Commands & Skills
 featureId: skills
 description: >
-  Built-in commands (/init, /undo, /redo, /share, /help) plus custom commands
-  as Markdown files in .opencode/commands/. Also discovers SKILL.md files in
-  .opencode/skills/, .claude/skills/, and .agents/skills/ directories.
+  Built-in slash commands (/init, /undo, /redo, /share, /help, plus
+  /compact, /sessions, /models, /themes, /export, /new, /editor and more)
+  plus custom commands defined inline in opencode.json under the
+  top-level `command` object, or as Markdown files in `.opencode/commands/`
+  (project) or `~/.config/opencode/commands/` (global). Each command has a
+  `template` (the prompt), an optional `description`, `agent`, `subtask`,
+  and `model`. Templates support `$ARGUMENTS` / `$1..$n`, shell
+  interpolation with !`cmd`, and `@file` references. OpenCode also
+  discovers SKILL.md files and supports @-mentions to invoke subagents.
 example: |
-  # OpenCode built-in commands:
-
-  /init       — Initialize project (creates AGENTS.md)
+  # OpenCode built-in commands (selection):
+  /init       — Analyze project and create AGENTS.md
   /undo       — Undo the last file change
   /redo       — Redo an undone change
   /share      — Share the current session
   /help       — Show available commands
+  /compact    — Summarize and compact the current session
+  /sessions   — List / resume sessions (aliases /resume, /continue)
+  /models     — Switch model
+  /new        — Start a new session (alias /clear)
 
-  # Custom commands in .opencode/commands/:
-  # User-level: ~/.config/opencode/commands/
-  # Project-level: .opencode/commands/
-  # Markdown files with argument placeholders ($ARG_NAME)
+  # Custom command inline in opencode.json:
+  {
+    "$schema": "https://opencode.ai/config.json",
+    "command": {
+      "deploy": {
+        "description": "Deploy current branch to staging",
+        "template": "Run npm test, npm run build, then deploy to staging."
+      }
+    }
+  }
+
+  # Or as a Markdown file: .opencode/commands/deploy.md
+  # File contents can reference @files and !`shell` output.
 syntax: text
 docUrl: https://opencode.ai/docs/commands
 userExtensible: true
-extensibilityNote: "Add custom commands as Markdown files in .opencode/commands/ directories"
+extensibilityNote: 'Add custom commands inline in opencode.json (`command`) or as Markdown files in .opencode/commands/ (or ~/.config/opencode/commands/)'
 customExample: |
   # .opencode/commands/deploy.md
   ---
   description: Deploy to staging environment
   ---
 
-  Deploy the current branch to staging:
+  Deploy the current branch to staging using @scripts/deploy.sh:
 
   1. Run the test suite: `npm test`
   2. Build the project: `npm run build`

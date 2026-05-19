@@ -2,27 +2,39 @@ id: copilot-skills
 name: Copilot Agent Skills
 featureId: skills
 description: >
-  Copilot discovers SKILL.md files in .github/skills/, .claude/skills/, and
-  .agents/skills/ (project-level), or ~/.copilot/skills/ and ~/.agents/skills/
-  (personal). Copilot adds argument-hint frontmatter for skill parameters.
-  Skills are invoked via /skill-name in chat or matched automatically by intent.
+  Agent Skills are folders containing a SKILL.md plus optional scripts and
+  resources. VS Code searches project paths (.github/skills/, .claude/skills/,
+  .agents/skills/) and personal paths (~/.copilot/skills/, ~/.claude/skills/,
+  ~/.agents/skills/). Each SKILL.md sits inside a directory whose name must
+  match the frontmatter `name` (lowercase letters, digits, hyphens). Required
+  frontmatter: name, description; optional: argument-hint, user-invocable,
+  disable-model-invocation, context (experimental: 'fork' runs the skill in
+  a subagent). Skills appear as `/` slash commands in chat and can also be
+  auto-loaded by the model based on the description. Agent Skills is an open
+  standard (agentskills.io) and works across VS Code, the Copilot CLI, and
+  the cloud agent.
 example: |
-  # Skill paths (all searched):
-  .github/skills/<name>/SKILL.md      # project-level (primary)
-  .claude/skills/<name>/SKILL.md      # cross-tool compatibility
-  .agents/skills/<name>/SKILL.md      # cross-tool compatibility
-  ~/.copilot/skills/<name>/SKILL.md   # personal
+  # Directory layout (project skill):
+  .github/skills/webapp-testing/
+    SKILL.md
+    test-template.js
+    examples/
 
-  # Copilot-specific frontmatter:
+  # SKILL.md frontmatter and body:
   ---
-  name: api-design
-  description: REST API design guidelines
-  argument-hint: "[endpoint] [method]"
+  name: webapp-testing
+  description: Guide for testing web apps with Playwright. Use when asked to
+    create or run browser-based tests.
+  argument-hint: "[test file] [options]"
   ---
 
-  # Invocation:
-  User: "/api-design /users GET"
+  # Web Application Testing with Playwright
+  Reference the [test template](./test-template.js) for the standard
+  structure. Run with `npx playwright test`.
+
+  # Invocation in chat:
+  /webapp-testing for the login page
 syntax: text
 docUrl: https://code.visualstudio.com/docs/copilot/customization/agent-skills
 userExtensible: true
-extensibilityNote: "Create SKILL.md files in .github/skills/ — also reads .claude/skills/ and .agents/skills/"
+extensibilityNote: 'Create SKILL.md inside a matching-name folder under .github/skills/ (or .claude/skills/, .agents/skills/, ~/.copilot/skills/)'

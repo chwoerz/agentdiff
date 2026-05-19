@@ -2,48 +2,41 @@ id: claude-memory
 name: Claude Code Memory
 featureId: memory
 description: >
-  Claude Code uses a file-based memory system stored in
-  ~/.claude/projects/<project>/memory/. A MEMORY.md index tracks all memory
-  entries. Memory types include user preferences, feedback from past sessions,
-  project-specific context, and reference information. Memories persist across
-  sessions and are automatically included in context. The AI can create, update,
-  and reference memories during conversations.
+  Claude Code's primary memory is the CLAUDE.md file: project memory at
+  ./CLAUDE.md (and parent directories), and user memory at ~/.claude/CLAUDE.md.
+  Both are auto-loaded into context every session. Agents additionally support
+  a `memory` frontmatter field with three scopes: `user` (persists per-user
+  across projects in ~/.claude/), `project` (shared project-level in .claude/),
+  and `local` (per-user per-project in .claude/*.local.*). The AI can edit
+  CLAUDE.md and agent memory files during conversations.
 example: |
-  # Memory is stored in ~/.claude/projects/<project>/memory/
-
-  # MEMORY.md — index of all memories
-  # Individual memory files:
-
-  # ~/.claude/projects/my-app/memory/user-preferences.md
-  ## User Preferences
-  - Prefers functional style over OOP
-  - Uses vitest, not jest
-  - Likes concise commit messages
-
-  # ~/.claude/projects/my-app/memory/project-architecture.md
+  # Project memory: ./CLAUDE.md (committed to repo)
   ## Architecture Notes
   - Frontend: Angular 21 with standalone components
   - Backend: Express with TypeScript
   - Database: PostgreSQL with Drizzle ORM
 
-  # Claude creates memories automatically:
-  # "I'll remember that you prefer vitest for testing."
-  # Memories are loaded into context each session.
+  ## Conventions
+  - Use vitest, not jest
+  - Functional style preferred over OOP
+  - Concise commit messages (Conventional Commits)
+
+  # User memory: ~/.claude/CLAUDE.md (personal, all projects)
+  ## My Preferences
+  - Always show me the diff before applying edits
+  - Prefer pnpm over npm
 syntax: markdown
-docUrl: https://docs.anthropic.com/en/docs/claude-code/memory
+docUrl: https://docs.claude.com/en/docs/claude-code/memory
 userExtensible: true
-extensibilityNote: "Memory files are user-readable and writable in ~/.claude/projects/"
+extensibilityNote: "CLAUDE.md is user-editable; agents can use memory frontmatter for scoped persistence"
 customExample: |
-  # ~/.claude/projects/my-project/memory/feedback_testing.md
+  # .claude/agents/test-reviewer.md
   ---
-  name: feedback-testing
-  description: User prefers integration tests over mocks
-  metadata:
-    type: feedback
+  name: test-reviewer
+  description: Reviews test changes; remembers team conventions
+  memory: project
   ---
-  
-  Use real database connections in tests, not mocks.
-  
-  **Why:** Team got burned when mocked tests passed but prod migration failed.
-  
-  **How to apply:** For any test touching the database, use the test container setup.
+
+  When reviewing tests, enforce:
+  - Real database connections in integration tests (no mocks)
+  - One assertion per test where practical

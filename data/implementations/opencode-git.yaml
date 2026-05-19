@@ -2,13 +2,14 @@ id: opencode-git
 name: OpenCode Git Integration
 featureId: git-integration
 description: >
-  OpenCode provides basic git integration through shell commands. The agent
-  can run git operations via the shell:exec tool but has no direct GitHub
-  API integration. Git status is used as a context source. There is no
-  built-in PR creation, issue management, or CI/CD interaction — these
-  require manual git commands or external tools.
+  OpenCode provides basic git integration through the `bash` tool, which
+  the agent uses to run `git` commands. A small set of GitHub-aware CLI
+  subcommands (`opencode github`, `opencode pr`) wrap workflows like
+  creating PRs from a session, but there is no built-in inline PR review
+  or CI/CD orchestration — the agent shells out to `gh` or `git` for
+  anything beyond that.
 example: |
-  # OpenCode uses git via shell:exec tool:
+  # OpenCode uses git via the `bash` tool:
 
   # Basic operations:
   "Commit the changes with a descriptive message"
@@ -20,15 +21,15 @@ example: |
   "Show me what changed since yesterday"
   # Agent runs: git log --since=yesterday --oneline
 
-  # No direct GitHub API:
-  # - No PR creation (would need gh CLI installed)
-  # - No issue management
-  # - No CI/CD interaction
+  # GitHub workflows:
+  # - `opencode github` — GitHub session integration
+  # - `opencode pr`     — create / manage PRs from a session
+  # - For anything else the agent shells out to `gh` (if installed)
 
   # Git status as context:
-  # OpenCode reads git status to understand
-  # which files are modified and staged
+  # The agent runs `git status` on demand to understand
+  # which files are modified and staged.
 syntax: bash
 docUrl: https://opencode.ai/docs
 userExtensible: false
-extensibilityNote: "Basic git via shell; no direct GitHub API integration"
+extensibilityNote: 'Git via `bash`; `opencode github`/`opencode pr` wrap basic GitHub workflows'

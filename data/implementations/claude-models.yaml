@@ -2,36 +2,40 @@ id: claude-models
 name: Claude Code Models
 featureId: model-selection
 description: >
-  Claude Code supports Anthropic models only: Opus 4.7 (most capable),
-  Opus 4.6, Sonnet 4.6 (balanced), and Haiku 4.5 (fastest, cheapest).
-  Models can be selected via the --model CLI flag or the /model command
-  in-session. The /fast shortcut toggles fast output mode for the current
-  model (faster output, not a model switch). The --effort flag adjusts
-  how much computation the model uses per response.
+  Claude Code supports Anthropic models only, addressed by the aliases
+  `opus`, `sonnet`, and `haiku` which resolve to the latest corresponding
+  model (currently Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5).
+  Full Claude API IDs (e.g. `claude-opus-4-7`, `claude-sonnet-4-6`,
+  `claude-haiku-4-5-20251001`, or legacy `claude-sonnet-4-5-20250929` /
+  `claude-opus-4-5-20251101`) can also be pinned. Models can be selected
+  via the --model CLI flag, the /model command in-session, settings.json
+  (`modelOverrides`), or environment variables
+  (ANTHROPIC_DEFAULT_SONNET_MODEL / OPUS_MODEL / HAIKU_MODEL).
 example: |
-  # Select model at startup:
+  # Select model at startup with an alias:
+  claude --model opus      # -> claude-opus-4-7
+  claude --model sonnet    # -> claude-sonnet-4-6
+  claude --model haiku     # -> claude-haiku-4-5
+
+  # Or pin a specific version:
   claude --model claude-opus-4-7
-  claude --model claude-sonnet-4-6
-  claude --model claude-haiku-4-5-20251001
+  claude --model claude-sonnet-4-5-20250929   # legacy
 
   # Switch model mid-session:
-  /model claude-sonnet-4-6
+  /model sonnet
 
-  # Toggle fast output mode:
-  /fast
-  # Enables faster output on the current model (not a model switch)
+  # Settings.json: pin alias resolution
+  // ~/.claude/settings.json
+  {
+    "modelOverrides": {
+      "sonnet": "claude-sonnet-4-6"
+    }
+  }
 
-  # Effort level (controls thinking depth):
-  claude --effort high    # More thorough, slower
-  claude --effort medium  # Balanced (default)
-  claude --effort low     # Quick responses
-
-  # Available models:
-  # claude-opus-4-7          — Most capable, complex tasks
-  # claude-opus-4-6          — Previous Opus generation
-  # claude-sonnet-4-6        — Balanced speed/capability
-  # claude-haiku-4-5-20251001 — Fastest, simple tasks
+  # Environment variables override the alias resolution:
+  export ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6
+  export ANTHROPIC_DEFAULT_OPUS_MODEL=claude-opus-4-7
 syntax: bash
-docUrl: https://docs.anthropic.com/en/docs/claude-code/models
+docUrl: https://docs.claude.com/en/docs/claude-code/models
 userExtensible: false
-extensibilityNote: "Anthropic models only (Opus, Sonnet, Haiku)"
+extensibilityNote: 'Anthropic models only; use aliases (opus/sonnet/haiku) or pin full model IDs'

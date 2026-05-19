@@ -2,36 +2,45 @@ id: copilot-prompt-files
 name: Copilot Prompt Files
 featureId: skills
 description: >
-  Reusable prompt templates saved as .prompt.md files in .github/prompts/.
-  Each file has YAML frontmatter (agent mode, description) and a Markdown body
-  with variable placeholders. Invoke via /filename in Copilot Chat. Prompt files
-  are shared via the repository, making them available to the whole team.
-  Available in VS Code, Visual Studio, and JetBrains.
+  Reusable prompt templates saved as `.prompt.md` files in `.github/prompts/`
+  (workspace) or the VS Code user profile. Optional YAML frontmatter:
+  description, name, argument-hint, agent (`ask` | `agent` | `plan` | custom
+  agent name), model, tools. The body is Markdown and can use `${input:var}`
+  placeholders and `#tool:<tool-name>` references. Invoked with `/name` in
+  the chat input (or via "Chat: Run Prompt"). Agent Skills also surface as
+  slash commands alongside prompt files. Available in VS Code; the broader
+  Copilot ecosystem (CLI, JetBrains, Visual Studio) supports a comparable
+  prompt-file concept.
 example: |
   # .github/prompts/create-component.prompt.md
   ---
-  agent: 'agent'
-  description: 'Scaffold a new React component with tests'
+  description: Scaffold a new React component with tests
+  agent: agent
+  model: Claude Sonnet 4.5
+  tools: ['edit', 'search/codebase']
   ---
 
   Create a new React component named ${input:name:Component name}.
 
   Requirements:
-  - Use TypeScript with proper prop types
-  - Include unit tests using Vitest
-  - Follow the existing component patterns in src/components/
-  - Add Storybook story if storybook is configured
+  - TypeScript with proper prop types
+  - Unit tests with Vitest
+  - Follow patterns in src/components/
+  - Add a Storybook story if storybook is configured
 
   Component type: ${input:type:functional or class component}
+
+  # Invoke in chat:
+  /create-component name=UserCard
 syntax: markdown
-docUrl: https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files
+docUrl: https://code.visualstudio.com/docs/copilot/customization/prompt-files
 userExtensible: true
-extensibilityNote: "Create .prompt.md files in .github/prompts/ — invoked as /commands in chat"
+extensibilityNote: 'Create .prompt.md files under .github/prompts/ or your user profile — invoked as /commands in chat'
 customExample: |
   # .github/prompts/review-pr.prompt.md
   ---
-  agent: 'agent'
-  description: 'Review current changes for common issues'
+  description: Review current changes for common issues
+  agent: agent
   ---
 
   Review the staged changes and check for:
@@ -41,4 +50,4 @@ customExample: |
   3. Missing error handling at system boundaries
   4. Test coverage for new code paths
 
-  Format: List issues grouped by severity (critical, warning, suggestion).
+  Format: list issues grouped by severity (critical, warning, suggestion).

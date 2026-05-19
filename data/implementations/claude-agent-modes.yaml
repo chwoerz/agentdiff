@@ -4,24 +4,29 @@ featureId: agent-modes
 description: >
   Claude Code offers permission modes controlling autonomy: default (asks
   before most actions), acceptEdits (auto-approves file edits), plan
-  (read-only planning), auto (AI-based permission classifier), dontAsk
-  (auto-approves most actions), and bypassPermissions (no confirmations).
-  It supports subagent types including Explore (read-only context gathering),
-  general-purpose (full tool access), and Plan (generates implementation
-  plans). Subagents can run in git worktree isolation for safe parallel
-  execution.
+  (read-only planning, no edits), auto (AI-based permission classifier,
+  research preview), dontAsk (auto-denies tools unless pre-approved), and
+  bypassPermissions (no confirmations, with circuit breakers for critical
+  operations). It supports subagent types including Explore (read-only
+  context gathering) and general-purpose (full tool access). Custom
+  subagent types can be defined in .claude/agents/*.md. Subagents can run
+  in git worktree isolation for safe parallel execution.
 example: |
   # Permission modes:
-  claude                          # default — asks before actions
-  claude --dangerously-skip-permissions  # bypassPermissions mode
+  claude                                    # default — asks before actions
+  claude --permission-mode acceptEdits      # auto-approve file edits
+  claude --permission-mode plan             # read-only planning
+  claude --dangerously-skip-permissions     # bypassPermissions mode
 
   # In .claude/settings.json, set default mode:
-  # "permissionMode": "default" | "acceptEdits" | "plan" | "auto" | "dontAsk" | "bypassPermissions"
+  # "permissions": {
+  #   "defaultMode": "default" | "acceptEdits" | "plan" |
+  #                  "auto" | "dontAsk" | "bypassPermissions"
+  # }
 
-  # Subagent types (used automatically by Claude):
-  # Explore — read-only, gathers context across codebase
-  # general-purpose — full tool access, executes subtasks
-  # Plan — creates implementation plans without executing
+  # Built-in subagent types (used automatically by Claude):
+  # Explore           — read-only, gathers context across codebase
+  # general-purpose   — full tool access, executes subtasks
 
   # Worktree isolation for parallel work:
   # Claude creates git worktrees so subagents can edit
@@ -33,7 +38,7 @@ example: |
   # Agent 2 (worktree): writes tests
   # Agent 3 (worktree): updates documentation
 syntax: bash
-docUrl: https://docs.anthropic.com/en/docs/claude-code/agent-modes
+docUrl: https://docs.claude.com/en/docs/claude-code/agent-modes
 userExtensible: true
 extensibilityNote: "Define custom subagent types in .claude/agents/*.md with YAML frontmatter"
 customExample: |

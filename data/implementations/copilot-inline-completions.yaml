@@ -2,32 +2,37 @@ id: copilot-inline-completions
 name: Copilot Inline Completions
 featureId: ide-integration
 description: >
-  Real-time ghost text code suggestions that appear as you type. Copilot
-  analyzes the current file, open tabs, and surrounding context to predict
-  what you'll write next. Press Tab to accept a suggestion, Esc to dismiss,
-  or Alt+] / Alt+[ to cycle through alternatives. Available in VS Code and
-  JetBrains. This is Copilot's original and most widely-used feature.
+  Real-time ghost text code suggestions that appear as you type. Copilot uses
+  the current and open files in the editor for context. Press Tab to accept,
+  Esc to dismiss, or Cmd/Ctrl+Right to accept the next word only. VS Code also
+  offers Next Edit Suggestions (Copilot NES), which predicts the location and
+  content of your next edit and lets you Tab through suggested edits across
+  the file. Available in VS Code and JetBrains; this is Copilot's original
+  feature.
 example: |
-  // As you type, Copilot shows ghost text (dimmed):
+  // Ghost text appears dimmed as you type:
 
   function calculateDiscount(price: number, percentage: number) {
     // Copilot suggests (ghost text):
     // return price * (percentage / 100);
     // Press Tab to accept
+  }
 
-  // After typing a function signature:
-  function fibonacci(n: number): number {
-    // Copilot suggests the full implementation:
-    // if (n <= 1) return n;
-    // return fibonacci(n - 1) + fibonacci(n - 2);
+  // Keyboard shortcuts (VS Code):
+  // Tab                   — Accept suggestion / navigate to next edit suggestion
+  // Esc                   — Dismiss
+  // Cmd/Ctrl+Right        — Accept next word only
+  // Hover suggestion      — Cycle through alternative suggestions
 
-  // Keyboard shortcuts:
-  // Tab        — Accept suggestion
-  // Esc        — Dismiss
-  // Alt+]      — Next suggestion
-  // Alt+[      — Previous suggestion
-  // Ctrl+→     — Accept next word only
+  // Next Edit Suggestions (Copilot NES):
+  // Enable: github.copilot.nextEditSuggestions.enabled
+  // A gutter arrow indicates the next predicted edit; press Tab
+  // to navigate to it, Tab again to accept.
+
+  // Comment-driven suggestions:
+  // # write a recursive fibonacci function
+  // (Copilot uses the comment as a hint for the next suggestion)
 syntax: typescript
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/getting-code-suggestions-in-your-ide
+docUrl: https://code.visualstudio.com/docs/copilot/ai-powered-suggestions
 userExtensible: false
-extensibilityNote: "Built-in ghost text completions; not user-configurable"
+extensibilityNote: "Built-in ghost text completions; choose completion model via 'GitHub Copilot: Change Completions Model' command"

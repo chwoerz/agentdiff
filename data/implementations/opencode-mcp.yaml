@@ -2,26 +2,31 @@ id: opencode-mcp
 name: OpenCode MCP Servers
 featureId: mcp-servers
 description: >
-  Configured in opencode.json under mcp.servers. Follows the standard MCP
-  format with command, args, and environment variables. Supports stdio
-  transport.
+  Configured in opencode.json under the top-level `mcp` object, where each
+  key is the server name. Each server has a `type` of "local" (with a
+  `command` array) or "remote" (with a `url` and optional `headers`).
+  Supports `enabled`, `env`, and other per-server options.
 example: |
   // opencode.json
   {
+    "$schema": "https://opencode.ai/config.json",
     "mcp": {
-      "servers": {
-        "sqlite": {
-          "command": "npx",
-          "args": ["-y", "@modelcontextprotocol/server-sqlite", "data.db"]
-        },
-        "memory": {
-          "command": "npx",
-          "args": ["-y", "@modelcontextprotocol/server-memory"]
-        }
-      }
+      "playwright": {
+        "type": "local",
+        "command": ["npx", "-y", "@playwright/mcp"],
+        "enabled": true,
+        "env": { "BROWSER": "chromium" }
+      },
+      "github": {
+        "type": "remote",
+        "url": "https://api.githubcopilot.com/mcp/",
+        "enabled": true,
+        "headers": { "Authorization": "Bearer ${GITHUB_TOKEN}" }
+      },
+      "disabled-server": { "enabled": false }
     }
   }
 syntax: json
 docUrl: https://opencode.ai/docs/mcp
 userExtensible: true
-extensibilityNote: "Add MCP servers in opencode.json project configuration"
+extensibilityNote: "Add MCP servers in opencode.json under the top-level `mcp` object"

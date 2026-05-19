@@ -2,32 +2,33 @@ id: opencode-context
 name: OpenCode Context
 featureId: context-providers
 description: >
-  OpenCode gathers context through LSP integration (getting diagnostics,
-  type information, and symbol definitions), file watching for real-time
-  change detection, git status for version control state, and agent-driven
-  file reading where the AI reads files as needed. The LSP integration is
-  particularly strong, providing the AI with the same type errors and
-  warnings that developers see in their editors.
+  OpenCode gathers context through LSP integration (an experimental `lsp`
+  tool that provides definitions, references, hover info and call
+  hierarchy from configured language servers), file watching for real-time
+  change detection, git operations executed via the `bash` tool, and
+  agent-driven file reading where the AI reads files as needed. The LSP
+  tool must be enabled with `OPENCODE_EXPERIMENTAL_LSP_TOOL=true` and
+  surfaces the same code intelligence developers see in their editors.
 example: |
   # OpenCode context sources:
 
-  # 1. LSP diagnostics — real-time errors and warnings
-  # The AI sees TypeScript errors, ESLint warnings, etc.
-  # lsp:diagnostics tool returns structured diagnostic data
+  # 1. LSP code intelligence — definitions, references, hover
+  # Exposed via the experimental `lsp` tool
+  # (OPENCODE_EXPERIMENTAL_LSP_TOOL=true)
 
   # 2. File watching — detects external changes
   # Files modified outside OpenCode are detected automatically
 
-  # 3. Git status — version control context
+  # 3. Git status — surfaced via `bash` (e.g. git status)
   # Knows which files are modified, staged, untracked
 
   # 4. Agent-driven file reading
-  # The AI reads files on demand using file:read
-  # and searches with search:grep
+  # The AI reads files on demand using `read`
+  # and searches with `grep` / `glob`
 
   # 5. AGENTS.md — persistent project instructions
   # Loaded from repo root and subdirectories
 syntax: text
 docUrl: https://opencode.ai/docs/context
 userExtensible: true
-extensibilityNote: "LSP integration automatic; extend via plugins for custom context sources"
+extensibilityNote: 'LSP integration automatic; extend via plugins for custom context sources'

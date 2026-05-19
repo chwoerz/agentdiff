@@ -2,40 +2,52 @@ id: opencode-subagents
 name: OpenCode Subagents
 featureId: subagents
 description: >
-  OpenCode includes three built-in subagents: General (full tool access for
+  OpenCode ships three built-in subagents: General (full tool access for
   multi-step tasks), Explore (fast read-only codebase search), and Scout
-  (read-only external docs and dependency research). Subagents can be invoked
-  by @-mentioning them in messages or automatically by the primary agent based
-  on task descriptions. Custom agents can be created via the plugin system
-  with tailored tools and prompts.
+  (read-only external docs and dependency research, including cloning
+  dependency repos into OpenCode's managed cache). All three are enabled
+  by default. Subagents are invoked by @-mentioning them in messages or
+  automatically by the primary agent via the Task tool. Custom agents
+  can be defined inline in opencode.json, as Markdown files in
+  `.opencode/agents/` (project) or `~/.config/opencode/agents/` (global),
+  or via the plugin system.
 example: |
   # Invoke a subagent by @-mention:
   @explore Find all files that import the UserService class
-
-  @scout What testing framework does this project use?
+  @general Search the repo and summarize the auth flow
 
   # Built-in subagent types:
-  # - General: full tool access, multi-step task execution
-  # - Explore: read-only, fast codebase search
-  # - Scout: read-only, external docs and dependency research
+  # - general  — full tool access, multi-step task execution
+  # - explore  — read-only, fast codebase search
+  # - scout    — read-only external docs / dependency research
 
-  # Custom agent via plugin:
-  # Agents can be defined via plugins
-  # with scoped tools and custom system prompts
+  # Custom agent as a Markdown file:
+  # .opencode/agents/reviewer.md
+  # ---
+  # description: Reviews PRs for style violations.
+  # mode: subagent
+  # model: anthropic/claude-sonnet-4-6
+  # permission:
+  #   edit: deny
+  #   bash: ask
+  # ---
+  #
+  # You are a strict PR reviewer. Focus on...
 syntax: text
-docUrl: https://opencode.ai/docs/agents/
+docUrl: https://opencode.ai/docs/agents
 userExtensible: true
-extensibilityNote: "Create custom agents via JavaScript/TypeScript plugins with scoped tools"
+extensibilityNote: 'Define custom agents inline in opencode.json or as Markdown files in .opencode/agents/ (or ~/.config/opencode/agents/)'
 customExample: |
-  // plugins/my-agents/index.ts
-  export const TestRunnerAgent = async (ctx) => ({
-    agents: {
+  // opencode.json
+  {
+    "$schema": "https://opencode.ai/config.json",
+    "agent": {
       "test-runner": {
-        description: "Runs and analyzes test results",
-        tools: ["bash", "read"],
-        prompt: `You are a test specialist. Run tests, analyze
-                 failures, and suggest fixes. Always run the
-                 full suite before reporting.`
+        "description": "Runs and analyzes test results",
+        "mode": "subagent",
+        "model": "anthropic/claude-sonnet-4-6",
+        "prompt": "You are a test specialist. Run tests, analyze failures, and suggest fixes.",
+        "permission": { "edit": "deny" }
       }
     }
-  });
+  }

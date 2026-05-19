@@ -2,30 +2,39 @@ id: copilot-chat-panel
 name: Copilot Chat Panel
 featureId: ide-integration
 description: >
-  A dedicated chat panel in the IDE for conversational interaction with
-  Copilot. Supports @-references for context, slash commands for workflows,
-  and agent mode for multi-step tasks. Available in VS Code and JetBrains.
-  The chat panel can reference files, selections, terminal output, and
-  workspace-wide context. Supports switching between chat and agent mode.
+  VS Code provides three chat surfaces: the Chat view (Cmd/Ctrl+Alt+I) in the
+  Secondary Side Bar for ongoing conversations, Inline Chat (Cmd/Ctrl+I) in
+  the editor or terminal, and Quick Chat (Cmd/Ctrl+Shift+Alt+L) for quick
+  one-offs. Attach context via the "Add Context..." button, drag-and-drop,
+  `#`-mentions (files, folders, symbols, tools), or `@`-mentions for chat
+  participants (`@github`, `@terminal`, `@vscode`). Slash commands like
+  `/explain`, `/fix`, `/tests`, `/plan` invoke built-in workflows. Switch
+  agents from the agents dropdown to use agent mode. JetBrains has a
+  comparable but smaller chat panel.
 example: |
-  # VS Code Copilot Chat panel interactions:
+  # VS Code keyboard shortcuts:
+  # Cmd/Ctrl+Alt+I        — Open Chat view
+  # Cmd/Ctrl+I            — Inline Chat in editor or terminal
+  # Cmd/Ctrl+Shift+Alt+L  — Quick Chat
+  # Cmd/Ctrl+Shift+I      — Switch to using agents
+  # Cmd/Ctrl+N (in chat)  — New chat session
+  # Cmd/Ctrl+Alt+.        — Model picker
 
-  # Simple question:
-  "How does the auth middleware work?"
+  # In the chat input:
+  #file:src/app.ts Explain the middleware chain
+  #codebase Where are the API routes defined?
+  #selection Refactor this
+  @github Show recent merged PRs
+  @terminal list the 5 largest files
 
-  # With context references:
-  "@workspace Where are the API routes defined?"
-  "@file:src/app.ts Explain the middleware chain"
+  # Slash commands:
+  /explain   /fix   /tests   /plan   /new   /init
+  /clear     /compact   /fork
+  /agents    /prompts   /skills   /hooks   /instructions
 
-  # Slash commands in chat:
-  "/explain What does this regex do?"
-  "/fix The tests are failing with a timeout error"
-  "/tests Generate tests for the UserService"
-
-  # Agent mode (toggle in chat panel):
-  "Add input validation to all API endpoints"
-  # Agent iterates: searches → edits → tests → reports
+  # Agent mode: select an agent from the agents dropdown
+  # (built-in: Ask, Agent, Plan; plus custom and third-party agents)
 syntax: text
-docUrl: https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/using-copilot-chat-in-your-ide
-userExtensible: false
-extensibilityNote: "Built-in IDE feature; extend via marketplace extensions"
+docUrl: https://code.visualstudio.com/docs/copilot/chat/copilot-chat
+userExtensible: true
+extensibilityNote: 'Extend with MCP servers, custom agents, prompt files, skills, chat tool extensions, and third-party agents (Claude, Codex)'

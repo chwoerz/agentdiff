@@ -2,14 +2,17 @@ id: copilot-memory
 name: Copilot Memory
 featureId: memory
 description: >
-  GitHub Copilot Memory (public preview, March 2026) enables persistent,
-  repository-level understanding across sessions. Copilot learns coding
-  conventions, architectural patterns, and cross-file dependencies, then
-  reuses that knowledge in future interactions. Memory works across Copilot
-  cloud agent, code review, and CLI. It operates at two levels: repository-level
-  facts (shared, viewable by repo owners) and user-level preferences
-  (personal, Pro/Pro+ only). Memories auto-expire after 28 days. Enabled by
-  default for Pro and Pro+ users.
+  GitHub Copilot Memory (public preview) enables persistent, repository-level
+  understanding across sessions. Copilot learns coding conventions,
+  architectural patterns, and cross-file dependencies, then reuses that
+  knowledge in future interactions. Memory works across Copilot cloud agent,
+  Copilot code review, and Copilot CLI. It operates at two levels:
+  repository-level facts (shared per repository, viewable and deletable by
+  repository owners) and user-level preferences (personal, Pro/Pro+ only).
+  Memories auto-expire after 28 days to prevent stale information from
+  influencing Copilot's decisions. Enabled by default for individual Pro and
+  Pro+ users; off by default for organization/enterprise-managed subscriptions
+  and must be enabled in org/enterprise policy settings.
 example: |
   # Copilot Memory is automatic — no manual setup needed
 
@@ -41,4 +44,4 @@ example: |
 syntax: text
 docUrl: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory
 userExtensible: true
-extensibilityNote: "Automatic cross-session memory; supplement with copilot-instructions.md for permanent rules"
+extensibilityNote: 'Automatic cross-session memory; supplement with copilot-instructions.md for permanent rules'

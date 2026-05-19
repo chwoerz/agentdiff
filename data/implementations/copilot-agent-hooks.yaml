@@ -2,11 +2,15 @@ id: copilot-agent-hooks
 name: Copilot Hooks
 featureId: hooks
 description: >
-  Shell commands triggered at 8 lifecycle events: SessionStart, UserPromptSubmit,
-  PreToolUse, PostToolUse, PreCompact, SubagentStart, SubagentStop, Stop.
-  Configured in .github/hooks/*.json files. Also reads .claude/settings.json
-  format for cross-tool compatibility. Custom agents can define hooks in
-  frontmatter.
+  Shell commands triggered at agent lifecycle events. Configured as JSON files
+  under .github/hooks/ (workspace), .claude/settings.json (Claude format), or
+  ~/.copilot/hooks / ~/.claude/settings.json (user). Available in VS Code
+  (Preview), the Copilot CLI, and cloud agents. Supported events (PascalCase):
+  SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, PreCompact,
+  SubagentStart, SubagentStop, Stop. Hooks can also be scoped to a custom
+  agent via a `hooks` field in `.agent.md` frontmatter. Hooks receive JSON on
+  stdin and can return JSON on stdout to influence behavior; exit code 2
+  blocks the action.
 example: |
   // .github/hooks/auto-format.json
   {
@@ -14,7 +18,9 @@ example: |
       "PostToolUse": [
         {
           "type": "command",
-          "command": "npx prettier --write \"$TOOL_INPUT_FILE_PATH\""
+          "command": "npx prettier --write \"$TOOL_INPUT_FILE_PATH\"",
+          "windows": "powershell -File scripts\\format.ps1",
+          "timeout": 30
         }
       ],
       "PreToolUse": [
@@ -27,9 +33,12 @@ example: |
     }
   }
 
-  // Hooks receive JSON via stdin (sessionId, hookEventName, etc.)
-  // Exit 0 = success, exit 2 = block the action
+  // Each entry: type ("command"), command (default), optional os overrides
+  // (windows/linux/osx), cwd, env, timeout (seconds, default 30).
+  // Hooks receive JSON on stdin (sessionId, hookEventName, tool_name, ...).
+  // Return {"hookSpecificOutput": {"permissionDecision": "deny", ...}} to
+  // block a single tool call; exit 2 also blocks.
 syntax: json
 docUrl: https://code.visualstudio.com/docs/copilot/customization/hooks
 userExtensible: true
-extensibilityNote: "Create .github/hooks/*.json files with custom shell commands for lifecycle events"
+extensibilityNote: 'Create JSON files under .github/hooks/ (or ~/.copilot/hooks) with PascalCase event arrays'
