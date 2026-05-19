@@ -9,12 +9,12 @@ description: >
   used for training unless you opt out at claude.ai/settings/data-privacy-controls.
   Retention: 30 days standard for commercial; 5 years for consumers who allow
   training, 30 days otherwise. Zero Data Retention available for Enterprise.
-  Local session transcripts cached under ~/.claude/projects/ for 30 days
-  (configurable via cleanupPeriodDays). File access is controlled via
-  permission rules in settings (deny rules, additionalDirectories), not via
-  a single .claudeignore file. Telemetry/error reporting can be disabled via
-  DISABLE_TELEMETRY, DISABLE_ERROR_REPORTING, DISABLE_FEEDBACK_COMMAND, or
-  CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC. No local/offline mode.
+  Local session transcripts cached under `~/.claude/projects/` for 30 days
+  (configurable via `cleanupPeriodDays`). File access is controlled via
+  permission rules in settings (deny rules, `additionalDirectories`), not via
+  a single `.claudeignore` file. Telemetry/error reporting can be disabled via
+  `DISABLE_TELEMETRY`, `DISABLE_ERROR_REPORTING`, `DISABLE_FEEDBACK_COMMAND`, or
+  `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`. No local/offline mode.
 example: |
   # Deny sensitive paths via .claude/settings.json permissions:
   {
@@ -42,4 +42,4 @@ example: |
 syntax: text
 docUrl: https://docs.claude.com/en/docs/claude-code/data-usage
 userExtensible: true
-extensibilityNote: 'Restrict file access via permissions.deny rules; disable telemetry via env vars; enable ZDR for Enterprise'
+extensibilityNote: 'Restrict file access via `permissions.deny` rules; disable telemetry via env vars; enable ZDR for Enterprise'

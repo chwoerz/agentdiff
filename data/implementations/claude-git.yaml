@@ -2,7 +2,7 @@ id: claude-git
 name: Claude Code Git Integration
 featureId: git-integration
 description: >
-  Git operations via Bash tool and gh CLI: branches, commits, PRs, worktrees.
+  Git operations via `Bash` tool and `gh` CLI: branches, commits, PRs, worktrees.
   Worktrees used for parallel subagent isolation. Internal checkpoints (not
   git commits) created before changes.
 example: |
@@ -32,4 +32,4 @@ example: |
 syntax: bash
 docUrl: https://docs.claude.com/en/docs/claude-code/git
 userExtensible: false
-extensibilityNote: "Uses standard git/gh tools; behavior guided via CLAUDE.md"
+extensibilityNote: 'Uses standard `git`/`gh` tools; behavior guided via `CLAUDE.md`'

@@ -2,9 +2,9 @@ id: opencode-undo
 name: OpenCode Undo/Redo
 featureId: checkpoints
 description: >
-  OpenCode provides /undo and /redo commands for file-level change tracking.
-  Each file modification made by the agent is tracked, and /undo reverts the
-  last change. /redo re-applies an undone change. This provides a linear
+  OpenCode provides `/undo` and `/redo` commands for file-level change tracking.
+  Each file modification made by the agent is tracked, and `/undo` reverts the
+  last change. `/redo` re-applies an undone change. This provides a linear
   undo history for the current session. Changes are tracked at the file
   level, not at the individual edit level.
 example: |
@@ -32,4 +32,4 @@ example: |
 syntax: text
 docUrl: https://opencode.ai/docs/commands
 userExtensible: false
-extensibilityNote: "Built-in /undo and /redo for file-level tracking"
+extensibilityNote: 'Built-in /undo and /redo for file-level tracking'

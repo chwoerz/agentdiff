@@ -4,7 +4,7 @@ featureId: plugins
 description: >
   Copilot Extensions are third-party integrations built as GitHub Apps or
   VS Code chat participant extensions. In VS Code/JetBrains chat they are
-  invoked via @-mention (e.g. @docker, @azure, @github) and surface
+  invoked via `@`-mention (e.g. `@docker`, `@azure`, `@github`) and surface
   domain-specific tools, skills, and context. They are distinct from custom
   agents (`.agent.md` files), which are user/team-defined personas selected
   from the agents dropdown. For programmatic tool integration, prefer MCP

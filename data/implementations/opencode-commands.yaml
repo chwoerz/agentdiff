@@ -2,18 +2,20 @@ id: opencode-commands
 name: OpenCode Commands & Skills
 featureId: skills
 description: >
-  Built-in slash commands (/init, /undo, /redo, /share, /help, plus
-  /compact, /sessions, /models, /themes, /export, /new, /editor and more)
-  plus custom commands defined inline in opencode.json under the
-  top-level `command` object, or as Markdown files in `.opencode/commands/`
-  (project) or `~/.config/opencode/commands/` (global). Each command has a
-  `template` (the prompt), an optional `description`, `agent`, `subtask`,
-  and `model`. Templates support `$ARGUMENTS` / `$1..$n`, shell
-  interpolation with !`cmd`, and `@file` references. OpenCode also
-  discovers SKILL.md files and supports @-mentions to invoke subagents.
+  Built-in slash commands (`/init`, `/undo`, `/redo`, `/share`, `/help`,
+  `/connect`, plus `/compact`, `/sessions`, `/models`, `/themes`,
+  `/export`, `/new`, `/editor` and more) plus custom commands defined
+  inline in `opencode.json` under the top-level `command` object, or as
+  Markdown files in `.opencode/commands/` (project) or
+  `~/.config/opencode/commands/` (global). Each command has a `template`
+  (the prompt), an optional `description`, `agent`, `subtask`, and
+  `model`. Templates support `$ARGUMENTS` / `$1..$n`, shell interpolation
+  with `` !`cmd` ``, and `@file` references. OpenCode also discovers
+  `SKILL.md` files and supports `@agent` mentions to invoke subagents.
 example: |
   # OpenCode built-in commands (selection):
   /init       — Analyze project and create AGENTS.md
+  /connect    — Connect to a provider (OpenCode Zen et al.)
   /undo       — Undo the last file change
   /redo       — Redo an undone change
   /share      — Share the current session

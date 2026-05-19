@@ -44,4 +44,4 @@ example: |
 syntax: text
 docUrl: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory
 userExtensible: true
-extensibilityNote: 'Automatic cross-session memory; supplement with copilot-instructions.md for permanent rules'
+extensibilityNote: 'Automatic cross-session memory; supplement with `copilot-instructions.md` for permanent rules'

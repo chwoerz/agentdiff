@@ -2,13 +2,13 @@ id: claude-memory
 name: Claude Code Memory
 featureId: memory
 description: >
-  Claude Code's primary memory is the CLAUDE.md file: project memory at
-  ./CLAUDE.md (and parent directories), and user memory at ~/.claude/CLAUDE.md.
+  Claude Code's primary memory is the `CLAUDE.md` file: project memory at
+  `./CLAUDE.md` (and parent directories), and user memory at `~/.claude/CLAUDE.md`.
   Both are auto-loaded into context every session. Agents additionally support
   a `memory` frontmatter field with three scopes: `user` (persists per-user
-  across projects in ~/.claude/), `project` (shared project-level in .claude/),
-  and `local` (per-user per-project in .claude/*.local.*). The AI can edit
-  CLAUDE.md and agent memory files during conversations.
+  across projects in `~/.claude/`), `project` (shared project-level in `.claude/`),
+  and `local` (per-user per-project in `.claude/*.local.*`). The AI can edit
+  `CLAUDE.md` and agent memory files during conversations.
 example: |
   # Project memory: ./CLAUDE.md (committed to repo)
   ## Architecture Notes
@@ -28,7 +28,7 @@ example: |
 syntax: markdown
 docUrl: https://docs.claude.com/en/docs/claude-code/memory
 userExtensible: true
-extensibilityNote: "CLAUDE.md is user-editable; agents can use memory frontmatter for scoped persistence"
+extensibilityNote: '`CLAUDE.md` is user-editable; agents can use `memory` frontmatter for scoped persistence'
 customExample: |
   # .claude/agents/test-reviewer.md
   ---

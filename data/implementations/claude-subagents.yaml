@@ -2,19 +2,19 @@ id: claude-subagents
 name: Claude Code Subagents
 featureId: subagents
 description: >
-  Claude Code spawns subagents via the Agent tool (renamed from Task in
+  Claude Code spawns subagents via the `Agent` tool (renamed from `Task` in
   v2.1.63) — isolated Claude sessions with their own context window,
   system prompt, tool restrictions, and permissions. Built-in subagent
-  types: Explore (read-only, Haiku-powered codebase search), Plan
-  (read-only research used during plan mode), general-purpose (full tool
-  access), plus helpers statusline-setup and claude-code-guide. Subagents
+  types: `Explore` (read-only, Haiku-powered codebase search), `Plan`
+  (read-only research used during plan mode), `general-purpose` (full tool
+  access), plus helpers `statusline-setup` and `claude-code-guide`. Subagents
   can run in parallel, optionally in their own git worktree
-  (isolation: worktree). They cannot spawn other subagents. Subagents can
-  also persist memory across sessions (memory: user|project|local) and
-  preload skills via the skills frontmatter field. Custom subagent types
-  are defined in .claude/agents/*.md (project) or ~/.claude/agents/*.md
+  (`isolation: worktree`). They cannot spawn other subagents. Subagents can
+  also persist memory across sessions (`memory: user|project|local`) and
+  preload skills via the `skills` frontmatter field. Custom subagent types
+  are defined in `.claude/agents/*.md` (project) or `~/.claude/agents/*.md`
   (user), bundled in plugins, deployed via managed settings, or passed
-  inline with --agents JSON. Use --agent <name> to run the whole session
+  inline with `--agents` JSON. Use `--agent <name>` to run the whole session
   as a subagent.
 example: |
   # Custom subagent: .claude/agents/code-reviewer.md
@@ -44,7 +44,7 @@ example: |
 syntax: text
 docUrl: https://docs.claude.com/en/docs/claude-code/sub-agents
 userExtensible: true
-extensibilityNote: 'Define custom subagent types in .claude/agents/*.md, bundle in plugins, deploy via managed settings, or pass via --agents JSON'
+extensibilityNote: 'Define custom subagent types in `.claude/agents/*.md`, bundle in plugins, deploy via managed settings, or pass via `--agents` JSON'
 customExample: |
   # Custom subagent orchestration via a skill:
   # .claude/skills/parallel-review/SKILL.md

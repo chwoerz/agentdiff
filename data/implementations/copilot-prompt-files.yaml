@@ -8,9 +8,10 @@ description: >
   agent name), model, tools. The body is Markdown and can use `${input:var}`
   placeholders and `#tool:<tool-name>` references. Invoked with `/name` in
   the chat input (or via "Chat: Run Prompt"). Agent Skills also surface as
-  slash commands alongside prompt files. Available in VS Code; the broader
-  Copilot ecosystem (CLI, JetBrains, Visual Studio) supports a comparable
-  prompt-file concept.
+  slash commands alongside prompt files. The Copilot CLI loads the same
+  `.prompt.md` files from `.github/prompts/` and `~/.copilot/prompts/` and
+  invokes them as `/name` slash commands; JetBrains and Visual Studio
+  support a comparable prompt-file concept.
 example: |
   # .github/prompts/create-component.prompt.md
   ---
@@ -35,7 +36,7 @@ example: |
 syntax: markdown
 docUrl: https://code.visualstudio.com/docs/copilot/customization/prompt-files
 userExtensible: true
-extensibilityNote: 'Create .prompt.md files under .github/prompts/ or your user profile — invoked as /commands in chat'
+extensibilityNote: 'Create `.prompt.md` files under `.github/prompts/` or your user profile — invoked as `/commands` in chat'
 customExample: |
   # .github/prompts/review-pr.prompt.md
   ---

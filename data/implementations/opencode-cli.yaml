@@ -3,37 +3,84 @@ name: OpenCode CLI
 featureId: cli-features
 description: >
   OpenCode is a client/server agent with a Go TUI on a TypeScript core.
-  The terminal UI provides multi-session support, `/models` to switch AI
-  models mid-session, agent switching with Tab (build ↔ plan), real-time
-  streaming output, visual diff viewer, and @file fuzzy-search to inline
-  file contents.
+  The default `opencode` command launches the TUI, but the CLI exposes a
+  large subcommand surface: `opencode run` (non-interactive scripting),
+  `opencode serve` (headless API server), `opencode web` (browser UI),
+  `opencode attach` (attach a TUI to a remote backend), `opencode acp`
+  (Agent Client Protocol server for IDEs), `opencode session
+  list/delete`, `opencode stats`, `opencode export`/`import`, `opencode
+  auth login/list/logout`, `opencode agent create/list`, `opencode
+  models`, `opencode mcp add/list/auth/logout/debug`, `opencode plugin`,
+  `opencode github install/run`, `opencode pr <number>`, `opencode db`,
+  `opencode debug`, `opencode upgrade`, and `opencode uninstall`. The
+  TUI supports multi-session, `/models` to switch mid-session, Tab to
+  toggle primary agents (`build` ↔ `plan`), real-time streaming, visual
+  diffs, `@file` fuzzy references, and `@agent` mentions.
 example: |
-  # Start OpenCode:
+  # Start TUI:
   opencode
+  opencode --continue                  # resume last session
+  opencode -s <session-id> --fork      # branch a session
+  opencode --agent plan                # start in plan agent
 
-  # The TUI provides:
-  # - Multi-session support
-  # - Real-time streaming response
-  # - Visual diff viewer for file changes
-  # - Status bar with model/agent info
-  # - Tab to toggle primary agent (build ↔ plan)
-  # - @file fuzzy-search to reference files in a prompt
-  # - @agent mentions to invoke subagents (e.g. @explore, @general)
+  # Non-interactive (scripting):
+  opencode run "Explain how closures work in JavaScript"
+  opencode run --format json "List TODOs"
+  opencode run -f src/app.ts "Review this file"
+  opencode run --dangerously-skip-permissions "Apply the migration"
+
+  # Headless server + remote TUI:
+  opencode serve --port 4096 --hostname 0.0.0.0
+  opencode attach http://10.20.30.40:4096
+
+  # Web UI (browser):
+  opencode web --port 4096
+
+  # Attach `run` to a long-lived server (skip MCP cold boot):
+  opencode serve
+  opencode run --attach http://localhost:4096 "Explain async/await"
+
+  # Agent Client Protocol (for IDEs like Zed):
+  opencode acp
+
+  # Sessions:
+  opencode session list -n 20
+  opencode session delete <sessionID>
+  opencode stats --days 7 --models 5
+  opencode export <sessionID> --sanitize > session.json
+  opencode import https://opncd.ai/s/abc123
+
+  # Auth:
+  opencode auth login -p anthropic
+  opencode auth list
+  opencode auth logout
+
+  # Agents:
+  opencode agent create --description "..." --mode subagent \
+    --permissions read,grep,glob --model anthropic/claude-sonnet-4-6
+  opencode agent list
+
+  # Models / MCP / plugins:
+  opencode models anthropic --refresh
+  opencode mcp add
+  opencode mcp auth <name>
+  opencode plugin <module> --global
+
+  # GitHub:
+  opencode github install
+  opencode pr 123                      # fetch + checkout PR, then run
+
+  # Maintenance:
+  opencode upgrade
+  opencode uninstall --keep-config --dry-run
+
+  # Global flags:
+  opencode --pure                      # skip external plugins
+  opencode --print-logs --log-level DEBUG
 
   # In-session commands (selection):
-  /models      # interactive model picker
-  /init        # analyze project and create AGENTS.md
-  /undo
-  /redo
-  /share
-  /help
-  /compact     # summarize and compact current session
-  /sessions    # list / resume sessions (aliases /resume, /continue)
-
-  # Environment setup:
-  export ANTHROPIC_API_KEY=sk-ant-...
-  opencode
+  /models /init /undo /redo /share /help /compact /sessions /new
 syntax: bash
 docUrl: https://opencode.ai/docs/cli
 userExtensible: false
-extensibilityNote: 'Core TUI is fixed; extend via plugins for custom commands'
+extensibilityNote: 'Core CLI is fixed; extend via plugins, custom commands, custom agents, MCP servers, and ACP integrations'

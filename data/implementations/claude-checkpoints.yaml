@@ -4,10 +4,10 @@ featureId: checkpoints
 description: >
   Automatic internal file-state snapshots created before each user prompt.
   Checkpoints persist across sessions (auto-cleaned with sessions after 30 days,
-  configurable). Use the /rewind command or press Esc twice to open the rewind
+  configurable). Use the `/rewind` command or press Esc twice to open the rewind
   menu, where you can restore code, conversation, both, or summarize from/up to
   a chosen point. Checkpoints only track files modified by Claude's editing
-  tools (Edit, Write, NotebookEdit) — not files changed by Bash commands or
+  tools (`Edit`, `Write`, `NotebookEdit`) — not files changed by `Bash` commands or
   edits made outside the current session. Not a replacement for git.
 example: |
   # Automatic checkpoints — no configuration needed

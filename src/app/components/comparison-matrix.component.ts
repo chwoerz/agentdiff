@@ -1,16 +1,13 @@
-import { Component, Input } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import {
-  ComparisonMatrix,
-  ComparisonRow,
-  ResolvedHarness,
-} from "../models/data.models";
-import { PlatformBadgeComponent } from "./platform-badge.component";
-import { CodeExampleComponent } from "./code-example.component";
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ComparisonMatrix, ComparisonRow, ResolvedHarness } from '../models/data.models';
+import { PlatformBadgeComponent } from './platform-badge.component';
+import { CodeExampleComponent } from './code-example.component';
+import { InlineCodePipe } from '../pipes/inline-code.pipe';
 
 @Component({
-  selector: "app-comparison-matrix",
-  imports: [PlatformBadgeComponent, CodeExampleComponent, RouterLink],
+  selector: 'app-comparison-matrix',
+  imports: [PlatformBadgeComponent, CodeExampleComponent, RouterLink, InlineCodePipe],
   template: `
     <div class="space-y-4">
       @for (row of matrix.rows; track row.implementation.id) {
@@ -26,7 +23,9 @@ import { CodeExampleComponent } from "./code-example.component";
                   {{ row.implementation.name }}
                 </span>
                 @if (row.implementation.userExtensible) {
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                  <span
+                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800"
+                  >
                     Extensible
                   </span>
                 }
@@ -54,26 +53,37 @@ import { CodeExampleComponent } from "./code-example.component";
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </button>
 
           @if (isExpanded(row.implementation.id)) {
             <div class="border-t border-gray-100 px-5 pb-5 space-y-4">
               <!-- Description -->
-              <p class="text-sm text-gray-600 mt-4 leading-relaxed">
-                {{ row.implementation.description }}
-              </p>
+              <p
+                class="text-sm text-gray-600 mt-4 leading-relaxed"
+                [innerHTML]="row.implementation.description | inlineCode"
+              ></p>
 
               <!-- Extensibility note -->
               @if (row.implementation.extensibilityNote) {
-                <div class="flex items-start gap-2 text-sm rounded-md px-3 py-2"
-                  [class]="row.implementation.userExtensible
-                    ? 'bg-green-50 text-green-800'
-                    : 'bg-gray-50 text-gray-600'"
+                <div
+                  class="flex items-start gap-2 text-sm rounded-md px-3 py-2"
+                  [class]="
+                    row.implementation.userExtensible
+                      ? 'bg-green-50 text-green-800'
+                      : 'bg-gray-50 text-gray-600'
+                  "
                 >
-                  <span class="shrink-0 mt-0.5">{{ row.implementation.userExtensible ? '&#10003;' : '&#10007;' }}</span>
-                  <span>{{ row.implementation.extensibilityNote }}</span>
+                  <span class="shrink-0 mt-0.5">{{
+                    row.implementation.userExtensible ? '&#10003;' : '&#10007;'
+                  }}</span>
+                  <span [innerHTML]="row.implementation.extensibilityNote | inlineCode"></span>
                 </div>
               }
 
@@ -101,7 +111,10 @@ import { CodeExampleComponent } from "./code-example.component";
                         </div>
                       </div>
                       @if (cell.notes) {
-                        <p class="text-xs text-blue-600 italic">{{ cell.notes }}</p>
+                        <p
+                          class="text-xs text-blue-600 italic"
+                          [innerHTML]="cell.notes | inlineCode"
+                        ></p>
                       }
                     </div>
                   }

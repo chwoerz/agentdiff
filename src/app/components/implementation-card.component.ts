@@ -1,11 +1,12 @@
-import { Component, Input } from "@angular/core";
-import { Implementation } from "../models/data.models";
-import { PlatformBadgeComponent } from "./platform-badge.component";
-import { CodeExampleComponent } from "./code-example.component";
+import { Component, Input } from '@angular/core';
+import { Implementation } from '../models/data.models';
+import { PlatformBadgeComponent } from './platform-badge.component';
+import { CodeExampleComponent } from './code-example.component';
+import { InlineCodePipe } from '../pipes/inline-code.pipe';
 
 @Component({
-  selector: "app-implementation-card",
-  imports: [PlatformBadgeComponent, CodeExampleComponent],
+  selector: 'app-implementation-card',
+  imports: [PlatformBadgeComponent, CodeExampleComponent, InlineCodePipe],
   template: `
     <div class="border border-gray-200 rounded-lg overflow-hidden">
       <button
@@ -15,7 +16,9 @@ import { CodeExampleComponent } from "./code-example.component";
         <div class="flex items-center gap-3 flex-wrap">
           <span class="font-medium text-gray-900">{{ implementation.name }}</span>
           @if (implementation.userExtensible) {
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+            <span
+              class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800"
+            >
               Extensible
             </span>
           }
@@ -30,26 +33,39 @@ import { CodeExampleComponent } from "./code-example.component";
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
       @if (expanded) {
         <div class="px-4 pb-4 border-t border-gray-100 space-y-3">
-          <p class="text-sm text-gray-600 mt-3">{{ implementation.description }}</p>
+          <p
+            class="text-sm text-gray-600 mt-3"
+            [innerHTML]="implementation.description | inlineCode"
+          ></p>
 
           @if (notes) {
-            <p class="text-sm text-blue-600 italic">{{ notes }}</p>
+            <p class="text-sm text-blue-600 italic" [innerHTML]="notes | inlineCode"></p>
           }
 
           @if (implementation.extensibilityNote) {
-            <div class="flex items-start gap-2 text-sm rounded-md px-3 py-2"
-              [class]="implementation.userExtensible
-                ? 'bg-green-50 text-green-800'
-                : 'bg-gray-50 text-gray-600'"
+            <div
+              class="flex items-start gap-2 text-sm rounded-md px-3 py-2"
+              [class]="
+                implementation.userExtensible
+                  ? 'bg-green-50 text-green-800'
+                  : 'bg-gray-50 text-gray-600'
+              "
             >
-              <span class="shrink-0 mt-0.5">{{ implementation.userExtensible ? '&#10003;' : '&#10007;' }}</span>
-              <span>{{ implementation.extensibilityNote }}</span>
+              <span class="shrink-0 mt-0.5">{{
+                implementation.userExtensible ? '&#10003;' : '&#10007;'
+              }}</span>
+              <span [innerHTML]="implementation.extensibilityNote | inlineCode"></span>
             </div>
           }
 

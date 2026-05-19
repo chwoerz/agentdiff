@@ -3,10 +3,10 @@ name: OpenCode Plugin Hooks
 featureId: hooks
 description: >
   OpenCode exposes ~20 lifecycle hooks via its JavaScript/TypeScript plugin
-  system. Hook names use a mix of camelCase (sessionCreated, messageCreated,
-  toolExecuted) and dot notation (tool.execute.before, tool.execute.after,
-  provider.update, model.update, permission.asked, chat.params). Plugins
-  return a Hooks object whose keys are hook names and whose values are
+  system. Hook names use a mix of camelCase (`sessionCreated`, `messageCreated`,
+  `toolExecuted`) and dot notation (`tool.execute.before`, `tool.execute.after`,
+  `provider.update`, `model.update`, `permission.asked`, `chat.params`). Plugins
+  return a `Hooks` object whose keys are hook names and whose values are
   async functions receiving the event payload.
 example: |
   // my-plugin.ts
@@ -41,7 +41,7 @@ example: |
 syntax: typescript
 docUrl: https://opencode.ai/docs/plugins
 userExtensible: true
-extensibilityNote: "Register hook handlers via JavaScript/TypeScript plugins (default export)"
+extensibilityNote: 'Register hook handlers via JavaScript/TypeScript plugins (`default export`)'
 customExample: |
   // plugins/lint-on-edit.ts
   import type { Plugin } from "@opencode-ai/plugin"

@@ -35,8 +35,8 @@ example: |
   # - Full code privacy guaranteed
 
   # Open source — audit the code yourself:
-  # https://github.com/opencode-ai/opencode (and forks)
+  # https://github.com/anomalyco/opencode
 syntax: json
 docUrl: https://opencode.ai/docs
 userExtensible: true
-extensibilityNote: "Choose any provider; use local models via Ollama for full offline operation"
+extensibilityNote: 'Choose any provider; use local models via `Ollama` for full offline operation'

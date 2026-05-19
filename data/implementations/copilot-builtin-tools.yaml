@@ -3,16 +3,19 @@ name: Copilot Agent Mode Tools
 featureId: tools
 description: >
   In VS Code agent mode, Copilot has access to built-in tool sets that the
-  model invokes as needed: #read (readFile, problems, terminalLastCommand,
-  terminalSelection, notebook cell output), #search (codebase, fileSearch,
-  textSearch, listDirectory, usages, changes, githubRepo, githubTextSearch),
-  #edit (createFile, createDirectory, editFiles, editNotebook), #execute
-  (runInTerminal, getTerminalOutput, createAndRunTask, runNotebookCell,
-  testFailure), #web (fetch), #agent (runSubagent), and others like
-  #todos, #vscode/runCommand, #vscode/installExtension. Tool calls require
+  model invokes as needed: `#read` (`readFile`, `problems`, `terminalLastCommand`,
+  `terminalSelection`, notebook cell output), `#search` (`codebase`, `fileSearch`,
+  `textSearch`, `listDirectory`, `usages`, `changes`, `githubRepo`, `githubTextSearch`),
+  `#edit` (`createFile`, `createDirectory`, `editFiles`, `editNotebook`), `#execute`
+  (`runInTerminal`, `getTerminalOutput`, `createAndRunTask`, `runNotebookCell`,
+  `testFailure`), `#web` (`fetch`), `#agent` (`runSubagent`), and others like
+  `#todos`, `#vscode/runCommand`, `#vscode/installExtension`. Tool calls require
   user approval by default; permission levels control this. JetBrains has a
-  comparable subset. The CLI exposes shell, file, and edit tools through the
-  same agent loop.
+  comparable subset. The Copilot CLI exposes an equivalent set through the
+  same agent loop — shell execution, read/edit/create/delete on files,
+  glob/grep search, web/fetch, agent (subagent delegation), todos, and MCP
+  tools — gated by per-tool approval (`--allow-tool` / `--deny-tool` /
+  `--allow-all-tools`) and the `Shift+Tab` mode (standard / plan / autopilot).
 example: |
   # Agent mode example (VS Code):
   User: "Add a health check endpoint to the Express app"
@@ -36,4 +39,4 @@ example: |
 syntax: text
 docUrl: https://code.visualstudio.com/docs/copilot/agents/agent-tools
 userExtensible: true
-extensibilityNote: 'Extend with MCP servers (#-tools from the server), VS Code chat tool extensions, or custom agents that restrict tools'
+extensibilityNote: 'Extend with MCP servers (`#`-tools from the server), VS Code chat tool extensions, or custom agents that restrict tools'

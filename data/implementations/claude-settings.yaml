@@ -3,10 +3,10 @@ name: Claude Code Settings
 featureId: configuration
 description: >
   Claude Code uses a layered settings system with four scopes: managed
-  (organization-wide, via MDM, registry, or managed-settings.json), user
-  (~/.claude/settings.json) for personal preferences across all projects,
-  project (.claude/settings.json) committed to the repo for team-shared
-  configuration, and local (.claude/settings.local.json, gitignored) for
+  (organization-wide, via MDM, registry, or `managed-settings.json`), user
+  (`~/.claude/settings.json`) for personal preferences across all projects,
+  project (`.claude/settings.json`) committed to the repo for team-shared
+  configuration, and local (`.claude/settings.local.json`, gitignored) for
   personal overrides. Settings control permissions (allow/ask/deny rules),
   environment variables, model, hooks, plugins, and many other behaviors.
   Run `/config` in the REPL for a tabbed Settings UI.

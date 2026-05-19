@@ -3,17 +3,17 @@ name: Claude Code Hooks
 featureId: hooks
 description: >
   Event-driven shell commands, HTTP endpoints, MCP tool calls, prompts, or
-  subagents configured in settings.json. Hooks fire on session lifecycle
-  (SessionStart, SessionEnd, Setup), per turn (UserPromptSubmit,
-  UserPromptExpansion, Stop, StopFailure), on every tool call (PreToolUse,
-  PostToolUse, PostToolUseFailure, PostToolBatch, PermissionRequest,
-  PermissionDenied), subagent and task events (SubagentStart, SubagentStop,
-  TaskCreated, TaskCompleted), worktrees (WorktreeCreate, WorktreeRemove),
-  compaction (PreCompact, PostCompact), MCP elicitation
-  (Elicitation, ElicitationResult), and async events (Notification,
-  InstructionsLoaded, ConfigChange, CwdChanged, FileChanged, TeammateIdle).
-  Each hook specifies a matcher and a handler (command, http, mcp_tool,
-  prompt, or agent type).
+  subagents configured in `settings.json`. Hooks fire on session lifecycle
+  (`SessionStart`, `SessionEnd`, `Setup`), per turn (`UserPromptSubmit`,
+  `UserPromptExpansion`, `Stop`, `StopFailure`), on every tool call (`PreToolUse`,
+  `PostToolUse`, `PostToolUseFailure`, `PostToolBatch`, `PermissionRequest`,
+  `PermissionDenied`), subagent and task events (`SubagentStart`, `SubagentStop`,
+  `TaskCreated`, `TaskCompleted`), worktrees (`WorktreeCreate`, `WorktreeRemove`),
+  compaction (`PreCompact`, `PostCompact`), MCP elicitation
+  (`Elicitation`, `ElicitationResult`), and async events (`Notification`,
+  `InstructionsLoaded`, `ConfigChange`, `CwdChanged`, `FileChanged`, `TeammateIdle`).
+  Each hook specifies a matcher and a handler (`command`, `http`, `mcp_tool`,
+  `prompt`, or `agent` type).
 example: |
   // .claude/settings.json
   {
@@ -46,4 +46,4 @@ example: |
 syntax: json
 docUrl: https://docs.claude.com/en/docs/claude-code/hooks
 userExtensible: true
-extensibilityNote: 'Define custom hooks in .claude/settings.json, plugins, or skill/agent frontmatter for any lifecycle event'
+extensibilityNote: 'Define custom hooks in `.claude/settings.json`, plugins, or skill/agent frontmatter for any lifecycle event'

@@ -5,9 +5,10 @@ description: >
   Repository-level always-on instructions. VS Code automatically detects
   `.github/copilot-instructions.md` at the workspace root and includes it
   as context in every chat / agent request. Markdown body only — no
-  frontmatter is required. VS Code also recognizes `AGENTS.md` and
-  `CLAUDE.md` for cross-tool compatibility. Not used for inline code
-  completions. Use Markdown links to reference other instruction files.
+  frontmatter is required. VS Code, the Copilot CLI, and the cloud agent
+  also recognize `AGENTS.md` (and `CLAUDE.md` in VS Code) for cross-tool
+  compatibility. Not used for inline code completions. Use Markdown links
+  to reference other instruction files.
 example: |
   # .github/copilot-instructions.md
 
@@ -24,4 +25,4 @@ example: |
 syntax: markdown
 docUrl: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
 userExtensible: true
-extensibilityNote: 'Create .github/copilot-instructions.md (or AGENTS.md / CLAUDE.md) for repo-wide always-on guidance'
+extensibilityNote: 'Create `.github/copilot-instructions.md` (or `AGENTS.md` / `CLAUDE.md`) for repo-wide always-on guidance'

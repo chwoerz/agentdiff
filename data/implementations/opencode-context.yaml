@@ -6,9 +6,10 @@ description: >
   tool that provides definitions, references, hover info and call
   hierarchy from configured language servers), file watching for real-time
   change detection, git operations executed via the `bash` tool, and
-  agent-driven file reading where the AI reads files as needed. The LSP
-  tool must be enabled with `OPENCODE_EXPERIMENTAL_LSP_TOOL=true` and
-  surfaces the same code intelligence developers see in their editors.
+  agent-driven file reading where the AI reads files on demand using
+  `read`, `grep`, and `glob`. The LSP tool must be enabled with
+  `OPENCODE_EXPERIMENTAL_LSP_TOOL=true` and surfaces the same code
+  intelligence developers see in their editors.
 example: |
   # OpenCode context sources:
 
@@ -31,4 +32,4 @@ example: |
 syntax: text
 docUrl: https://opencode.ai/docs/context
 userExtensible: true
-extensibilityNote: 'LSP integration automatic; extend via plugins for custom context sources'
+extensibilityNote: 'LSP integration automatic; extend via `plugins` for custom context sources'

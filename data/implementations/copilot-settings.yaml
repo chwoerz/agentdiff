@@ -2,11 +2,11 @@ id: copilot-settings
 name: Copilot Settings
 featureId: configuration
 description: >
-  GitHub Copilot is configured across multiple layers: VS Code settings.json
+  GitHub Copilot is configured across multiple layers: VS Code `settings.json`
   for editor/chat behavior, JetBrains preferences for plugin settings,
   organization policies on GitHub.com for enterprise controls, and CLI
   configuration for the Copilot CLI. MCP servers are NOT configured in
-  settings.json — they live in `.vscode/mcp.json` (workspace) or the user
+  `settings.json` — they live in `.vscode/mcp.json` (workspace) or the user
   `mcp.json` file (see Copilot MCP). Common settings keys are documented in
   the VS Code Copilot settings reference.
 example: |
@@ -42,4 +42,4 @@ example: |
 syntax: json
 docUrl: https://code.visualstudio.com/docs/copilot/reference/copilot-settings
 userExtensible: true
-extensibilityNote: 'Configure via IDE settings, organization policies, and CLI config; MCP lives in mcp.json'
+extensibilityNote: 'Configure via IDE settings, organization policies, and CLI config; MCP lives in `mcp.json`'

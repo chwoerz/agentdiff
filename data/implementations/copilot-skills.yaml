@@ -2,13 +2,13 @@ id: copilot-skills
 name: Copilot Agent Skills
 featureId: skills
 description: >
-  Agent Skills are folders containing a SKILL.md plus optional scripts and
-  resources. VS Code searches project paths (.github/skills/, .claude/skills/,
-  .agents/skills/) and personal paths (~/.copilot/skills/, ~/.claude/skills/,
-  ~/.agents/skills/). Each SKILL.md sits inside a directory whose name must
+  Agent Skills are folders containing a `SKILL.md` plus optional scripts and
+  resources. VS Code searches project paths (`.github/skills/`, `.claude/skills/`,
+  `.agents/skills/`) and personal paths (`~/.copilot/skills/`, `~/.claude/skills/`,
+  `~/.agents/skills/`). Each `SKILL.md` sits inside a directory whose name must
   match the frontmatter `name` (lowercase letters, digits, hyphens). Required
-  frontmatter: name, description; optional: argument-hint, user-invocable,
-  disable-model-invocation, context (experimental: 'fork' runs the skill in
+  frontmatter: `name`, `description`; optional: `argument-hint`, `user-invocable`,
+  `disable-model-invocation`, `context` (experimental: `'fork'` runs the skill in
   a subagent). Skills appear as `/` slash commands in chat and can also be
   auto-loaded by the model based on the description. Agent Skills is an open
   standard (agentskills.io) and works across VS Code, the Copilot CLI, and
@@ -37,4 +37,4 @@ example: |
 syntax: text
 docUrl: https://code.visualstudio.com/docs/copilot/customization/agent-skills
 userExtensible: true
-extensibilityNote: 'Create SKILL.md inside a matching-name folder under .github/skills/ (or .claude/skills/, .agents/skills/, ~/.copilot/skills/)'
+extensibilityNote: 'Create `SKILL.md` inside a matching-name folder under `.github/skills/` (or `.claude/skills/`, `.agents/skills/`, `~/.copilot/skills/`)'

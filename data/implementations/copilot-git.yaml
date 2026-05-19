@@ -8,8 +8,11 @@ description: >
   and opens a draft pull request. Mention `@copilot` in a PR comment to ask
   it to iterate. In VS Code, Copilot can generate commit messages and PR
   titles/descriptions, and the `@github` chat participant answers questions
-  about issues and pull requests. The GitHub CLI extension `gh copilot suggest`
-  generates shell commands.
+  about issues and pull requests. The Copilot CLI provides `/pr` (view,
+  create, summarize, auto-address pull requests), `/diff` (working-tree
+  diff), `/review` (review staged changes), and `/delegate` (hand a task
+  off to the cloud agent). The separate GitHub CLI extension `gh copilot
+  suggest` / `explain` generates and explains shell commands.
 example: |
   # 1. Cloud agent: assign an issue to Copilot on GitHub.com
   #    (Assignees dropdown → "Copilot"). Copilot then:
@@ -28,12 +31,19 @@ example: |
   #    - @github participant answers PR/issue questions:
   @github What are the open PRs assigned to me?
 
-  # 4. GitHub CLI extension:
+  # 4. Copilot CLI:
+  copilot
+  > /pr                                 # view/create/auto-address PRs
+  > /diff                               # working-tree diff
+  > /review                             # review staged changes
+  > /delegate                           # hand off to cloud agent
+
+  # 5. GitHub CLI extension (separate tool):
   gh extension install github/gh-copilot
   gh copilot suggest "revert the last merge commit"
   gh copilot explain "git rebase -i HEAD~3"
 
-  # 5. Request a Copilot code review via CLI:
+  # 6. Request a Copilot code review via CLI:
   gh pr create --reviewer @copilot
 syntax: text
 docUrl: https://docs.github.com/en/copilot/concepts/coding-agent/coding-agent

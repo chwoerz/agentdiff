@@ -3,13 +3,13 @@ name: Copilot Custom Agents
 featureId: subagents
 description: >
   Custom agents are defined as `.agent.md` files with YAML frontmatter
-  (description, name, tools, agents, model, user-invocable,
-  disable-model-invocation, target, handoffs, hooks) and a Markdown body.
+  (`description`, `name`, `tools`, `agents`, `model`, `user-invocable`,
+  `disable-model-invocation`, `target`, `handoffs`, `hooks`) and a Markdown body.
   Stored in `.github/agents/` (workspace), `.claude/agents/` (Claude format),
   or `~/.copilot/agents` (user). In VS Code chat they are selected from the
-  agents dropdown (not via @-mention); in the Copilot CLI they are picked
-  with `/agent`. The CLI also ships six built-in custom agents — explore,
-  task, general-purpose, code-review, research, and rubber-duck — usable
+  agents dropdown (not via `@`-mention); in the Copilot CLI they are picked
+  with `/agent`. The CLI also ships six built-in custom agents — `explore`,
+  `task`, `general-purpose`, `code-review`, `research`, and `rubber-duck` — usable
   out of the box. An agent can delegate to other agents as subagents by
   including the `agent` tool plus an `agents:` list. The cloud Coding Agent
   runs autonomously in GitHub Actions and can be assigned issues directly.
@@ -40,7 +40,7 @@ example: |
 syntax: markdown
 docUrl: https://code.visualstudio.com/docs/copilot/customization/custom-agents
 userExtensible: true
-extensibilityNote: 'Create .agent.md files in .github/agents/ (or .claude/agents/, ~/.copilot/agents) with scoped tools, model, and handoffs'
+extensibilityNote: 'Create `.agent.md` files in `.github/agents/` (or `.claude/agents/`, `~/.copilot/agents`) with scoped tools, model, and handoffs'
 customExample: |
   # .github/agents/db-expert.agent.md
   ---

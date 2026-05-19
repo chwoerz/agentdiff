@@ -4,8 +4,8 @@ featureId: instructions
 description: >
   Project-level instruction file placed in the repo root or subdirectories.
   Claude reads these automatically at session start. Supports hierarchy —
-  a root CLAUDE.md plus subdirectory-level overrides that apply when working
-  in that directory. Also supports user-level ~/.claude/CLAUDE.md for global preferences.
+  a root `CLAUDE.md` plus subdirectory-level overrides that apply when working
+  in that directory. Also supports user-level `~/.claude/CLAUDE.md` for global preferences.
 example: |
   # CLAUDE.md
   ## Project conventions
@@ -19,21 +19,21 @@ example: |
 syntax: markdown
 docUrl: https://docs.claude.com/en/docs/claude-code/claude-md
 userExtensible: true
-extensibilityNote: "Create CLAUDE.md in any directory for scoped instructions"
+extensibilityNote: 'Create `CLAUDE.md` in any directory for scoped instructions'
 customExample: |
   # CLAUDE.md (project root)
-  
+
   ## Project conventions
   - Use TypeScript strict mode
   - All API endpoints must have OpenAPI annotations
   - Prefer composition over inheritance
-  
+
   ## Testing
   - Integration tests use a real database (no mocks)
   - Run `npm test` before committing
-  
+
   # src/api/CLAUDE.md (subdirectory override)
-  
+
   ## API-specific rules
   - All handlers must validate input with zod
   - Return RFC 7807 problem details for errors

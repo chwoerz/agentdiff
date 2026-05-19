@@ -5,13 +5,16 @@ description: >
   Terminal-based CLI with rich subcommand surface area. Core commands include
   interactive `claude`, single-shot `claude -p`, conversation continue/resume
   (`-c`, `-r`), background sessions (`--bg`, `claude agents`, `claude attach`,
-  `claude logs`, `claude stop`, `claude respawn`), `claude mcp`, `claude
-  plugin`, `claude auth login/logout/status`, `claude install`, `claude
-  setup-token`, and `claude remote-control`. Supports JSON/stream-json
+  `claude logs`, `claude stop`, `claude respawn`, `claude rm`), `claude mcp`,
+  `claude plugin`, `claude auth login/logout/status`, `claude install`,
+  `claude setup-token`, `claude remote-control`, `claude ultrareview`,
+  `claude project purge`, and `claude daemon status`. Supports JSON/stream-json
   input/output, multi-directory context (`--add-dir`), permission modes,
   effort levels, model selection, dynamic agent definition (`--agents`),
-  plugin loading (`--plugin-dir`, `--plugin-url`), and bare mode (`--bare`)
-  that skips auto-discovery for fast scripted runs.
+  plugin loading (`--plugin-dir`, `--plugin-url`), web sessions (`--remote`,
+  `--teleport`), Chrome integration (`--chrome`), resuming by PR
+  (`--from-pr`), and bare mode (`--bare`) that skips auto-discovery for
+  fast scripted runs.
 example: |
   # Interactive:
   claude
@@ -28,6 +31,7 @@ example: |
   claude -c                              # continue most recent
   claude -r "auth-refactor" "Finish PR"  # resume by name/ID
   claude --resume abc123 --fork-session  # branch a session
+  claude --from-pr 123                   # resume sessions linked to a PR
 
   # Background sessions:
   claude --bg "investigate the flaky test"
@@ -35,6 +39,13 @@ example: |
   claude attach <id>
   claude logs <id>
   claude stop <id>
+  claude respawn <id>
+  claude rm <id>
+
+  # Web sessions (claude.ai):
+  claude --remote "Fix the login bug"    # create web session
+  claude --teleport                      # resume web session locally
+  claude remote-control --name "My App"  # control from claude.ai
 
   # Multi-directory context:
   claude --add-dir ../shared-lib --add-dir ../common
@@ -42,7 +53,7 @@ example: |
   # Model & effort:
   claude --model sonnet
   claude --model claude-opus-4-7
-  claude --effort high
+  claude --effort high                   # low|medium|high|xhigh|max
 
   # Permission modes:
   claude --permission-mode plan          # default|acceptEdits|plan|auto|dontAsk|bypassPermissions
@@ -57,6 +68,12 @@ example: |
 
   # Fast scripted calls:
   claude --bare -p "query"               # skip hooks/skills/plugins/MCP/CLAUDE.md
+
+  # Non-interactive review (CI):
+  claude ultrareview 1234 --json
+
+  # Project state hygiene:
+  claude project purge ~/work/repo --dry-run
 syntax: bash
 docUrl: https://docs.claude.com/en/docs/claude-code/cli-reference
 userExtensible: false

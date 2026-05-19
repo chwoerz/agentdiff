@@ -2,20 +2,20 @@ id: copilot-cli
 name: Copilot CLI
 featureId: cli-features
 description: >
-  GitHub Copilot CLI (@github/copilot) is a standalone terminal-based
+  GitHub Copilot CLI (`@github/copilot`) is a standalone terminal-based
   agent installed as the `copilot` binary. It supports interactive chat
-  and three modes cycled with Shift+Tab — standard (per-tool approval),
+  and three modes cycled with `Shift+Tab` — standard (per-tool approval),
   plan (read-only research/planning), and autopilot (no approval prompts).
   Features include agent mode with file editing and shell commands, MCP
-  server support (including the GitHub MCP server), custom AGENTS.md
+  server support (including the GitHub MCP server), custom `AGENTS.md`
   instructions, custom agents, hooks, agent skills, Copilot Memory,
   automatic context auto-compaction, language server (LSP) integration,
   plugin marketplace, remote steering, fleet/delegate orchestration, and
-  per-tool approval modes (--allow-tool / --deny-tool / --allow-all-tools).
+  per-tool approval modes (`--allow-tool` / `--deny-tool` / `--allow-all-tools`).
   Trusted-directories prompt protects against running in unsafe folders.
-  The default model is Claude Sonnet 4.5; switch with /model or
-  --model. ACP server support lets external tools embed Copilot CLI.
-  The older `gh copilot` extension (suggest, explain) is a separate,
+  The default model is Claude Sonnet 4.5; switch with `/model` or
+  `--model`. ACP server support lets external tools embed Copilot CLI.
+  The older `gh copilot` extension (`suggest`, `explain`) is a separate,
   simpler tool that remains available.
 example: |
   # Install Copilot CLI:
@@ -70,4 +70,4 @@ example: |
 syntax: bash
 docUrl: https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli
 userExtensible: true
-extensibilityNote: 'Supports AGENTS.md, MCP servers, custom agents, hooks, agent skills, Copilot Memory, and ACP integration'
+extensibilityNote: 'Supports `AGENTS.md`, MCP servers, custom agents, hooks, agent skills, Copilot Memory, and ACP integration'

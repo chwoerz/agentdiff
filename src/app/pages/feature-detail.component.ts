@@ -1,13 +1,14 @@
-import { Component, inject, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterLink } from "@angular/router";
-import { Subscription } from "rxjs";
-import { DataService } from "../services/data.service";
-import { ComparisonMatrix } from "../models/data.models";
-import { ComparisonMatrixComponent } from "../components/comparison-matrix.component";
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { DataService } from '../services/data.service';
+import { ComparisonMatrix } from '../models/data.models';
+import { ComparisonMatrixComponent } from '../components/comparison-matrix.component';
+import { InlineCodePipe } from '../pipes/inline-code.pipe';
 
 @Component({
-  selector: "app-feature-detail",
-  imports: [ComparisonMatrixComponent, RouterLink],
+  selector: 'app-feature-detail',
+  imports: [ComparisonMatrixComponent, RouterLink, InlineCodePipe],
   template: `
     @if (matrix) {
       <div class="max-w-6xl">
@@ -19,7 +20,7 @@ import { ComparisonMatrixComponent } from "../components/comparison-matrix.compo
         <h1 class="text-2xl font-bold text-gray-900 mb-2">
           {{ matrix.feature.name }}
         </h1>
-        <p class="text-gray-600 mb-8">{{ matrix.feature.description }}</p>
+        <p class="text-gray-600 mb-8" [innerHTML]="matrix.feature.description | inlineCode"></p>
         <app-comparison-matrix [matrix]="matrix" />
       </div>
     } @else {
@@ -35,10 +36,8 @@ export class FeatureDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.route.paramMap.subscribe((params) => {
-      const featureId = params.get("featureId");
-      this.matrix = featureId
-        ? this.dataService.getComparisonMatrix(featureId)
-        : null;
+      const featureId = params.get('featureId');
+      this.matrix = featureId ? this.dataService.getComparisonMatrix(featureId) : null;
     });
   }
 

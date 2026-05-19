@@ -3,7 +3,7 @@ name: OpenCode Models
 featureId: model-selection
 description: >
   OpenCode supports ~100 AI providers and models sourced from models.dev.
-  The active model is set with the top-level `model` field as "provider/model-id";
+  The active model is set with the top-level `model` field as `"provider/model-id"`;
   `small_model` configures a lighter model for tasks like summarization
   and compaction. Use `/models` in the TUI to switch mid-session. Local models
   via Ollama are fully supported for offline operation, and any

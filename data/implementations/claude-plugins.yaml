@@ -4,8 +4,8 @@ featureId: plugins
 description: >
   Claude Code plugins bundle commands, skills, agents, hooks, and MCP servers
   into a distributable package. Plugins are installed from marketplaces via
-  /plugin install <name>@<marketplace>, and marketplaces are managed with
-  /plugin marketplace add. For local development, --plugin-dir loads a plugin
+  `/plugin install <name>@<marketplace>`, and marketplaces are managed with
+  `/plugin marketplace add`. For local development, `--plugin-dir` loads a plugin
   from a directory. Plugins enable sharing custom configurations and
   capabilities across teams and projects.
 example: |

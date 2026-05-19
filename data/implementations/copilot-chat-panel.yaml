@@ -2,10 +2,12 @@ id: copilot-chat-panel
 name: Copilot Chat Panel
 featureId: ide-integration
 description: >
-  VS Code provides three chat surfaces: the Chat view (Cmd/Ctrl+Alt+I) in the
-  Secondary Side Bar for ongoing conversations, Inline Chat (Cmd/Ctrl+I) in
-  the editor or terminal, and Quick Chat (Cmd/Ctrl+Shift+Alt+L) for quick
-  one-offs. Attach context via the "Add Context..." button, drag-and-drop,
+  VS Code provides three chat surfaces: the Chat view (⌃⌘I on macOS,
+  `Ctrl+Alt+I` on Windows/Linux) in the Secondary Side Bar for ongoing
+  conversations, Inline Chat (⌘I / `Ctrl+I`) in the editor or terminal,
+  and Quick Chat (⇧⌥⌘L / `Ctrl+Shift+Alt+L`) for quick one-offs. Switch to
+  agent mode with ⇧⌘I (Windows `Ctrl+Shift+I`, Linux `Ctrl+Shift+Alt+I`).
+  Attach context via the "Add Context..." button, drag-and-drop,
   `#`-mentions (files, folders, symbols, tools), or `@`-mentions for chat
   participants (`@github`, `@terminal`, `@vscode`). Slash commands like
   `/explain`, `/fix`, `/tests`, `/plan` invoke built-in workflows. Switch
@@ -13,12 +15,13 @@ description: >
   comparable but smaller chat panel.
 example: |
   # VS Code keyboard shortcuts:
-  # Cmd/Ctrl+Alt+I        — Open Chat view
-  # Cmd/Ctrl+I            — Inline Chat in editor or terminal
-  # Cmd/Ctrl+Shift+Alt+L  — Quick Chat
-  # Cmd/Ctrl+Shift+I      — Switch to using agents
-  # Cmd/Ctrl+N (in chat)  — New chat session
-  # Cmd/Ctrl+Alt+.        — Model picker
+  # ⌃⌘I (macOS) / Ctrl+Alt+I (Win/Linux)               — Open Chat view
+  # ⌘I (macOS) / Ctrl+I (Win/Linux)                    — Inline Chat in editor or terminal
+  # ⇧⌥⌘L (macOS) / Ctrl+Shift+Alt+L (Win/Linux)        — Quick Chat
+  # ⇧⌘I (macOS) / Ctrl+Shift+I (Win) /                  — Switch to using agents
+  #   Ctrl+Shift+Alt+I (Linux)
+  # ⌘N / Ctrl+N (in chat)                              — New chat session
+  # ⌥⌘. (macOS) / Ctrl+Alt+. (Win/Linux)               — Model picker
 
   # In the chat input:
   #file:src/app.ts Explain the middleware chain
@@ -27,13 +30,13 @@ example: |
   @github Show recent merged PRs
   @terminal list the 5 largest files
 
-  # Slash commands:
+  # Slash commands (selection):
   /explain   /fix   /tests   /plan   /new   /init
   /clear     /compact   /fork
   /agents    /prompts   /skills   /hooks   /instructions
 
   # Agent mode: select an agent from the agents dropdown
-  # (built-in: Ask, Agent, Plan; plus custom and third-party agents)
+  # (built-in: Agent, Plan, Ask; plus custom and third-party agents)
 syntax: text
 docUrl: https://code.visualstudio.com/docs/copilot/chat/copilot-chat
 userExtensible: true

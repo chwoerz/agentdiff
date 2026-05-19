@@ -2,15 +2,15 @@ id: claude-builtin-tools
 name: Claude Code Built-in Tools
 featureId: tools
 description: >
-  ~30 built-in tools invoked automatically. Core file/shell: Read, Edit, Write,
-  Bash, Glob, Grep, NotebookEdit, PowerShell. Web: WebSearch, WebFetch.
-  Planning/agents: Agent, EnterPlanMode, ExitPlanMode, Skill, AskUserQuestion.
-  Task management (replaces deprecated TodoWrite as of v2.1.142): TaskCreate,
-  TaskGet, TaskList, TaskOutput, TaskStop, TaskUpdate. Worktrees: EnterWorktree,
-  ExitWorktree. Scheduling: CronCreate, CronDelete, CronList. Collaboration:
-  TeamCreate, TeamDelete, SendMessage, RemoteTrigger, PushNotification, Monitor.
-  MCP: ListMcpResourcesTool, ReadMcpResourceTool, WaitForMcpServers, ToolSearch.
-  Misc: LSP, ShareOnboardingGuide. User approves or rejects each invocation.
+  ~30 built-in tools invoked automatically. Core file/shell: `Read`, `Edit`, `Write`,
+  `Bash`, `Glob`, `Grep`, `NotebookEdit`, `PowerShell`. Web: `WebSearch`, `WebFetch`.
+  Planning/agents: `Agent`, `EnterPlanMode`, `ExitPlanMode`, `Skill`, `AskUserQuestion`.
+  Task management (replaces deprecated `TodoWrite` as of v2.1.142): `TaskCreate`,
+  `TaskGet`, `TaskList`, `TaskOutput`, `TaskStop`, `TaskUpdate`. Worktrees: `EnterWorktree`,
+  `ExitWorktree`. Scheduling: `CronCreate`, `CronDelete`, `CronList`. Collaboration:
+  `TeamCreate`, `TeamDelete`, `SendMessage`, `RemoteTrigger`, `PushNotification`, `Monitor`.
+  MCP: `ListMcpResourcesTool`, `ReadMcpResourceTool`, `WaitForMcpServers`, `ToolSearch`.
+  Misc: `LSP`, `ShareOnboardingGuide`. User approves or rejects each invocation.
 example: |
   # Claude automatically uses tools during conversation:
 

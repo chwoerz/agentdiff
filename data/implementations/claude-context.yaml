@@ -3,9 +3,9 @@ name: Claude Code Context
 featureId: context-providers
 description: >
   Claude Code automatically gathers context from multiple sources: it reads
-  CLAUDE.md files from the repo root and parent directories, indexes the
-  repository structure, checks git status and recent commits, and uses grep
-  and find to search the codebase on demand. It also spawns Explore subagents
+  `CLAUDE.md` files from the repo root and parent directories, indexes the
+  repository structure, checks git status and recent commits, and uses `grep`
+  and `find` to search the codebase on demand. It also spawns `Explore` subagents
   to gather context across large codebases in parallel. File contents are
   read on-demand rather than pre-indexed.
 example: |
@@ -29,4 +29,4 @@ example: |
 syntax: bash
 docUrl: https://docs.claude.com/en/docs/claude-code/context
 userExtensible: true
-extensibilityNote: "Extend context via CLAUDE.md files, MCP servers, and custom skills"
+extensibilityNote: 'Extend context via `CLAUDE.md` files, MCP servers, and custom skills'

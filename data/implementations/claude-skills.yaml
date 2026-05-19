@@ -2,17 +2,17 @@ id: claude-skills
 name: Claude Code Skills
 featureId: skills
 description: >
-  Skills are markdown files (SKILL.md) with YAML frontmatter that extend
-  Claude's capabilities. Discovered in .claude/skills/<name>/ (project),
-  ~/.claude/skills/<name>/ (user), plugins' skills/ directories, and managed
+  Skills are markdown files (`SKILL.md`) with YAML frontmatter that extend
+  Claude's capabilities. Discovered in `.claude/skills/<name>/` (project),
+  `~/.claude/skills/<name>/` (user), plugins' `skills/` directories, and managed
   settings. Custom commands have been merged into skills: a file at
-  .claude/commands/foo.md and a skill at .claude/skills/foo/SKILL.md both
-  create /foo. Skills can be invoked manually with /<skill-name> or
+  `.claude/commands/foo.md` and a skill at `.claude/skills/foo/SKILL.md` both
+  create `/foo`. Skills can be invoked manually with `/<skill-name>` or
   auto-loaded by Claude based on the description field. Claude Code ships
-  bundled skills (/simplify, /batch, /debug, /loop, /claude-api). Skills
+  bundled skills (`/simplify`, `/batch`, `/debug`, `/loop`, `/claude-api`). Skills
   follow the Agent Skills open standard and support supporting files,
-  argument substitution ($ARGUMENTS, $0, $1), dynamic context injection
-  (!`cmd`), running in a forked subagent (context: fork), preloaded into
+  argument substitution (`$ARGUMENTS`, `$0`, `$1`), dynamic context injection
+  (!`cmd`), running in a forked subagent (`context: fork`), preloaded into
   subagents, and per-skill hooks.
 example: |
   # ~/.claude/skills/summarize-changes/SKILL.md
@@ -39,4 +39,4 @@ example: |
 syntax: text
 docUrl: https://docs.claude.com/en/docs/claude-code/skills
 userExtensible: true
-extensibilityNote: 'Create SKILL.md files in .claude/skills/<name>/ subdirectories or bundle them in plugins'
+extensibilityNote: 'Create `SKILL.md` files in `.claude/skills/<name>/` subdirectories or bundle them in plugins'

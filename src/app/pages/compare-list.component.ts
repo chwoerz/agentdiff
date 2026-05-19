@@ -1,10 +1,11 @@
-import { Component, inject } from "@angular/core";
-import { RouterLink } from "@angular/router";
-import { DataService } from "../services/data.service";
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DataService } from '../services/data.service';
+import { InlineCodePipe } from '../pipes/inline-code.pipe';
 
 @Component({
-  selector: "app-compare-list",
-  imports: [RouterLink],
+  selector: 'app-compare-list',
+  imports: [RouterLink, InlineCodePipe],
   template: `
     <div class="max-w-4xl">
       <h1 class="text-2xl font-bold text-gray-900 mb-2">Compare Features</h1>
@@ -19,10 +20,11 @@ import { DataService } from "../services/data.service";
             class="block border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-sm transition-all"
           >
             <h2 class="font-semibold text-gray-900">{{ feature.name }}</h2>
-            <p class="text-sm text-gray-600 mt-1">{{ feature.description }}</p>
-            <p class="text-xs text-gray-400 mt-2">
-              {{ getImplCount(feature.id) }} implementations
-            </p>
+            <p
+              class="text-sm text-gray-600 mt-1"
+              [innerHTML]="feature.description | inlineCode"
+            ></p>
+            <p class="text-xs text-gray-400 mt-2">{{ getImplCount(feature.id) }} implementations</p>
           </a>
         }
       </div>

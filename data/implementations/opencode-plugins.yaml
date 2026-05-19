@@ -5,11 +5,11 @@ description: >
   OpenCode has a JavaScript/TypeScript plugin system that allows extending
   the tool with custom tools, commands, and lifecycle hooks. Plugins are
   exported as default exports (or named functions) that receive a context
-  object (project, client, $, directory, worktree) and return a Hooks
-  object. Import types from "@opencode-ai/plugin". Plugins can hook into
+  object (`project`, `client`, `$`, `directory`, `worktree`) and return a `Hooks`
+  object. Import types from `@opencode-ai/plugin`. Plugins can hook into
   lifecycle events, intercept tool execution, customize providers/models,
   inject environment variables, and run side effects. Plugins are
-  registered under the top-level `plugin` array in opencode.json
+  registered under the top-level `plugin` array in `opencode.json`
   (supports local paths, npm package specifiers, and tuple form with
   options).
 example: |
@@ -46,7 +46,7 @@ example: |
 syntax: typescript
 docUrl: https://opencode.ai/docs/plugins
 userExtensible: true
-extensibilityNote: "Create JS/TS plugins; register them under the top-level `plugin` array in opencode.json"
+extensibilityNote: 'Create JS/TS plugins; register them under the top-level `plugin` array in `opencode.json`'
 customExample: |
   // opencode.json
   {

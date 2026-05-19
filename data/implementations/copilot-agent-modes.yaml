@@ -3,12 +3,12 @@ name: Copilot Agent Modes
 featureId: agent-modes
 description: >
   Copilot offers several agent surfaces. In VS Code chat, choose an agent
-  from the agents dropdown — built-in options are Agent (multi-step edits
-  and tool use), Plan (read-only research and planning), and Ask (Q&A).
+  from the agents dropdown — built-in options are `Agent` (multi-step edits
+  and tool use), `Plan` (read-only research and planning), and `Ask` (Q&A).
   The Copilot CLI runs the same agent loop in the terminal with three
-  modes cycled via Shift+Tab — standard (per-tool approval), plan
+  modes cycled via `Shift+Tab` — standard (per-tool approval), plan
   (read-only), and autopilot (no approvals) — and per-tool control via
-  --allow-tool / --deny-tool / --allow-all-tools. Copilot cloud agent
+  `--allow-tool` / `--deny-tool` / `--allow-all-tools`. Copilot cloud agent
   (formerly "coding agent") runs autonomously on GitHub Actions runners —
   assign the "Copilot" user to an issue or mention `@copilot` in a PR
   comment, and it researches the repo, makes commits on a branch, and
@@ -42,7 +42,7 @@ example: |
 syntax: text
 docUrl: https://code.visualstudio.com/docs/copilot/agents/overview
 userExtensible: true
-extensibilityNote: 'Create custom agents in .github/agents/*.agent.md (project) or ~/.copilot/agents (user); selected from the agents dropdown'
+extensibilityNote: 'Create custom agents in `.github/agents/*.agent.md` (project) or `~/.copilot/agents` (user); selected from the agents dropdown'
 customExample: |
   # .github/agents/security-reviewer.agent.md
   ---

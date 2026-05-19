@@ -2,11 +2,11 @@ id: copilot-mcp
 name: Copilot MCP Support
 featureId: mcp-servers
 description: >
-  Configured via an mcp.json file — workspace-level at .vscode/mcp.json or
+  Configured via an `mcp.json` file — workspace-level at `.vscode/mcp.json` or
   user-level via the "MCP: Open User Configuration" command. The top-level
-  key is "servers" (not "mcpServers"); each entry supports stdio and remote
+  key is `"servers"` (not `"mcpServers"`); each entry supports stdio and remote
   HTTP transports. Servers can also be installed from the Extensions view
-  (@mcp filter) or via "code --add-mcp". Also available in JetBrains and
+  (`@mcp` filter) or via `code --add-mcp`. Also available in JetBrains and
   the Copilot CLI.
 example: |
   // .vscode/mcp.json (workspace) or user mcp.json
@@ -32,4 +32,4 @@ example: |
 syntax: json
 docUrl: https://code.visualstudio.com/docs/copilot/customization/mcp-servers
 userExtensible: true
-extensibilityNote: 'Add MCP servers in .vscode/mcp.json, user mcp.json, or via the Extensions view'
+extensibilityNote: 'Add MCP servers in `.vscode/mcp.json`, user `mcp.json`, or via the Extensions view'

@@ -8,9 +8,9 @@ description: >
   Full Claude API IDs (e.g. `claude-opus-4-7`, `claude-sonnet-4-6`,
   `claude-haiku-4-5-20251001`, or legacy `claude-sonnet-4-5-20250929` /
   `claude-opus-4-5-20251101`) can also be pinned. Models can be selected
-  via the --model CLI flag, the /model command in-session, settings.json
+  via the `--model` CLI flag, the `/model` command in-session, `settings.json`
   (`modelOverrides`), or environment variables
-  (ANTHROPIC_DEFAULT_SONNET_MODEL / OPUS_MODEL / HAIKU_MODEL).
+  (`ANTHROPIC_DEFAULT_SONNET_MODEL` / `OPUS_MODEL` / `HAIKU_MODEL`).
 example: |
   # Select model at startup with an alias:
   claude --model opus      # -> claude-opus-4-7

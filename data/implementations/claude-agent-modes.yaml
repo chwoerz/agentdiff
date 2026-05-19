@@ -2,15 +2,17 @@ id: claude-agent-modes
 name: Claude Code Agent Modes
 featureId: agent-modes
 description: >
-  Claude Code offers permission modes controlling autonomy: default (asks
-  before most actions), acceptEdits (auto-approves file edits), plan
-  (read-only planning, no edits), auto (AI-based permission classifier,
-  research preview), dontAsk (auto-denies tools unless pre-approved), and
-  bypassPermissions (no confirmations, with circuit breakers for critical
-  operations). It supports subagent types including Explore (read-only
-  context gathering) and general-purpose (full tool access). Custom
-  subagent types can be defined in .claude/agents/*.md. Subagents can run
-  in git worktree isolation for safe parallel execution.
+  Claude Code offers permission modes controlling autonomy: `default` (asks
+  before most actions), `acceptEdits` (auto-approves file edits), `plan`
+  (read-only planning, no edits), `auto` (AI-based permission classifier,
+  research preview), `dontAsk` (auto-denies tools unless pre-approved), and
+  `bypassPermissions` (no confirmations, with circuit breakers for critical
+  operations). Cycle modes mid-session with `Shift+Tab`. It supports
+  subagent types including `Explore` (read-only context gathering, skips
+  `CLAUDE.md`), `Plan` (read-only research used during plan mode), and
+  `general-purpose` (full tool access). Custom subagent types can be
+  defined in `.claude/agents/*.md`. Subagents can run in git worktree
+  isolation for safe parallel execution.
 example: |
   # Permission modes:
   claude                                    # default — asks before actions
@@ -40,7 +42,7 @@ example: |
 syntax: bash
 docUrl: https://docs.claude.com/en/docs/claude-code/agent-modes
 userExtensible: true
-extensibilityNote: "Define custom subagent types in .claude/agents/*.md with YAML frontmatter"
+extensibilityNote: 'Define custom subagent types in `.claude/agents/*.md` with YAML frontmatter'
 customExample: |
   # .claude/agents/test-runner.md
   ---

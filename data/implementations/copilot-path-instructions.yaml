@@ -4,13 +4,15 @@ featureId: instructions
 description: >
   Path-scoped instruction files. `*.instructions.md` files live in
   `.github/instructions/` (workspace) or `~/.copilot/instructions/` (user);
-  VS Code searches subfolders recursively. Optional YAML frontmatter:
-  `name`, `description`, `applyTo` (glob, relative to workspace root).
-  Files with an `applyTo` pattern are applied automatically when the agent
-  works on matching files; without `applyTo` they are not auto-applied but
-  can still be attached manually to a chat request. Multiple instruction
-  files combine (no guaranteed order). Claude-format rules in `.claude/rules`
-  use a `paths` array instead of `applyTo`.
+  VS Code searches subfolders recursively, and the Copilot CLI loads the
+  same files (use `/instructions` to view/toggle them). Optional YAML
+  frontmatter: `name`, `description`, `applyTo` (glob, relative to
+  workspace root). Files with an `applyTo` pattern are applied
+  automatically when the agent works on matching files; without `applyTo`
+  they are not auto-applied but can still be attached manually to a chat
+  request. Multiple instruction files combine (no guaranteed order).
+  Claude-format rules in `.claude/rules` use a `paths` array instead of
+  `applyTo`.
 example: |
   # .github/instructions/typescript.instructions.md
   ---
@@ -40,4 +42,4 @@ example: |
 syntax: markdown
 docUrl: https://code.visualstudio.com/docs/copilot/customization/custom-instructions
 userExtensible: true
-extensibilityNote: 'Create .instructions.md files under .github/instructions/ with applyTo glob patterns'
+extensibilityNote: 'Create `.instructions.md` files under `.github/instructions/` with `applyTo` glob patterns'

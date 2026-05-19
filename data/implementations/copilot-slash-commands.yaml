@@ -5,15 +5,15 @@ description: >
   GitHub Copilot Chat includes built-in slash commands for common workflows.
   The exact set varies by surface (VS Code, Visual Studio, JetBrains, Xcode,
   GitHub.com web chat, CLI). VS Code has the fullest set, including
-  /explain, /fix, /tests, /plan, /new, /init, /clear, /compact, /fork,
-  /agents, /prompts, /skills, /hooks, /instructions, and many more.
+  `/explain`, `/fix`, `/tests`, `/plan`, `/new`, `/init`, `/clear`, `/compact`, `/fork`,
+  `/agents`, `/prompts`, `/skills`, `/hooks`, `/instructions`, and many more.
   JetBrains supports a smaller subset. The Copilot CLI has a rich set of
-  its own slash commands — including /review, /plan, /diff, /pr, /research,
-  /fleet, /delegate, /agent, /undo, /init, /model, /mcp, /compact,
-  /context, /usage, /feedback, /allow-all, /yolo, and many more (see the
+  its own slash commands — including `/review`, `/plan`, `/diff`, `/pr`, `/research`,
+  `/fleet`, `/delegate`, `/agent`, `/undo`, `/init`, `/model`, `/mcp`, `/compact`,
+  `/context`, `/usage`, `/feedback`, `/allow-all`, `/yolo`, and many more (see the
   CLI command reference). Built-in chat commands are not user-extensible
   directly, but users can author custom commands via prompt files
-  (.prompt.md) and skills (SKILL.md) in supported surfaces.
+  (`.prompt.md`) and skills (`SKILL.md`) in supported surfaces.
 example: |
   # VS Code Copilot Chat built-in slash commands (verified):
   /explain         — Explain code or a programming concept
@@ -88,4 +88,4 @@ example: |
 syntax: text
 docUrl: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
 userExtensible: false
-extensibilityNote: 'Built-in chat commands are predefined per surface; author custom commands via prompt files (.prompt.md) and SKILL.md skills where supported'
+extensibilityNote: 'Built-in chat commands are predefined per surface; author custom commands via prompt files (`.prompt.md`) and `SKILL.md` skills where supported'

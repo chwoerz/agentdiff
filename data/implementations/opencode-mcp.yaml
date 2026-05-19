@@ -2,9 +2,9 @@ id: opencode-mcp
 name: OpenCode MCP Servers
 featureId: mcp-servers
 description: >
-  Configured in opencode.json under the top-level `mcp` object, where each
-  key is the server name. Each server has a `type` of "local" (with a
-  `command` array) or "remote" (with a `url` and optional `headers`).
+  Configured in `opencode.json` under the top-level `mcp` object, where each
+  key is the server name. Each server has a `type` of `"local"` (with a
+  `command` array) or `"remote"` (with a `url` and optional `headers`).
   Supports `enabled`, `env`, and other per-server options.
 example: |
   // opencode.json
@@ -27,6 +27,6 @@ example: |
     }
   }
 syntax: json
-docUrl: https://opencode.ai/docs/mcp
+docUrl: https://opencode.ai/docs/mcp-servers
 userExtensible: true
-extensibilityNote: "Add MCP servers in opencode.json under the top-level `mcp` object"
+extensibilityNote: 'Add MCP servers in `opencode.json` under the top-level `mcp` object'

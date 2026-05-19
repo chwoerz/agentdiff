@@ -2,9 +2,9 @@ id: claude-mcp
 name: Claude Code MCP Servers
 featureId: mcp-servers
 description: >
-  Configured in .claude/settings.json or via claude mcp add. Supports stdio
+  Configured in `.claude/settings.json` or via `claude mcp add`. Supports stdio
   (local process) and HTTP (streamable HTTP for remote servers). SSE is
-  deprecated. Also accepts --mcp-config CLI flag.
+  deprecated. Also accepts `--mcp-config` CLI flag.
 example: |
   // .claude/settings.json
   {

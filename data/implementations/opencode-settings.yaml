@@ -2,19 +2,19 @@ id: opencode-settings
 name: OpenCode Settings
 featureId: configuration
 description: >
-  OpenCode uses opencode.json (or opencode.jsonc) as its primary
+  OpenCode uses `opencode.json` (or `opencode.jsonc`) as its primary
   configuration file. Sources are merged in precedence order: remote
-  (.well-known/opencode), global (~/.config/opencode/opencode.json),
-  custom (OPENCODE_CONFIG env var), project (opencode.json in repo),
-  .opencode directories (agents/, commands/, plugins/, etc.), inline
-  (OPENCODE_CONFIG_CONTENT env var), file-based managed config, and
-  macOS managed preferences (.mobileconfig via MDM, highest priority).
-  TUI-only settings go in tui.json. Top-level fields include model,
-  small_model, default_agent, agent, command, instructions, provider,
-  mcp, plugin, permission, tools, formatter, lsp, share, snapshot,
-  autoupdate, compaction, watcher, shell, attachment, server,
-  disabled_providers, enabled_providers, and experimental. Variable
-  substitution supports {env:VAR} and {file:path}.
+  (`.well-known/opencode`), global (`~/.config/opencode/opencode.json`),
+  custom (`OPENCODE_CONFIG` env var), project (`opencode.json` in repo),
+  `.opencode` directories (`agents/`, `commands/`, `plugins/`, etc.), inline
+  (`OPENCODE_CONFIG_CONTENT` env var), file-based managed config, and
+  macOS managed preferences (`.mobileconfig` via MDM, highest priority).
+  TUI-only settings go in `tui.json`. Top-level fields include `model`,
+  `small_model`, `default_agent`, `agent`, `command`, `instructions`, `provider`,
+  `mcp`, `plugin`, `permission`, `tools`, `formatter`, `lsp`, `share`, `snapshot`,
+  `autoupdate`, `compaction`, `watcher`, `shell`, `attachment`, `server`,
+  `disabled_providers`, `enabled_providers`, and `experimental`. Variable
+  substitution supports `{env:VAR}` and `{file:path}`.
 example: |
   // opencode.json
   {
@@ -46,4 +46,4 @@ example: |
 syntax: json
 docUrl: https://opencode.ai/docs/config/
 userExtensible: true
-extensibilityNote: 'Edit opencode.json (project) or ~/.config/opencode/opencode.json (global); TUI settings in tui.json; managed settings via MDM .mobileconfig on macOS'
+extensibilityNote: 'Edit `opencode.json` (project) or `~/.config/opencode/opencode.json` (global); TUI settings in `tui.json`; managed settings via MDM `.mobileconfig` on macOS'

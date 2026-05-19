@@ -3,11 +3,11 @@ name: Copilot Hooks
 featureId: hooks
 description: >
   Shell commands triggered at agent lifecycle events. Configured as JSON files
-  under .github/hooks/ (workspace), .claude/settings.json (Claude format), or
-  ~/.copilot/hooks / ~/.claude/settings.json (user). Available in VS Code
+  under `.github/hooks/` (workspace), `.claude/settings.json` (Claude format), or
+  `~/.copilot/hooks` / `~/.claude/settings.json` (user). Available in VS Code
   (Preview), the Copilot CLI, and cloud agents. Supported events (PascalCase):
-  SessionStart, UserPromptSubmit, PreToolUse, PostToolUse, PreCompact,
-  SubagentStart, SubagentStop, Stop. Hooks can also be scoped to a custom
+  `SessionStart`, `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `PreCompact`,
+  `SubagentStart`, `SubagentStop`, `Stop`. Hooks can also be scoped to a custom
   agent via a `hooks` field in `.agent.md` frontmatter. Hooks receive JSON on
   stdin and can return JSON on stdout to influence behavior; exit code 2
   blocks the action.
@@ -41,4 +41,4 @@ example: |
 syntax: json
 docUrl: https://code.visualstudio.com/docs/copilot/customization/hooks
 userExtensible: true
-extensibilityNote: 'Create JSON files under .github/hooks/ (or ~/.copilot/hooks) with PascalCase event arrays'
+extensibilityNote: 'Create JSON files under `.github/hooks/` (or `~/.copilot/hooks`) with PascalCase event arrays'

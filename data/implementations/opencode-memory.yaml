@@ -2,9 +2,9 @@ id: opencode-memory
 name: OpenCode Memory
 featureId: memory
 description: >
-  OpenCode's persistent project memory is AGENTS.md, created with /init
+  OpenCode's persistent project memory is `AGENTS.md`, created with `/init`
   and auto-loaded each session. Additional instruction files can be
-  declared via the `instructions` array in opencode.json. Sessions are
+  declared via the `instructions` array in `opencode.json`. Sessions are
   persisted in a SQLite database, so you can resume previous
   conversations. Within a single run, OpenCode supports multiple
   concurrent sessions so you can work on different tasks in parallel.
@@ -29,4 +29,4 @@ example: |
 syntax: text
 docUrl: https://opencode.ai/docs
 userExtensible: true
-extensibilityNote: "AGENTS.md plus the `instructions` array for additional persistent context"
+extensibilityNote: 'AGENTS.md plus the `instructions` array for additional persistent context'

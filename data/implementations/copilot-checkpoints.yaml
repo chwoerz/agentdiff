@@ -2,13 +2,15 @@ id: copilot-checkpoints
 name: Copilot Checkpoints
 featureId: checkpoints
 description: >
-  VS Code Copilot Chat supports checkpoints: when chat.checkpoints.enabled is
+  VS Code Copilot Chat supports checkpoints: when `chat.checkpoints.enabled` is
   set, VS Code snapshots affected files before each chat request. Hover a past
   request and click "Restore Checkpoint" to roll the workspace back to that
   point; a Redo button reappears if you want to undo the restore. You can also
   edit a previous request, which reverts changes made by that request and all
-  subsequent ones. The Coding Agent works on a copilot/* branch that can be
-  discarded entirely. Checkpoints are temporary and do not replace Git.
+  subsequent ones. The Copilot CLI provides equivalent functionality through
+  `/undo` (revert the last turn's file changes) and `/rewind` (jump back to
+  an earlier checkpoint). The Coding Agent works on a `copilot/*` branch that
+  can be discarded entirely. Checkpoints are temporary and do not replace Git.
 example: |
   // settings.json — enable checkpoints
   {
@@ -21,8 +23,12 @@ example: |
   # - After restoring → "Redo" button to reapply
   # - "Fork Conversation" to branch from a checkpoint
 
+  # Copilot CLI:
+  > /undo               # revert the last turn's file changes
+  > /rewind             # jump back to an earlier checkpoint
+
   # Coding Agent: changes live on a copilot/* branch — delete to roll back.
 syntax: text
 docUrl: https://code.visualstudio.com/docs/copilot/chat/chat-checkpoints
 userExtensible: false
-extensibilityNote: 'Built-in; toggle via chat.checkpoints.enabled. No custom checkpoint providers.'
+extensibilityNote: 'Built-in; toggle via `chat.checkpoints.enabled`. No custom checkpoint providers.'

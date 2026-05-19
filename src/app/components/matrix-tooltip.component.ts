@@ -1,18 +1,15 @@
-import { Component, Input } from "@angular/core";
-import { FullMatrixCell } from "../models/data.models";
-import { PlatformBadgeComponent } from "./platform-badge.component";
+import { Component, Input } from '@angular/core';
+import { FullMatrixCell } from '../models/data.models';
+import { PlatformBadgeComponent } from './platform-badge.component';
+import { InlineCodePipe } from '../pipes/inline-code.pipe';
 
 @Component({
-  selector: "app-matrix-tooltip",
-  imports: [PlatformBadgeComponent],
+  selector: 'app-matrix-tooltip',
+  imports: [PlatformBadgeComponent, InlineCodePipe],
   template: `
     <div class="w-72 bg-white border border-gray-200 rounded-lg shadow-xl p-4 text-sm">
       <div class="flex items-center gap-2 mb-2">
-        <img
-          [src]="'assets/icons/' + cell.harnessIcon"
-          [alt]="cell.harnessName"
-          class="w-5 h-5"
-        />
+        <img [src]="'assets/icons/' + cell.harnessIcon" [alt]="cell.harnessName" class="w-5 h-5" />
         <span class="font-semibold text-gray-900">{{ cell.harnessName }}</span>
       </div>
       <p class="text-xs text-gray-500 mb-3">{{ featureName }}</p>
@@ -34,7 +31,10 @@ import { PlatformBadgeComponent } from "./platform-badge.component";
                 }
               </div>
               @if (impl.notes) {
-                <p class="text-xs text-blue-600 italic mt-0.5">{{ impl.notes }}</p>
+                <p
+                  class="text-xs text-blue-600 italic mt-0.5"
+                  [innerHTML]="impl.notes | inlineCode"
+                ></p>
               }
             </li>
           }

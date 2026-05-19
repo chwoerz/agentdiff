@@ -31,4 +31,4 @@ example: |
 syntax: text
 docUrl: https://opencode.ai/docs
 userExtensible: false
-extensibilityNote: 'No dedicated review; uses standard tools for review-like feedback'
+extensibilityNote: 'No dedicated review; uses standard tools (`read`, `grep`, `bash`) for review-like feedback'
