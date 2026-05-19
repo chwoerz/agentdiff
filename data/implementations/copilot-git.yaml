@@ -1,0 +1,39 @@
+id: copilot-git
+name: Copilot Git & GitHub Integration
+featureId: git-integration
+description: >
+  GitHub Copilot has the tightest GitHub integration of any AI harness. The
+  Coding Agent can be assigned issues directly, creates branches automatically,
+  makes changes via GitHub Actions runners, opens draft PRs, runs CI, and
+  iterates on failures. In the IDE, agent mode can create commits and PRs.
+  This deep integration makes the full issue-to-PR workflow possible without
+  a local environment.
+example: |
+  # Coding Agent: Issue → Branch → PR workflow:
+
+  # 1. Assign an issue to Copilot on GitHub.com:
+  @github-copilot implement this feature
+
+  # 2. Coding Agent automatically:
+  #    - Creates a branch: copilot/issue-42
+  #    - Reads the issue description
+  #    - Makes code changes (GitHub Actions runner)
+  #    - Opens a draft PR
+  #    - Runs CI checks
+  #    - Iterates on failures
+  #    - Marks ready for review
+
+  # IDE agent mode:
+  "Create a PR for the changes on this branch"
+  # Agent: stages changes, commits, pushes, creates PR
+
+  # CLI:
+  gh copilot suggest "revert the last merge commit"
+
+  # PR interaction in chat:
+  @github Summarize PR #42
+  @github What issues does PR #42 close?
+syntax: text
+docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-coding-agent
+userExtensible: false
+extensibilityNote: "Deep GitHub integration is built-in"

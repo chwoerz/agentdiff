@@ -1,0 +1,35 @@
+id: copilot-agent-hooks
+name: Copilot Hooks
+featureId: hooks
+description: >
+  Shell commands triggered at 8 lifecycle events: SessionStart, UserPromptSubmit,
+  PreToolUse, PostToolUse, PreCompact, SubagentStart, SubagentStop, Stop.
+  Configured in .github/hooks/*.json files. Also reads .claude/settings.json
+  format for cross-tool compatibility. Custom agents can define hooks in
+  frontmatter.
+example: |
+  // .github/hooks/auto-format.json
+  {
+    "hooks": {
+      "PostToolUse": [
+        {
+          "type": "command",
+          "command": "npx prettier --write \"$TOOL_INPUT_FILE_PATH\""
+        }
+      ],
+      "PreToolUse": [
+        {
+          "type": "command",
+          "command": "./scripts/validate-tool-call.sh",
+          "timeout": 10
+        }
+      ]
+    }
+  }
+
+  // Hooks receive JSON via stdin (sessionId, hookEventName, etc.)
+  // Exit 0 = success, exit 2 = block the action
+syntax: json
+docUrl: https://code.visualstudio.com/docs/copilot/customization/hooks
+userExtensible: true
+extensibilityNote: "Create .github/hooks/*.json files with custom shell commands for lifecycle events"

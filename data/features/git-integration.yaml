@@ -1,0 +1,5 @@
+id: git-integration
+name: "Git & Workflow Integration"
+description: Direct integration with version control and development workflows, including PR creation, issue handling, branch management, and CI/CD interaction.
+category: workflow
+sortOrder: 14

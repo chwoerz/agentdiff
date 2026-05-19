@@ -1,0 +1,36 @@
+id: copilot-path-instructions
+name: ".instructions.md (applyTo)"
+featureId: instructions
+description: >
+  Path-specific instruction files in .github/instructions/. Each file has YAML
+  frontmatter with an applyTo glob pattern that scopes the instructions to
+  matching files. Multiple files can stack. Without applyTo, the file is ignored.
+example: |
+  # .github/instructions/typescript.instructions.md
+  ---
+  applyTo: "**/*.ts,**/*.tsx"
+  ---
+
+  Use strict TypeScript. Prefer interfaces over types.
+  Always use explicit return types on exported functions.
+
+  # .github/instructions/api-routes.instructions.md
+  ---
+  applyTo: "src/api/**"
+  ---
+
+  All route handlers must validate input with zod.
+  Return RFC 7807 problem details for errors.
+  Always include rate limiting middleware.
+
+  # .github/instructions/tests.instructions.md
+  ---
+  applyTo: "**/*.test.ts,**/*.spec.ts"
+  ---
+
+  Use vitest. Prefer integration tests over unit tests.
+  Never mock the database — use test containers.
+syntax: markdown
+docUrl: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+userExtensible: true
+extensibilityNote: "Create .instructions.md files in .github/instructions/ with applyTo glob patterns"

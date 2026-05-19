@@ -1,0 +1,22 @@
+id: copilot-instructions-md
+name: .github/copilot-instructions.md
+featureId: instructions
+description: >
+  Repository-level instructions file for GitHub Copilot. Placed in
+  .github/copilot-instructions.md. Automatically included as context
+  in Copilot Chat and agent mode. Supports references to other
+  instruction files via links.
+example: |
+  # Copilot Instructions
+
+  ## Code Style
+  Use TypeScript with strict null checks enabled.
+  Prefer `const` over `let`. Use arrow functions for callbacks.
+
+  ## Testing
+  Write Jest tests for all new functions.
+  Use `describe`/`it` blocks with clear test names.
+syntax: markdown
+docUrl: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+userExtensible: true
+extensibilityNote: "Create .github/copilot-instructions.md for repo-wide guidance"

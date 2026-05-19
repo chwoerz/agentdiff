@@ -1,0 +1,5 @@
+id: mcp-servers
+name: MCP Servers
+description: Model Context Protocol (MCP) servers that extend the AI's capabilities with external integrations and tools.
+category: capabilities
+sortOrder: 3

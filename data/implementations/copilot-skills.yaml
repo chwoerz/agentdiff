@@ -1,0 +1,28 @@
+id: copilot-skills
+name: Copilot Agent Skills
+featureId: skills
+description: >
+  Copilot discovers SKILL.md files in .github/skills/, .claude/skills/, and
+  .agents/skills/ (project-level), or ~/.copilot/skills/ and ~/.agents/skills/
+  (personal). Copilot adds argument-hint frontmatter for skill parameters.
+  Skills are invoked via /skill-name in chat or matched automatically by intent.
+example: |
+  # Skill paths (all searched):
+  .github/skills/<name>/SKILL.md      # project-level (primary)
+  .claude/skills/<name>/SKILL.md      # cross-tool compatibility
+  .agents/skills/<name>/SKILL.md      # cross-tool compatibility
+  ~/.copilot/skills/<name>/SKILL.md   # personal
+
+  # Copilot-specific frontmatter:
+  ---
+  name: api-design
+  description: REST API design guidelines
+  argument-hint: "[endpoint] [method]"
+  ---
+
+  # Invocation:
+  User: "/api-design /users GET"
+syntax: text
+docUrl: https://code.visualstudio.com/docs/copilot/customization/agent-skills
+userExtensible: true
+extensibilityNote: "Create SKILL.md files in .github/skills/ — also reads .claude/skills/ and .agents/skills/"

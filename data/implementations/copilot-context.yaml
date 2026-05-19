@@ -1,0 +1,30 @@
+id: copilot-context
+name: Copilot Context References
+featureId: context-providers
+description: >
+  Uses @-mentions and #-references for context in chat. VS Code: @workspace,
+  @file, @terminal, @problems. Hash alternatives: #codebase, #file, #selection.
+  JetBrains supports a subset. Context indexed locally by the IDE.
+example: |
+  # VS Code Copilot Chat context references:
+
+  # @-mentions for context sources:
+  @workspace How is authentication implemented?
+  @file:src/auth/login.ts Explain this file
+  @terminal What caused the last error?
+  @problems Fix the TypeScript errors
+
+  # #-references for specific content:
+  #codebase Find all API endpoints
+  #file:package.json What dependencies are installed?
+  #selection Refactor this code
+
+  # JetBrains supports:
+  # @workspace, @file (JetBrains-specific syntax)
+
+  # Combine references:
+  @workspace @file:src/types.ts Add a new User type
+syntax: text
+docUrl: https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/using-context-in-copilot-chat
+userExtensible: true
+extensibilityNote: "Use @-mentions and #-references to control context; extend via extensions"

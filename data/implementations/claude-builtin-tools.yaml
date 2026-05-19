@@ -1,0 +1,30 @@
+id: claude-builtin-tools
+name: Claude Code Built-in Tools
+featureId: tools
+description: >
+  30+ built-in tools invoked automatically. Core: Read, Edit, Write, Bash,
+  Grep, Glob, Agent, Skill, WebSearch, WebFetch, NotebookEdit, AskUserQuestion.
+  Also: task management (TaskCreate/Update/List), Monitor, EnterPlanMode,
+  EnterWorktree, ToolSearch, ScheduleWakeup. User approves or rejects each
+  invocation.
+example: |
+  # Claude automatically uses tools during conversation:
+
+  User: "Add error handling to the login function"
+
+  # Claude invokes:
+  # 1. Read tool — reads src/auth/login.ts
+  # 2. Edit tool — wraps the body in try/catch
+  # 3. Bash tool — runs `npm test` to verify
+  # 4. Reports the result
+
+  # Tools can be restricted in settings:
+  # .claude/settings.json
+  {
+    "allowedTools": ["Read", "Edit", "Write", "Bash"],
+    "blockedTools": ["WebFetch"]
+  }
+syntax: json
+docUrl: https://docs.anthropic.com/en/docs/claude-code/tools
+userExtensible: false
+extensibilityNote: "Built-in tools are fixed; extend via MCP servers for custom tools"

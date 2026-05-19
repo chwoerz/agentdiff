@@ -1,0 +1,28 @@
+id: copilot-mcp
+name: Copilot MCP Support
+featureId: mcp-servers
+description: >
+  Configured in VS Code settings.json under github.copilot.chat.mcpServers,
+  with similar support in JetBrains and the CLI. MCP tools become available
+  to the agent alongside built-in tools. Supports stdio transport.
+example: |
+  // VS Code settings.json
+  {
+    "github.copilot.chat.mcpServers": {
+      "filesystem": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-filesystem", "/workspace"]
+      },
+      "brave-search": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+        "env": {
+          "BRAVE_API_KEY": "${input:braveApiKey}"
+        }
+      }
+    }
+  }
+syntax: json
+docUrl: https://docs.github.com/en/copilot/customizing-copilot/extending-copilot-mcp
+userExtensible: true
+extensibilityNote: "Add MCP servers via IDE settings for custom tool integrations"

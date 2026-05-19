@@ -1,0 +1,5 @@
+id: memory
+name: "Memory & Persistence"
+description: Long-term memory systems that persist information across sessions, allowing the AI to remember user preferences, project context, and past decisions.
+category: context
+sortOrder: 10

@@ -1,0 +1,77 @@
+id: claude-code
+name: Claude Code
+icon: claude-code.svg
+website: https://claude.ai/code
+platforms:
+  - id: cli
+    name: CLI
+  - id: vscode
+    name: VS Code Extension
+  - id: jetbrains
+    name: JetBrains Extension
+  - id: desktop
+    name: Desktop App
+  - id: web
+    name: Web App
+
+implementations:
+  - implementationId: claude-md
+    platforms: [cli, vscode, jetbrains]
+    notes: "Loaded automatically from repo root and parent directories"
+  - implementationId: agents-md
+    platforms: [cli, vscode, jetbrains]
+    notes: "Supported as a cross-tool instruction format"
+  - implementationId: claude-builtin-tools
+    platforms: [cli, vscode, jetbrains]
+    notes: "30+ tools: Read, Edit, Write, Bash, Grep, Glob, Agent, Skill, WebSearch, WebFetch, and more"
+  - implementationId: claude-mcp
+    platforms: [cli, vscode, jetbrains]
+    notes: "Configured in .claude/settings.json or via --mcp-config"
+  - implementationId: claude-hooks
+    platforms: [cli, vscode, jetbrains]
+    notes: "Configured in .claude/settings.json"
+  - implementationId: skill-md
+    platforms: [cli, vscode, jetbrains]
+    notes: "Searches .claude/skills/<name>/ and ~/.claude/skills/<name>/"
+  - implementationId: claude-skills
+    platforms: [cli, vscode, jetbrains]
+    notes: "Skill tool invocation, auto-matching by description, plugin-registered skills"
+  - implementationId: claude-context
+    platforms: [cli, vscode, jetbrains]
+    notes: "Automatic context from git, CLAUDE.md, and codebase search"
+  - implementationId: claude-settings
+    platforms: [cli, vscode, jetbrains]
+    notes: "Layered: global, project, and local settings"
+  - implementationId: claude-ide-chat
+    platforms: [vscode, jetbrains]
+    notes: "Chat panel with full tool access"
+  - implementationId: claude-cli
+    platforms: [cli]
+    notes: "Primary interface with interactive and non-interactive modes"
+  - implementationId: claude-memory
+    platforms: [cli, vscode, jetbrains]
+    notes: "File-based memory in ~/.claude/projects/<project>/memory/"
+  - implementationId: claude-agent-modes
+    platforms: [cli, vscode, jetbrains]
+    notes: "Permission modes + subagent types with worktree isolation"
+  - implementationId: claude-plugins
+    platforms: [cli, vscode, jetbrains]
+    notes: "Via --plugin-dir and --plugin-url (May 2026+)"
+  - implementationId: claude-code-review
+    platforms: [cli, vscode, jetbrains]
+    notes: "/review, /ultrareview, /security-review skills"
+  - implementationId: claude-git
+    platforms: [cli, vscode, jetbrains]
+    notes: "Git operations via Bash tool and gh CLI"
+  - implementationId: claude-checkpoints
+    platforms: [cli, vscode, jetbrains]
+    notes: "Automatic checkpoint creation before changes"
+  - implementationId: claude-privacy
+    platforms: [cli, vscode, jetbrains]
+    notes: "Code sent to Anthropic API; commercial plans: not used for training"
+  - implementationId: claude-models
+    platforms: [cli, vscode, jetbrains]
+    notes: "Anthropic models only: Opus, Sonnet, Haiku"
+  - implementationId: claude-subagents
+    platforms: [cli, vscode, jetbrains]
+    notes: "Agent tool spawns isolated subagents with worktree support"

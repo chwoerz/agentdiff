@@ -1,0 +1,65 @@
+id: opencode-models
+name: OpenCode Models
+featureId: model-selection
+description: >
+  OpenCode supports 75+ AI providers and models. Use /model to switch
+  mid-session. Configuration supports primary and secondary models — the
+  secondary is used for lighter tasks like summarization. Local models
+  via Ollama are fully supported for offline operation. Any OpenAI-compatible
+  API endpoint can be configured as a provider.
+example: |
+  # Switch model mid-session:
+  /model anthropic/claude-sonnet-4-20250514
+  /model openai/gpt-4o
+  /model ollama/codellama:34b
+
+  # opencode.json — primary + secondary model:
+  {
+    "provider": {
+      "name": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "secondary": {
+        "name": "anthropic",
+        "model": "claude-haiku-4-20250414"
+      }
+    }
+  }
+
+  # Local models via Ollama:
+  {
+    "provider": {
+      "name": "ollama",
+      "model": "deepseek-coder-v2:latest",
+      "baseUrl": "http://localhost:11434"
+    }
+  }
+
+  # Any OpenAI-compatible endpoint:
+  {
+    "provider": {
+      "name": "openai-compatible",
+      "model": "my-fine-tuned-model",
+      "baseUrl": "https://my-api.example.com/v1",
+      "apiKey": "${MY_API_KEY}"
+    }
+  }
+syntax: json
+docUrl: https://opencode.ai/docs/models
+userExtensible: true
+extensibilityNote: "75+ providers; any OpenAI-compatible API endpoint works"
+customExample: |
+  // opencode.json
+  {
+    "provider": {
+      "custom-local": {
+        "name": "Local Llama",
+        "api": "openai",
+        "url": "http://localhost:11434/v1",
+        "model": "llama3.2:70b"
+      }
+    },
+    "model": {
+      "primary": "anthropic/claude-sonnet-4-6",
+      "secondary": "custom-local/llama3.2:70b"
+    }
+  }

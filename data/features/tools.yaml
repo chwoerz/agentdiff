@@ -1,0 +1,5 @@
+id: tools
+name: Tools
+description: Individual tools the AI can invoke to interact with the filesystem, run commands, search code, and manipulate files. These are the atomic actions available to the AI.
+category: capabilities
+sortOrder: 2

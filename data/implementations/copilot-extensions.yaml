@@ -1,0 +1,46 @@
+id: copilot-extensions
+name: Copilot Extensions
+featureId: plugins
+description: >
+  GitHub Copilot supports extensions through the VS Code/JetBrains marketplace
+  and custom agent definitions. Marketplace extensions like @docker and @azure
+  add domain-specific capabilities. Custom agents are defined as .agent.md
+  files in .github/agents/, allowing teams to create specialized agents with
+  scoped tools, model selection, and custom instructions.
+example: |
+  # Marketplace extensions (invoked via @-mention in chat):
+  @docker Optimize my Dockerfile for production
+  @azure Deploy this app to Azure Container Apps
+  @github Create an issue for this bug
+
+  # Custom agent definition:
+  # .github/agents/reviewer.agent.md
+  ---
+  name: reviewer
+  description: Code review specialist
+  tools: [read_file, search_code, list_files]
+  model: claude-sonnet-4-5
+  ---
+
+  Review code for security, performance, and style.
+  Never modify files directly — only report findings.
+
+  # Use custom agent in chat:
+  @reviewer Check the auth module for vulnerabilities
+syntax: json
+docUrl: https://docs.github.com/en/copilot/building-copilot-extensions
+userExtensible: true
+extensibilityNote: "Build custom agents via .github/agents/*.agent.md or marketplace extensions"
+customExample: |
+  # .github/agents/db-expert.agent.md
+  ---
+  name: Database Expert
+  description: Specializes in SQL optimization and schema design
+  tools: [read_file, search_code, run_terminal_command]
+  ---
+
+  You are a database expert. Focus on query performance,
+  indexing strategies, and schema normalization.
+
+  # Usage in chat:
+  # @db-expert How can I optimize this slow query?

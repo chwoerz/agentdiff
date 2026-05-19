@@ -1,0 +1,40 @@
+id: opencode-privacy
+name: OpenCode Privacy
+featureId: privacy
+description: >
+  OpenCode is open source and local-first. Users choose their own AI provider
+  and API keys, so data handling depends on the chosen provider. For full
+  offline operation, local models via Ollama are supported — no data leaves
+  the machine. This gives users complete control over where their code is
+  sent and how it is processed.
+example: |
+  # Provider choices and privacy implications:
+
+  # Cloud providers (code sent to their APIs):
+  # - Anthropic (Claude) — not used for training
+  # - OpenAI (GPT) — enterprise no-retention available
+  # - Google (Gemini) — enterprise controls available
+  # - Any of 75+ supported providers
+
+  # Fully offline with local models:
+  # opencode.json
+  {
+    "provider": {
+      "name": "ollama",
+      "model": "codellama:34b",
+      "baseUrl": "http://localhost:11434"
+    }
+  }
+
+  # With Ollama, no data leaves your machine:
+  # - All processing is local
+  # - No API keys needed
+  # - No internet required
+  # - Full code privacy guaranteed
+
+  # Open source — audit the code yourself:
+  # https://github.com/opencode-ai/opencode
+syntax: json
+docUrl: https://opencode.ai/docs/privacy
+userExtensible: true
+extensibilityNote: "Choose any provider; use local models via Ollama for full offline operation"

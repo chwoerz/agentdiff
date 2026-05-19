@@ -1,0 +1,5 @@
+id: hooks
+name: Hooks
+description: User-defined automation that triggers on specific events like tool calls, session start/stop, or agent actions. Hooks run deterministic shell commands in response to AI activity.
+category: automation
+sortOrder: 4

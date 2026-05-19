@@ -1,0 +1,44 @@
+id: copilot-memory
+name: Copilot Memory
+featureId: memory
+description: >
+  GitHub Copilot Memory (public preview, March 2026) enables persistent,
+  repository-level understanding across sessions. Copilot learns coding
+  conventions, architectural patterns, and cross-file dependencies, then
+  reuses that knowledge in future interactions. Memory works across Copilot
+  cloud agent, code review, and CLI. It operates at two levels: repository-level
+  facts (shared, viewable by repo owners) and user-level preferences
+  (personal, Pro/Pro+ only). Memories auto-expire after 28 days. Enabled by
+  default for Pro and Pro+ users.
+example: |
+  # Copilot Memory is automatic — no manual setup needed
+
+  # Session 1:
+  User: "I prefer arrow functions and const declarations"
+  # Copilot stores this as a user preference
+
+  # Session 2 (new chat, same repo):
+  User: "Write a helper function"
+  # Copilot remembers the arrow function preference
+  # and applies it automatically
+
+  # Repository-level facts (learned automatically):
+  # - "This project uses Vitest for testing"
+  # - "API routes follow RESTful conventions"
+  # - "Migrations use Drizzle ORM"
+
+  # User-level preferences:
+  # - "User prefers functional style"
+  # - "User wants concise commit messages"
+
+  # Memory management:
+  # - Entries auto-expire after 28 days
+  # - Repository owners can view/delete repo facts
+  # - Users can manage preferences in Copilot settings
+
+  # For permanent persistence, also use instruction files:
+  # .github/copilot-instructions.md
+syntax: text
+docUrl: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory
+userExtensible: true
+extensibilityNote: "Automatic cross-session memory; supplement with copilot-instructions.md for permanent rules"

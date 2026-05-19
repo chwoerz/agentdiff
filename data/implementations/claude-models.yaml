@@ -1,0 +1,37 @@
+id: claude-models
+name: Claude Code Models
+featureId: model-selection
+description: >
+  Claude Code supports Anthropic models only: Opus 4.7 (most capable),
+  Opus 4.6, Sonnet 4.6 (balanced), and Haiku 4.5 (fastest, cheapest).
+  Models can be selected via the --model CLI flag or the /model command
+  in-session. The /fast shortcut toggles fast output mode for the current
+  model (faster output, not a model switch). The --effort flag adjusts
+  how much computation the model uses per response.
+example: |
+  # Select model at startup:
+  claude --model claude-opus-4-7
+  claude --model claude-sonnet-4-6
+  claude --model claude-haiku-4-5-20251001
+
+  # Switch model mid-session:
+  /model claude-sonnet-4-6
+
+  # Toggle fast output mode:
+  /fast
+  # Enables faster output on the current model (not a model switch)
+
+  # Effort level (controls thinking depth):
+  claude --effort high    # More thorough, slower
+  claude --effort medium  # Balanced (default)
+  claude --effort low     # Quick responses
+
+  # Available models:
+  # claude-opus-4-7          — Most capable, complex tasks
+  # claude-opus-4-6          — Previous Opus generation
+  # claude-sonnet-4-6        — Balanced speed/capability
+  # claude-haiku-4-5-20251001 — Fastest, simple tasks
+syntax: bash
+docUrl: https://docs.anthropic.com/en/docs/claude-code/models
+userExtensible: false
+extensibilityNote: "Anthropic models only (Opus, Sonnet, Haiku)"

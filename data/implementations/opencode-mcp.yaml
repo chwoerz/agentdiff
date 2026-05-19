@@ -1,0 +1,27 @@
+id: opencode-mcp
+name: OpenCode MCP Servers
+featureId: mcp-servers
+description: >
+  Configured in opencode.json under mcp.servers. Follows the standard MCP
+  format with command, args, and environment variables. Supports stdio
+  transport.
+example: |
+  // opencode.json
+  {
+    "mcp": {
+      "servers": {
+        "sqlite": {
+          "command": "npx",
+          "args": ["-y", "@modelcontextprotocol/server-sqlite", "data.db"]
+        },
+        "memory": {
+          "command": "npx",
+          "args": ["-y", "@modelcontextprotocol/server-memory"]
+        }
+      }
+    }
+  }
+syntax: json
+docUrl: https://opencode.ai/docs/mcp
+userExtensible: true
+extensibilityNote: "Add MCP servers in opencode.json project configuration"

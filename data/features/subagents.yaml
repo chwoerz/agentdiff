@@ -1,0 +1,5 @@
+id: subagents
+name: "Subagents & Multi-Agent"
+description: Spawning specialized sub-agents for parallel or isolated task execution, with orchestration, context isolation, and multi-agent coordination.
+category: capabilities
+sortOrder: 12

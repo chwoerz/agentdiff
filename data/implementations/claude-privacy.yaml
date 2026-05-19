@@ -1,0 +1,22 @@
+id: claude-privacy
+name: Claude Code Privacy
+featureId: privacy
+description: >
+  Code sent to Anthropic API (TLS 1.2+). Commercial plans (Team, Enterprise):
+  not used for training. Consumer plans (Free, Pro, Max): may train unless
+  opted out. Enterprise offers data retention controls. .claudeignore excludes
+  sensitive files. No local/offline mode.
+example: |
+  # .claudeignore — exclude files (gitignore syntax)
+  .env
+  .env.*
+  **/secrets/
+  credentials.json
+  *.pem
+  *.key
+  dist/
+  node_modules/
+syntax: text
+docUrl: https://docs.anthropic.com/en/docs/claude-code/privacy
+userExtensible: true
+extensibilityNote: "Create .claudeignore to exclude files; configure data retention via enterprise"

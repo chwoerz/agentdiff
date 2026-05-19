@@ -1,0 +1,30 @@
+id: skill-md
+name: SKILL.md (Open Standard)
+featureId: skills
+description: >
+  Open standard for reusable AI agent workflows. SKILL.md files use YAML
+  frontmatter (name, description) and a Markdown body with instructions.
+  Supported by Claude Code, GitHub Copilot, and OpenCode. Skills are invoked
+  via slash commands or triggered automatically by intent matching.
+example: |
+  # <skills-dir>/deploy-staging/SKILL.md
+  ---
+  name: deploy-staging
+  description: Deploy the current branch to staging environment
+  ---
+
+  ## Deploy to Staging
+
+  1. Run the test suite: `npm test`
+  2. Build the project: `npm run build`
+  3. Deploy via CLI: `aws ecs update-service --cluster staging`
+  4. Verify health: `curl https://staging.example.com/health`
+  5. Report the deployment status
+
+  ### Rules
+  - Never deploy if tests fail
+  - Always verify health endpoint responds 200
+syntax: markdown
+docUrl: https://code.visualstudio.com/docs/copilot/customization/agent-skills
+userExtensible: true
+extensibilityNote: "Create SKILL.md files in your harness's skills directory — works across tools"

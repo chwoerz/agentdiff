@@ -1,0 +1,34 @@
+id: opencode-git
+name: OpenCode Git Integration
+featureId: git-integration
+description: >
+  OpenCode provides basic git integration through shell commands. The agent
+  can run git operations via the shell:exec tool but has no direct GitHub
+  API integration. Git status is used as a context source. There is no
+  built-in PR creation, issue management, or CI/CD interaction — these
+  require manual git commands or external tools.
+example: |
+  # OpenCode uses git via shell:exec tool:
+
+  # Basic operations:
+  "Commit the changes with a descriptive message"
+  # Agent runs: git add . && git commit -m "..."
+
+  "Create a branch for this feature"
+  # Agent runs: git checkout -b feat/new-feature
+
+  "Show me what changed since yesterday"
+  # Agent runs: git log --since=yesterday --oneline
+
+  # No direct GitHub API:
+  # - No PR creation (would need gh CLI installed)
+  # - No issue management
+  # - No CI/CD interaction
+
+  # Git status as context:
+  # OpenCode reads git status to understand
+  # which files are modified and staged
+syntax: bash
+docUrl: https://opencode.ai/docs
+userExtensible: false
+extensibilityNote: "Basic git via shell; no direct GitHub API integration"

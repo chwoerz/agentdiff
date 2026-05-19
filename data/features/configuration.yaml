@@ -1,0 +1,5 @@
+id: configuration
+name: Configuration
+description: Settings files, permission modes, environment variables, and other mechanisms for customizing AI behavior at the user, project, or workspace level.
+category: configuration
+sortOrder: 7

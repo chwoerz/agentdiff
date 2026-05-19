@@ -1,0 +1,5 @@
+id: agent-modes
+name: "Agent Modes"
+description: Different levels of AI autonomy and permission, from simple Q&A to fully autonomous agents that plan, execute, and iterate without human approval.
+category: capabilities
+sortOrder: 11

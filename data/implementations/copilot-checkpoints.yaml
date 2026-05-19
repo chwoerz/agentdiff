@@ -1,0 +1,16 @@
+id: copilot-checkpoints
+name: Copilot Checkpoints
+featureId: checkpoints
+description: >
+  IDE undo (Ctrl+Z / Cmd+Z) for reverting agent edits. Agent mode shows
+  diffs before applying — user can reject changes. The Coding Agent works
+  on a copilot/* branch that can be discarded entirely. No session-level
+  checkpoint or multi-file atomic undo.
+example: |
+  # IDE agent mode: Ctrl+Z / Cmd+Z to undo edits
+  # Coding Agent: changes on copilot/* branch — delete branch to rollback
+  # No session-level checkpoints — each edit undone individually
+syntax: text
+docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-agent-mode
+userExtensible: false
+extensibilityNote: "IDE undo and branch-based rollback; no custom checkpoints"

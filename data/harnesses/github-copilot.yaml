@@ -1,0 +1,96 @@
+id: github-copilot
+name: GitHub Copilot
+icon: github-copilot.svg
+website: https://github.com/features/copilot
+platforms:
+  - id: vscode
+    name: VS Code Extension
+  - id: jetbrains
+    name: JetBrains Plugin
+  - id: cli
+    name: CLI
+  - id: github-web
+    name: GitHub.com Chat
+  - id: visual-studio
+    name: Visual Studio
+  - id: eclipse
+    name: Eclipse
+  - id: xcode
+    name: Xcode
+
+implementations:
+  - implementationId: copilot-instructions-md
+    platforms: [vscode, jetbrains, cli]
+    notes: "Placed in .github/copilot-instructions.md"
+  - implementationId: copilot-path-instructions
+    platforms: [vscode, jetbrains, cli]
+    notes: ".github/instructions/*.instructions.md with applyTo glob patterns"
+  - implementationId: agents-md
+    platforms: [cli, vscode, jetbrains]
+    notes: "Supported as a cross-tool instruction format"
+  - implementationId: create-instructions-cmd
+    platforms: [vscode]
+    notes: "VS Code only — generates instructions by analyzing workspace"
+  - implementationId: copilot-builtin-tools
+    platforms: [vscode, jetbrains, cli]
+    notes: "File editing, terminal, codebase search in agent mode"
+  - implementationId: copilot-mcp
+    platforms: [vscode, jetbrains, cli]
+    notes: "MCP servers in agent mode, configured in IDE settings or CLI"
+  - implementationId: copilot-agent-hooks
+    platforms: [vscode, jetbrains, cli]
+    notes: ".github/hooks/*.json — 8 lifecycle events, also reads .claude/settings.json format"
+  - implementationId: copilot-slash-commands
+    platforms: [vscode, jetbrains, cli]
+    notes: "VS Code has the most commands; JetBrains has a subset"
+  - implementationId: skill-md
+    platforms: [vscode, jetbrains, cli]
+    notes: "Searches .github/skills/, .claude/skills/, .agents/skills/"
+  - implementationId: copilot-skills
+    platforms: [vscode, jetbrains, cli]
+    notes: "Copilot-specific: argument-hint frontmatter, personal skills in ~/.copilot/skills/"
+  - implementationId: copilot-prompt-files
+    platforms: [vscode, jetbrains]
+    notes: ".prompt.md files in .github/prompts/ — custom slash commands"
+  - implementationId: copilot-subagents
+    platforms: [vscode, cli]
+    notes: "Custom agents, /fleet for parallel execution, Coding Agent"
+  - implementationId: copilot-context
+    platforms: [vscode, jetbrains, cli]
+    notes: "@workspace, @file, #codebase — fullest in VS Code"
+  - implementationId: copilot-settings
+    platforms: [vscode, jetbrains, cli]
+    notes: "IDE settings + organization policies on GitHub.com"
+  - implementationId: copilot-inline-completions
+    platforms: [vscode, jetbrains]
+    notes: "Real-time ghost text suggestions as you type"
+  - implementationId: copilot-chat-panel
+    platforms: [vscode, jetbrains]
+    notes: "Dedicated chat interface in the IDE"
+  - implementationId: copilot-cli
+    platforms: [cli]
+    notes: "Full agentic CLI with plan mode, autopilot, /fleet, and file editing"
+  - implementationId: copilot-memory
+    platforms: [vscode, jetbrains, cli]
+    notes: "Copilot Memory: persistent repo-level and user-level memory (public preview)"
+  - implementationId: copilot-agent-modes
+    platforms: [vscode, jetbrains, cli]
+    notes: "Chat, agent, plan/autopilot (CLI), and cloud coding agent"
+  - implementationId: copilot-extensions
+    platforms: [vscode, jetbrains]
+    notes: "Marketplace extensions and .github/agents/*.agent.md custom agents"
+  - implementationId: copilot-code-review
+    platforms: [vscode, jetbrains]
+    notes: "Agentic review with auto-fix via coding agent"
+  - implementationId: copilot-git
+    platforms: [vscode, jetbrains, cli]
+    notes: "Deep GitHub integration — issues, PRs, Actions"
+  - implementationId: copilot-checkpoints
+    platforms: [vscode, jetbrains]
+    notes: "Editor undo + branch-based rollback for coding agent"
+  - implementationId: copilot-privacy
+    platforms: [vscode, jetbrains, cli]
+    notes: "Cloud-based, enterprise no-retention option"
+  - implementationId: copilot-models
+    platforms: [vscode, jetbrains, cli]
+    notes: "GPT-5/4.1, Claude 4.5, Gemini 3.x — auto-selection or manual, varies by plan"

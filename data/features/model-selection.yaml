@@ -1,0 +1,5 @@
+id: model-selection
+name: "Model Selection"
+description: Which AI models are available, how to switch between them, multi-model support, and model-specific capabilities within each harness.
+category: configuration
+sortOrder: 17

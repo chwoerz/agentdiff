@@ -1,0 +1,37 @@
+id: claude-cli
+name: Claude Code CLI
+featureId: cli-features
+description: >
+  Terminal-based CLI with interactive REPL, non-interactive mode (--print),
+  stdin piping, JSON output (--output-format json), session management
+  (--resume, --continue), multi-directory context (--add-dir), and model
+  selection (--model). Built for both human use and scripting.
+example: |
+  # Interactive mode (default):
+  claude
+
+  # Non-interactive / single-shot:
+  claude --print "Explain this error" < error.log
+
+  # Pipe input:
+  cat src/app.ts | claude --print "Review this code"
+
+  # JSON output for scripting:
+  claude --print --output-format json "List all TODO comments"
+
+  # Resume previous session:
+  claude --resume          # resume last session
+  claude --continue        # continue last conversation
+
+  # Multi-directory context:
+  claude --add-dir ../shared-lib --add-dir ../common
+
+  # Model selection:
+  claude --model claude-opus-4-7
+
+  # Effort level:
+  claude --effort high
+syntax: bash
+docUrl: https://docs.anthropic.com/en/docs/claude-code/cli
+userExtensible: false
+extensibilityNote: "Core CLI is fixed; extend via plugins, skills, and MCP servers"

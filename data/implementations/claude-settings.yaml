@@ -1,0 +1,42 @@
+id: claude-settings
+name: Claude Code Settings
+featureId: configuration
+description: >
+  Claude Code uses a layered settings system with three levels: global
+  (~/.claude/settings.json) for user preferences, project (.claude/settings.json)
+  committed to the repo for team-shared configuration, and local
+  (.claude/settings.local.json) for personal overrides not committed to git.
+  Settings control permissions, allowed/blocked tools, environment variables,
+  MCP servers, and hooks.
+example: |
+  // .claude/settings.json (project-level, committed)
+  {
+    "permissions": {
+      "allow": [
+        "Bash(npm run *)",
+        "Bash(npx vitest *)",
+        "Read",
+        "Edit",
+        "Write"
+      ],
+      "deny": [
+        "Bash(rm -rf *)"
+      ]
+    },
+    "allowedTools": ["mcp__postgres__query"],
+    "env": {
+      "NODE_ENV": "development"
+    }
+  }
+
+  // ~/.claude/settings.json (global, user-level)
+  {
+    "permissions": {
+      "allow": ["WebSearch", "WebFetch"]
+    },
+    "theme": "dark"
+  }
+syntax: json
+docUrl: https://docs.anthropic.com/en/docs/claude-code/settings
+userExtensible: true
+extensibilityNote: "Three-tier settings: global, project (shared), and local (personal)"

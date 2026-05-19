@@ -1,0 +1,44 @@
+id: opencode-settings
+name: OpenCode Settings
+featureId: configuration
+description: >
+  OpenCode uses opencode.json as its primary configuration file (JSON/JSONC).
+  Config sources are loaded in order: remote config (from .well-known/opencode),
+  global config (~/.config/opencode/opencode.json), and project-level
+  (opencode.json in project root). Later sources override earlier ones.
+  Supports provider configurations, model selection, agent settings, MCP
+  servers, plugins, permissions, and custom commands. Environment variables
+  can override configuration values.
+example: |
+  // opencode.json
+  {
+    "provider": {
+      "name": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "secondary": {
+        "name": "anthropic",
+        "model": "claude-haiku-4-20250414"
+      }
+    },
+    "agent": {
+      "defaultMode": "general"
+    },
+    "mcp": {
+      "servers": {
+        "memory": {
+          "command": "npx",
+          "args": ["-y", "@modelcontextprotocol/server-memory"]
+        }
+      }
+    },
+    "plugins": ["./my-plugin"]
+  }
+
+  # Environment variable overrides:
+  # OPENCODE_PROVIDER=anthropic
+  # OPENCODE_MODEL=claude-sonnet-4-20250514
+  # ANTHROPIC_API_KEY=sk-ant-...
+syntax: json
+docUrl: https://opencode.ai/docs/configuration
+userExtensible: true
+extensibilityNote: "Edit opencode.json for project-level configuration"

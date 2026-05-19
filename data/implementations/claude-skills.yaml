@@ -1,0 +1,24 @@
+id: claude-skills
+name: Claude Code Skills
+featureId: skills
+description: >
+  Claude Code discovers SKILL.md files in .claude/skills/<name>/ (project)
+  and ~/.claude/skills/<name>/ (user). Skills are invoked via the Skill tool
+  or matched automatically by description. Plugins can also register skills
+  via --plugin-dir or --plugin-url.
+example: |
+  # Skill paths:
+  .claude/skills/<name>/SKILL.md         # project-level
+  ~/.claude/skills/<name>/SKILL.md       # user-level
+
+  # Invocation in conversation:
+  User: "/test-driven-development"
+  # → Skill tool loads .claude/skills/test-driven-development/SKILL.md
+
+  # Automatic matching:
+  User: "Deploy to staging"
+  # → Claude matches skill by description and invokes it
+syntax: text
+docUrl: https://docs.anthropic.com/en/docs/claude-code/skills
+userExtensible: true
+extensibilityNote: "Create SKILL.md files in .claude/skills/<name>/ subdirectories"

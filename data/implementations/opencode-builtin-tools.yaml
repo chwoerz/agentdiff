@@ -1,0 +1,41 @@
+id: opencode-builtin-tools
+name: OpenCode Built-in Tools
+featureId: tools
+description: >
+  OpenCode provides a set of built-in tools using simple names (no namespace
+  prefixes): read (view files), write (create/overwrite files), edit (targeted
+  string replacements), bash (execute shell commands), grep (regex search),
+  glob (find files by pattern), lsp (language server diagnostics, experimental),
+  apply_patch (apply patches), skill (load skill content), todowrite (manage
+  todo lists), webfetch (fetch web content), websearch (search the web), and
+  question (ask user questions). All tools are available across the CLI,
+  desktop app, and IDE extension. Tools can be extended via the plugin system.
+example: |
+  # OpenCode's built-in tools in action:
+
+  # read — Read file contents (supports line ranges)
+  # write — Create new files or overwrite existing ones
+  # edit — Modify files using exact string replacements
+  # bash — Execute shell commands
+  # grep — Search file contents using regex
+  # glob — Find files by pattern matching
+  # lsp — Language server diagnostics (experimental)
+  # apply_patch — Apply patches to files
+  # skill — Load skill content into conversation
+  # todowrite — Manage todo lists during sessions
+  # webfetch — Fetch and read web pages
+  # websearch — Search the web for information
+  # question — Ask user questions during execution
+
+  # Tools are invoked automatically by the AI:
+  User: "Fix the TypeScript errors in auth.ts"
+
+  # OpenCode:
+  # 1. lsp — gets current errors
+  # 2. read — reads the file
+  # 3. edit — fixes the issues
+  # 4. lsp — verifies errors are resolved
+syntax: text
+docUrl: https://opencode.ai/docs/tools
+userExtensible: true
+extensibilityNote: "Built-in tools extensible via plugins; add custom tools with the plugin system"

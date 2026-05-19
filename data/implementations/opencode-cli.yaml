@@ -1,0 +1,34 @@
+id: opencode-cli
+name: OpenCode CLI
+featureId: cli-features
+description: >
+  OpenCode is a Go-based terminal UI (TUI) with a rich interactive interface.
+  Features include multi-session tabs for working on different tasks in
+  parallel, /model to switch AI models mid-session, /agent to switch between
+  agent modes, real-time streaming output, and a visual diff viewer. The TUI
+  provides a more polished terminal experience than a basic REPL.
+example: |
+  # Start OpenCode:
+  opencode
+
+  # The TUI provides:
+  # - Multi-session tabs (Ctrl+T new, Ctrl+W close)
+  # - Real-time streaming response
+  # - Visual diff viewer for file changes
+  # - Status bar with model/mode info
+
+  # In-session commands:
+  /model anthropic/claude-sonnet-4-20250514
+  /agent plan
+  /compact
+  /undo
+  /redo
+  /clear
+
+  # Environment setup:
+  export ANTHROPIC_API_KEY=sk-ant-...
+  opencode
+syntax: bash
+docUrl: https://opencode.ai/docs/cli
+userExtensible: false
+extensibilityNote: "Core TUI is fixed; extend via plugins for custom commands"

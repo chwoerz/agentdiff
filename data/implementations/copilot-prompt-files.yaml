@@ -1,0 +1,44 @@
+id: copilot-prompt-files
+name: Copilot Prompt Files
+featureId: skills
+description: >
+  Reusable prompt templates saved as .prompt.md files in .github/prompts/.
+  Each file has YAML frontmatter (agent mode, description) and a Markdown body
+  with variable placeholders. Invoke via /filename in Copilot Chat. Prompt files
+  are shared via the repository, making them available to the whole team.
+  Available in VS Code, Visual Studio, and JetBrains.
+example: |
+  # .github/prompts/create-component.prompt.md
+  ---
+  agent: 'agent'
+  description: 'Scaffold a new React component with tests'
+  ---
+
+  Create a new React component named ${input:name:Component name}.
+
+  Requirements:
+  - Use TypeScript with proper prop types
+  - Include unit tests using Vitest
+  - Follow the existing component patterns in src/components/
+  - Add Storybook story if storybook is configured
+
+  Component type: ${input:type:functional or class component}
+syntax: markdown
+docUrl: https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files
+userExtensible: true
+extensibilityNote: "Create .prompt.md files in .github/prompts/ — invoked as /commands in chat"
+customExample: |
+  # .github/prompts/review-pr.prompt.md
+  ---
+  agent: 'agent'
+  description: 'Review current changes for common issues'
+  ---
+
+  Review the staged changes and check for:
+
+  1. Security issues (injection, XSS, secrets)
+  2. Performance problems (N+1 queries, missing indexes)
+  3. Missing error handling at system boundaries
+  4. Test coverage for new code paths
+
+  Format: List issues grouped by severity (critical, warning, suggestion).

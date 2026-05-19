@@ -1,0 +1,5 @@
+id: instructions
+name: Instructions
+description: Persistent guidance files that shape how the AI behaves across sessions. These files tell the AI about project conventions, preferred patterns, and rules to follow.
+category: configuration
+sortOrder: 1

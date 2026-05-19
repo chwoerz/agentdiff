@@ -1,0 +1,41 @@
+id: copilot-cli
+name: Copilot CLI
+featureId: cli-features
+description: >
+  GitHub Copilot CLI is a standalone terminal-based coding agent (github/copilot-cli)
+  with full agentic capabilities. It supports interactive chat, agent mode with
+  file editing and terminal commands, plan mode (Shift+Tab) for outlining work
+  before executing, and autopilot mode (Shift+Tab again) for autonomous task
+  completion. Features include /fleet for parallel subagent execution, /model
+  for switching models mid-session, MCP server support, AGENTS.md and SKILL.md
+  integration, and cross-session memory. The default model is Claude Sonnet 4.5.
+  The older gh copilot extension (suggest, explain, chat) is still available
+  but is a simpler, separate tool.
+example: |
+  # Install Copilot CLI:
+  npm install -g @github/copilot-cli
+  # Or via GitHub CLI:
+  gh extension install github/copilot-cli
+
+  # Interactive agent mode (default):
+  copilot
+
+  # Plan mode — outline before executing:
+  # Press Shift+Tab to enter plan mode
+  # Press Shift+Tab again for autopilot mode
+
+  # Switch models mid-session:
+  /model claude-sonnet-4-5
+  /model gpt-5
+
+  # Parallel subagent execution:
+  /fleet Implement auth: create middleware, write tests, update docs
+
+  # Legacy gh copilot commands (simpler tool):
+  gh copilot suggest "find large files in git history"
+  gh copilot explain "awk '{print $2}' | sort | uniq -c"
+  gh copilot chat "How do I squash the last 3 commits?"
+syntax: bash
+docUrl: https://docs.github.com/en/copilot/concepts/agents/about-copilot-cli
+userExtensible: true
+extensibilityNote: "Supports AGENTS.md, SKILL.md, MCP servers, custom agents, /fleet parallel execution"

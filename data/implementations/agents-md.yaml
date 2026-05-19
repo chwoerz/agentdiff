@@ -1,0 +1,21 @@
+id: agents-md
+name: AGENTS.md
+featureId: instructions
+description: >
+  Cross-tool standard for AI agent instructions. Portable across multiple
+  harnesses (Claude Code, OpenCode, Copilot). Supports hierarchy with
+  directory-level files.
+example: |
+  # AGENTS.md
+  ## Guidelines
+  - Follow existing code patterns
+  - Write tests for new functionality
+  - Use conventional commits
+
+  ## Architecture
+  - Backend: Express.js with TypeScript
+  - Frontend: Angular 21 with standalone components
+syntax: markdown
+docUrl: https://github.com/anthropics/agents-md
+userExtensible: true
+extensibilityNote: "Create AGENTS.md files; works across Claude Code, OpenCode, and Copilot"

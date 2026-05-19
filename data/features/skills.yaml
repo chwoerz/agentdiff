@@ -1,0 +1,5 @@
+id: skills
+name: "Skills & Slash Commands"
+description: Reusable workflows invoked by the user via slash commands or other triggers. These encapsulate multi-step processes into single actions.
+category: automation
+sortOrder: 5

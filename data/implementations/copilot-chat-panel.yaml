@@ -1,0 +1,31 @@
+id: copilot-chat-panel
+name: Copilot Chat Panel
+featureId: ide-integration
+description: >
+  A dedicated chat panel in the IDE for conversational interaction with
+  Copilot. Supports @-references for context, slash commands for workflows,
+  and agent mode for multi-step tasks. Available in VS Code and JetBrains.
+  The chat panel can reference files, selections, terminal output, and
+  workspace-wide context. Supports switching between chat and agent mode.
+example: |
+  # VS Code Copilot Chat panel interactions:
+
+  # Simple question:
+  "How does the auth middleware work?"
+
+  # With context references:
+  "@workspace Where are the API routes defined?"
+  "@file:src/app.ts Explain the middleware chain"
+
+  # Slash commands in chat:
+  "/explain What does this regex do?"
+  "/fix The tests are failing with a timeout error"
+  "/tests Generate tests for the UserService"
+
+  # Agent mode (toggle in chat panel):
+  "Add input validation to all API endpoints"
+  # Agent iterates: searches → edits → tests → reports
+syntax: text
+docUrl: https://docs.github.com/en/copilot/using-github-copilot/copilot-chat/using-copilot-chat-in-your-ide
+userExtensible: false
+extensibilityNote: "Built-in IDE feature; extend via marketplace extensions"

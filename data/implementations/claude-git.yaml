@@ -1,0 +1,35 @@
+id: claude-git
+name: Claude Code Git Integration
+featureId: git-integration
+description: >
+  Git operations via Bash tool and gh CLI: branches, commits, PRs, worktrees.
+  Worktrees used for parallel subagent isolation. Internal checkpoints (not
+  git commits) created before changes.
+example: |
+  # Claude uses git via Bash tool:
+
+  # Branch management:
+  git checkout -b feat/add-auth
+  git add src/auth/
+  git commit -m "feat: add authentication module"
+  git push -u origin feat/add-auth
+
+  # PR creation via gh CLI:
+  gh pr create --title "Add auth module" --body "..."
+
+  # Worktree isolation for parallel subagents:
+  git worktree add ../worktree-auth feat/auth
+  git worktree add ../worktree-tests feat/tests
+  # Each subagent works in its own worktree
+
+  # Checkpoints (automatic, NOT git commits):
+  # Before making changes, Claude creates an internal checkpoint
+  # so file changes can be rolled back if needed
+
+  # Issue interaction:
+  gh issue list --label bug
+  gh issue view 42
+syntax: bash
+docUrl: https://docs.anthropic.com/en/docs/claude-code/git
+userExtensible: false
+extensibilityNote: "Uses standard git/gh tools; behavior guided via CLAUDE.md"

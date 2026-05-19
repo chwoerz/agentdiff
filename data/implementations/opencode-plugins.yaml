@@ -1,0 +1,57 @@
+id: opencode-plugins
+name: OpenCode Plugins
+featureId: plugins
+description: >
+  OpenCode has a JavaScript/TypeScript plugin system that allows extending
+  the tool with custom tools, commands, and lifecycle hooks. Plugins are
+  exported as named functions that receive a context object and return a
+  hooks object. Import from "@opencode-ai/plugin" for type definitions.
+  Plugins can add new tools the AI can invoke, hook into lifecycle events,
+  inject environment variables, send notifications, and customize session
+  compaction.
+example: |
+  // opencode-plugin/index.ts
+  // Plugins export named functions, NOT definePlugin
+  import type { PluginContext } from "@opencode-ai/plugin";
+
+  export const MyPlugin = async (ctx: PluginContext) => ({
+    tools: {
+      "db.query": {
+        description: "Execute a database query",
+        parameters: {
+          sql: { type: "string", description: "SQL query" }
+        },
+        async execute(params) {
+          const result = await db.query(params.sql);
+          return JSON.stringify(result.rows);
+        }
+      }
+    },
+    hooks: {
+      "session.created": async () => {
+        console.log("Plugin loaded for session");
+      }
+    }
+  });
+syntax: typescript
+docUrl: https://opencode.ai/docs/plugins
+userExtensible: true
+extensibilityNote: "Create JS/TS plugins with custom tools, hooks, and sidebar panels"
+customExample: |
+  // opencode.json
+  {
+    "plugins": ["./plugins/my-plugin"]
+  }
+
+  // plugins/my-plugin/index.ts
+  export const DbPlugin = async (ctx) => ({
+    tools: {
+      "db.query": {
+        description: "Run a read-only SQL query",
+        parameters: { query: { type: "string" } },
+        execute: async (params) => {
+          return await ctx.exec("psql", ["-c", params.query]);
+        }
+      }
+    }
+  });

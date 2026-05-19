@@ -1,0 +1,30 @@
+id: claude-ide-chat
+name: Claude Code IDE Chat
+featureId: ide-integration
+description: >
+  Claude Code provides VS Code and JetBrains extensions with a chat panel
+  that offers the same capabilities as the CLI. The extension integrates
+  directly with the editor, allowing Claude to read open files, make edits
+  that appear as diffs, and access the terminal. All CLI features including
+  tools, skills, MCP servers, and hooks work identically in the IDE.
+example: |
+  # VS Code / JetBrains Claude Code extension:
+
+  # Chat panel with full tool access
+  # Same capabilities as CLI — not a separate product
+
+  # Features available in IDE:
+  # - Read/Edit/Write tools work on editor buffers
+  # - Bash tool runs in integrated terminal
+  # - Diffs shown inline for approval
+  # - CLAUDE.md loaded from workspace root
+  # - MCP servers from .claude/settings.json
+  # - Skills from .claude/skills/
+
+  # Open via:
+  # VS Code: Cmd+Shift+P → "Claude Code: Open Chat"
+  # JetBrains: Tools → Claude Code
+syntax: text
+docUrl: https://docs.anthropic.com/en/docs/claude-code/ide
+userExtensible: false
+extensibilityNote: "IDE extensions provided by Anthropic; not user-extensible"

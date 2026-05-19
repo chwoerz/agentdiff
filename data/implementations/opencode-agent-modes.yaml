@@ -1,0 +1,48 @@
+id: opencode-agent-modes
+name: OpenCode Agent Modes
+featureId: agent-modes
+description: >
+  OpenCode supports two primary agent modes: Build (default, full tool access
+  for development work) and Plan (restricted, focuses on analysis and planning
+  without making modifications). Switch between them with the Tab key.
+  Sub-agents include General (full tool access for multi-step tasks), Explore
+  (fast read-only codebase search), and Scout (read-only external docs and
+  dependency research). Hidden system agents handle compaction, titles, and
+  summaries automatically.
+example: |
+  # Switch primary agent modes (Tab key):
+  # Build — default, all tools enabled for development
+  # Plan — restricted, analyzes and plans without modifying files
+
+  # Sub-agents (used internally or via @-mention):
+  # General — full tool access, multi-step task execution
+  # Explore — read-only, fast codebase search
+  # Scout — read-only, external docs and dependency research
+
+  # The main agent delegates to sub-agents automatically:
+  # "Let me explore the codebase structure first..."
+  # (Explore sub-agent reads multiple files in parallel)
+
+  # Hidden system agents:
+  # Compaction — summarizes long context automatically
+  # Title — generates session titles
+  # Summary — creates session summaries
+syntax: bash
+docUrl: https://opencode.ai/docs/agents
+userExtensible: true
+extensibilityNote: "Create custom agents via JavaScript/TypeScript plugin system"
+customExample: |
+  // plugins/my-agents/index.ts
+  import { MyPlugin } from "@opencode-ai/plugin";
+
+  export const ReviewerPlugin = async (ctx) => ({
+    agents: {
+      "reviewer": {
+        description: "Code review specialist",
+        tools: ["read", "bash"],
+        prompt: `You review code for quality, security,
+                 and adherence to project conventions.
+                 Never modify files directly.`
+      }
+    }
+  });

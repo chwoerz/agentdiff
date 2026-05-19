@@ -1,0 +1,54 @@
+id: copilot-agent-modes
+name: Copilot Agent Modes
+featureId: agent-modes
+description: >
+  GitHub Copilot operates in multiple modes: Chat mode for Q&A and explanations,
+  Agent mode (VS Code, JetBrains, CLI) for multi-step tasks with tool use,
+  Coding Agent (cloud) for fully autonomous execution via GitHub Actions, and
+  CLI-specific plan/autopilot modes. The CLI supports plan mode (Shift+Tab)
+  for outlining work before executing, and autopilot mode for autonomous task
+  completion. The Coding Agent can be assigned issues, creates branches,
+  makes changes, opens draft PRs, runs self-review with security scanning,
+  and iterates on CI feedback — all without a local IDE.
+example: |
+  # Chat mode — Q&A, no tool use:
+  "Explain how React hooks work"
+
+  # Agent mode — multi-step with tools (VS Code/JetBrains/CLI):
+  # Toggle agent mode in the chat panel dropdown
+  "Add input validation to the registration form"
+  # Agent: searches codebase → edits files → runs tests → iterates
+
+  # CLI plan mode (Shift+Tab):
+  # Outlines the work before executing
+  # Shift+Tab again → autopilot mode (autonomous completion)
+
+  # Coding Agent — cloud-based, fully autonomous:
+  # Assign an issue on GitHub.com:
+  @github-copilot implement this feature
+
+  # Coding Agent workflow:
+  # 1. Creates a branch from the issue
+  # 2. Makes changes using GitHub Actions runner
+  # 3. Self-reviews with Copilot code review
+  # 4. Runs security scanning (code, secrets, dependencies)
+  # 5. Opens a draft PR with the changes
+  # 6. Runs CI and iterates on failures
+  # 7. Requests human review when ready
+syntax: text
+docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-agent-mode
+userExtensible: true
+extensibilityNote: "Create custom agents via .github/agents/*.agent.md"
+customExample: |
+  # .github/agents/security-reviewer.agent.md
+  ---
+  name: Security Reviewer
+  description: Reviews code for security vulnerabilities
+  tools: [read_file, search_code, list_files]
+  ---
+
+  You are a security expert. Analyze code for OWASP Top 10
+  vulnerabilities, injection flaws, and authentication issues.
+  Never suggest changes — only report findings.
+
+  # Usage in chat: @security-reviewer check this PR

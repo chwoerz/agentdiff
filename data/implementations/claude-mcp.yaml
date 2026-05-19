@@ -1,0 +1,26 @@
+id: claude-mcp
+name: Claude Code MCP Servers
+featureId: mcp-servers
+description: >
+  Configured in .claude/settings.json or via claude mcp add. Supports stdio
+  (local process) and HTTP (streamable HTTP for remote servers). SSE is
+  deprecated. Also accepts --mcp-config CLI flag.
+example: |
+  // .claude/settings.json
+  {
+    "mcpServers": {
+      "postgres": {
+        "command": "npx",
+        "args": ["-y", "@modelcontextprotocol/server-postgres"],
+        "env": { "DATABASE_URL": "postgresql://localhost:5432/mydb" }
+      },
+      "remote-api": {
+        "type": "http",
+        "url": "https://mcp.example.com/mcp"
+      }
+    }
+  }
+syntax: json
+docUrl: https://docs.anthropic.com/en/docs/claude-code/mcp
+userExtensible: true
+extensibilityNote: "Add any MCP server to extend capabilities with custom integrations"

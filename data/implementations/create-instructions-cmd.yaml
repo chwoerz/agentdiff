@@ -1,0 +1,18 @@
+id: create-instructions-cmd
+name: /create-instructions
+featureId: instructions
+description: >
+  A VS Code-only slash command that generates a copilot-instructions.md
+  file by analyzing your workspace. Scans project structure, dependencies,
+  and patterns to produce a starter instruction file. Not available in
+  JetBrains or CLI.
+example: |
+  # In VS Code Copilot Chat, type:
+  /create-instructions
+
+  # Copilot analyzes your workspace and generates:
+  # .github/copilot-instructions.md with project-specific guidance
+syntax: text
+docUrl: https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+userExtensible: false
+extensibilityNote: "Built-in VS Code command that generates instructions automatically"

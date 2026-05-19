@@ -1,0 +1,5 @@
+id: ide-integration
+name: "IDE Integration"
+description: Editor-specific features like inline code completions, chat panels, code actions, inline suggestions, and editor commands.
+category: platforms
+sortOrder: 8

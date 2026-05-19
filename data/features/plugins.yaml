@@ -1,0 +1,5 @@
+id: plugins
+name: "Plugins & Extensions"
+description: Systems for extending the harness with third-party or custom functionality, including plugin APIs, extension points, and custom agent definitions.
+category: extensibility
+sortOrder: 12

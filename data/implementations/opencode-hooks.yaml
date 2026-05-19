@@ -1,0 +1,59 @@
+id: opencode-hooks
+name: OpenCode Plugin Hooks
+featureId: hooks
+description: >
+  OpenCode supports ~30 lifecycle event hooks via its JavaScript/TypeScript
+  plugin system. Hooks use dot notation for event names and cover file changes,
+  tool invocations, sessions, permissions, LSP diagnostics, shell environment,
+  and TUI interactions. Plugins export named functions that return a hooks
+  object.
+example: |
+  // opencode-plugin/index.ts
+  export const MyHooks = async (ctx) => ({
+    hooks: {
+      "tool.execute.before": async (event) => {
+        console.log(`About to call: ${event.tool}`);
+      },
+      "tool.execute.after": async (event) => {
+        if (event.tool === "write") {
+          await ctx.exec("npm run lint");
+        }
+      },
+      "session.created": async () => {
+        console.log("Session started");
+      }
+    }
+  });
+
+  // Available hook events (dot notation):
+  // command.executed
+  // file.edited, file.watcher.updated
+  // lsp.client.diagnostics, lsp.updated
+  // message.part.removed, message.part.updated
+  // message.removed, message.updated
+  // permission.asked, permission.replied
+  // session.created, session.compacted, session.deleted
+  // session.diff, session.error, session.idle
+  // session.status, session.updated
+  // shell.env
+  // tool.execute.before, tool.execute.after
+  // tui.prompt.append, tui.command.execute, tui.toast.show
+  // experimental.session.compacting
+syntax: typescript
+docUrl: https://opencode.ai/docs/plugins
+userExtensible: true
+extensibilityNote: "Register custom hook handlers via JavaScript/TypeScript plugins"
+customExample: |
+  // my-plugin/index.ts
+  export const LintPlugin = async (ctx) => ({
+    hooks: {
+      "file.edited": async (event) => {
+        if (event.path.endsWith(".ts")) {
+          await ctx.exec("npx", ["eslint", "--fix", event.path]);
+        }
+      },
+      "session.created": async () => {
+        console.log("Session started at", new Date().toISOString());
+      }
+    }
+  });

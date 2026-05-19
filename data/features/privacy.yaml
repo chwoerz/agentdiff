@@ -1,0 +1,5 @@
+id: privacy
+name: "Privacy & Data Handling"
+description: How each harness handles code data — where it is sent, whether it is stored, options for local-only operation, and compliance with data policies.
+category: safety
+sortOrder: 16

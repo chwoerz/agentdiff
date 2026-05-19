@@ -1,0 +1,5 @@
+id: code-review
+name: "Code Review"
+description: AI-powered code review capabilities, including pull request review, inline suggestions, agentic review that gathers full context, and auto-fix features.
+category: workflow
+sortOrder: 13

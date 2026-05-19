@@ -1,0 +1,33 @@
+id: opencode-context
+name: OpenCode Context
+featureId: context-providers
+description: >
+  OpenCode gathers context through LSP integration (getting diagnostics,
+  type information, and symbol definitions), file watching for real-time
+  change detection, git status for version control state, and agent-driven
+  file reading where the AI reads files as needed. The LSP integration is
+  particularly strong, providing the AI with the same type errors and
+  warnings that developers see in their editors.
+example: |
+  # OpenCode context sources:
+
+  # 1. LSP diagnostics — real-time errors and warnings
+  # The AI sees TypeScript errors, ESLint warnings, etc.
+  # lsp:diagnostics tool returns structured diagnostic data
+
+  # 2. File watching — detects external changes
+  # Files modified outside OpenCode are detected automatically
+
+  # 3. Git status — version control context
+  # Knows which files are modified, staged, untracked
+
+  # 4. Agent-driven file reading
+  # The AI reads files on demand using file:read
+  # and searches with search:grep
+
+  # 5. AGENTS.md — persistent project instructions
+  # Loaded from repo root and subdirectories
+syntax: text
+docUrl: https://opencode.ai/docs/context
+userExtensible: true
+extensibilityNote: "LSP integration automatic; extend via plugins for custom context sources"

@@ -1,0 +1,27 @@
+id: copilot-builtin-tools
+name: Copilot Agent Mode Tools
+featureId: tools
+description: >
+  Agent mode tools: file editing, terminal commands, codebase search. VS Code
+  has the full set, JetBrains a comparable subset, CLI has full agent
+  capabilities. Tools run with user confirmation by default.
+example: |
+  # In VS Code Copilot agent mode, the AI can:
+
+  # 1. Edit files directly in the editor
+  # 2. Run terminal commands
+  # 3. Search across the workspace with @workspace
+
+  # Example agent mode interaction:
+  User: "Add a health check endpoint to the Express app"
+
+  # Copilot agent:
+  # - Searches codebase for existing routes
+  # - Creates src/routes/health.ts
+  # - Adds route registration in app.ts
+  # - Runs `npm test` in terminal
+  # - Shows diff for approval
+syntax: text
+docUrl: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-agent-mode
+userExtensible: false
+extensibilityNote: "Agent mode tools are fixed; extend via MCP servers or extensions"

@@ -1,0 +1,36 @@
+id: opencode-commands
+name: OpenCode Commands & Skills
+featureId: skills
+description: >
+  Built-in commands (/init, /undo, /redo, /share, /help) plus custom commands
+  as Markdown files in .opencode/commands/. Also discovers SKILL.md files in
+  .opencode/skills/, .claude/skills/, and .agents/skills/ directories.
+example: |
+  # OpenCode built-in commands:
+
+  /init       — Initialize project (creates AGENTS.md)
+  /undo       — Undo the last file change
+  /redo       — Redo an undone change
+  /share      — Share the current session
+  /help       — Show available commands
+
+  # Custom commands in .opencode/commands/:
+  # User-level: ~/.config/opencode/commands/
+  # Project-level: .opencode/commands/
+  # Markdown files with argument placeholders ($ARG_NAME)
+syntax: text
+docUrl: https://opencode.ai/docs/commands
+userExtensible: true
+extensibilityNote: "Add custom commands as Markdown files in .opencode/commands/ directories"
+customExample: |
+  # .opencode/commands/deploy.md
+  ---
+  description: Deploy to staging environment
+  ---
+
+  Deploy the current branch to staging:
+
+  1. Run the test suite: `npm test`
+  2. Build the project: `npm run build`
+  3. Deploy: `aws ecs update-service --cluster staging`
+  4. Verify health: `curl https://staging.example.com/health`

@@ -1,0 +1,37 @@
+id: claude-code-review
+name: Claude Code Review
+featureId: code-review
+description: >
+  Claude Code provides multiple review capabilities: /review for single-agent
+  code review of the current branch, /ultrareview for multi-agent cloud-based
+  deep review, and /security-review for security-focused analysis. Reviews
+  use a code-reviewer subagent that gathers full context before providing
+  feedback. Reviews can target specific files, commits, or the entire branch diff.
+example: |
+  # Single-agent review of current changes:
+  /review
+
+  # Multi-agent deep review (cloud):
+  /ultrareview
+
+  # Security-focused review:
+  /security-review
+
+  # Review specific PR:
+  "Review PR #42 and leave comments"
+
+  # Claude Code review workflow:
+  # 1. Gathers diff (git diff main...HEAD)
+  # 2. Reads changed files for full context
+  # 3. Spawns Explore subagents for related code
+  # 4. Analyzes for bugs, style, security, performance
+  # 5. Provides structured feedback with file:line references
+
+  # Review output includes:
+  # - Critical issues (bugs, security)
+  # - Suggestions (style, performance)
+  # - Questions (unclear intent)
+syntax: text
+docUrl: https://docs.anthropic.com/en/docs/claude-code/review
+userExtensible: false
+extensibilityNote: "Built-in /review, /ultrareview, and /security-review commands"

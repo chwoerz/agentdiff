@@ -1,0 +1,35 @@
+id: claude-checkpoints
+name: Claude Code Checkpoints
+featureId: checkpoints
+description: >
+  Automatic internal file-state snapshots (NOT git commits) created every
+  user prompt. Individual tool invocations can be rejected to undo changes.
+  Roll back to any checkpoint in the session. Only tracks changes via
+  Claude's editing tools (Edit, Write), not Bash commands.
+example: |
+  # Automatic checkpoints — no configuration needed:
+
+  # 1. Claude proposes an edit to src/app.ts
+  #    → Checkpoint created automatically (internal snapshot)
+
+  # 2. User can reject the change:
+  #    "Undo that last edit"
+  #    → Claude rolls back to the checkpoint
+
+  # 3. Roll back multiple changes:
+  #    "Undo everything since we started working on auth"
+  #    → Claude restores to earlier checkpoint
+
+  # In the CLI, individual tool calls show:
+  # [Read] src/app.ts ✓
+  # [Edit] src/app.ts — Accept? (y/n/undo)
+  #   n → Change is rejected, file restored
+
+  # Checkpoints are NOT git commits:
+  # They are aggressive auto-save points for Claude's changes
+  # Only file edits via Claude tools are tracked
+  # Shell commands (Bash tool) are not checkpointed
+syntax: text
+docUrl: https://docs.anthropic.com/en/docs/claude-code/checkpoints
+userExtensible: false
+extensibilityNote: "Automatic internal checkpoints; no custom configuration"

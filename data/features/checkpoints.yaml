@@ -1,0 +1,5 @@
+id: checkpoints
+name: "Checkpoint & Undo"
+description: Session state management that allows rolling back AI changes, undoing modifications, and restoring previous states when the AI makes mistakes.
+category: safety
+sortOrder: 15

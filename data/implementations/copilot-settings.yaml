@@ -1,0 +1,35 @@
+id: copilot-settings
+name: Copilot Settings
+featureId: configuration
+description: >
+  GitHub Copilot is configured through multiple layers: VS Code settings.json
+  for editor behavior, JetBrains preferences for plugin settings, organization
+  policies on GitHub.com for enterprise controls, and CLI configuration via
+  gh config. Settings control which features are enabled, model selection,
+  content exclusions, and MCP server configuration.
+example: |
+  // VS Code settings.json
+  {
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": false,
+      "markdown": true
+    },
+    "github.copilot.chat.agent.enabled": true,
+    "github.copilot.chat.mcpServers": {
+      "my-server": {
+        "command": "node",
+        "args": ["server.js"]
+      }
+    },
+    "github.copilot.selectedCompletionModel": "gpt-4o"
+  }
+
+  # Organization policy (GitHub.com → Settings → Copilot):
+  # - Enable/disable for members
+  # - Allow/block suggestions matching public code
+  # - Content exclusion patterns
+syntax: json
+docUrl: https://docs.github.com/en/copilot/managing-copilot/configure-personal-settings
+userExtensible: true
+extensibilityNote: "Configure via IDE settings, organization policies, and CLI config"

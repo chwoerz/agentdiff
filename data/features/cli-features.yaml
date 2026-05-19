@@ -1,0 +1,5 @@
+id: cli-features
+name: "CLI Features"
+description: Terminal-specific capabilities including non-interactive mode, piping input/output, output formatting, and shell integration.
+category: platforms
+sortOrder: 9

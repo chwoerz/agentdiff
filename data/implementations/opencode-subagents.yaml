@@ -1,0 +1,41 @@
+id: opencode-subagents
+name: OpenCode Subagents
+featureId: subagents
+description: >
+  OpenCode includes three built-in subagents: General (full tool access for
+  multi-step tasks), Explore (fast read-only codebase search), and Scout
+  (read-only external docs and dependency research). Subagents can be invoked
+  by @-mentioning them in messages or automatically by the primary agent based
+  on task descriptions. Custom agents can be created via the plugin system
+  with tailored tools and prompts.
+example: |
+  # Invoke a subagent by @-mention:
+  @explore Find all files that import the UserService class
+
+  @scout What testing framework does this project use?
+
+  # Built-in subagent types:
+  # - General: full tool access, multi-step task execution
+  # - Explore: read-only, fast codebase search
+  # - Scout: read-only, external docs and dependency research
+
+  # Custom agent via plugin:
+  # Agents can be defined via plugins
+  # with scoped tools and custom system prompts
+syntax: text
+docUrl: https://opencode.ai/docs/agents/
+userExtensible: true
+extensibilityNote: "Create custom agents via JavaScript/TypeScript plugins with scoped tools"
+customExample: |
+  // plugins/my-agents/index.ts
+  export const TestRunnerAgent = async (ctx) => ({
+    agents: {
+      "test-runner": {
+        description: "Runs and analyzes test results",
+        tools: ["bash", "read"],
+        prompt: `You are a test specialist. Run tests, analyze
+                 failures, and suggest fixes. Always run the
+                 full suite before reporting.`
+      }
+    }
+  });

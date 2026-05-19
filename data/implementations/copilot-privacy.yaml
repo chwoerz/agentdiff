@@ -1,0 +1,21 @@
+id: copilot-privacy
+name: Copilot Privacy
+featureId: privacy
+description: >
+  Code sent to GitHub/Microsoft cloud. Business/Enterprise: no code retention
+  by default. Individual: code may be retained unless opted out. Org-level
+  content exclusion policies for paths and repos. Enterprise adds IP indemnity
+  and audit logs. Public code matching filter available.
+example: |
+  # Content exclusion (GitHub.com → Settings → Copilot):
+  # Exclude paths: "**/.env", "**/secrets/**"
+  # Exclude entire repositories
+
+  # Privacy by plan:
+  # Individual — code may be retained, opt-out available
+  # Business   — no retention, org policies
+  # Enterprise — no retention, exclusions, IP indemnity, audit logs
+syntax: text
+docUrl: https://docs.github.com/en/copilot/managing-copilot/managing-copilot-policies
+userExtensible: true
+extensibilityNote: "Configure content exclusion policies at org level"

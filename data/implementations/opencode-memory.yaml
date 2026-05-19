@@ -1,0 +1,34 @@
+id: opencode-memory
+name: OpenCode Memory
+featureId: memory
+description: >
+  OpenCode has limited persistence. Sessions are stored in a SQLite database,
+  allowing some session history to persist. The /init command creates an
+  AGENTS.md memory file for project-specific context that is loaded each
+  session. However, there is no automatic cross-session memory system like
+  Claude Code's memory files. Within a single run, OpenCode supports
+  multi-session tabs so you can work on different tasks in parallel.
+example: |
+  # Session persistence via SQLite database
+  # Sessions can be resumed within the same installation
+
+  # For persistent context, use AGENTS.md:
+  /init  # Creates AGENTS.md with project context
+
+  # AGENTS.md (project root)
+  ## Project Context
+  - This is a Go microservices project
+  - Use table-driven tests
+  - Follow the repository pattern for data access
+
+  # Within a single run, multi-session support:
+  # Tab 1: Working on auth module
+  # Tab 2: Working on API endpoints
+  # Each tab has independent conversation state
+
+  # No automatic memory system — AGENTS.md is the
+  # primary cross-session persistence mechanism
+syntax: text
+docUrl: https://opencode.ai/docs/memory
+userExtensible: false
+extensibilityNote: "Sessions stored in SQLite; use AGENTS.md for persistent project context"

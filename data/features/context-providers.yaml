@@ -1,0 +1,5 @@
+id: context-providers
+name: "Context Providers"
+description: Mechanisms for feeding relevant context to the AI, such as file references, workspace indexing, codebase search, and explicit context annotations.
+category: context
+sortOrder: 6

@@ -1,0 +1,61 @@
+id: copilot-subagents
+name: Copilot Subagents & Fleet
+featureId: subagents
+description: >
+  GitHub Copilot supports multi-agent orchestration with custom agents defined
+  in .github/agents/*.agent.md. The /fleet command in Copilot CLI decomposes
+  tasks into parallel subagents, identifies dependencies, and dispatches
+  independent work items simultaneously. Custom agents have scoped tools and
+  prompts — the runtime matches intent against agent descriptions and runs
+  matching sub-agents with context isolation. The Coding Agent runs fully
+  autonomously in GitHub Actions for cloud-based execution.
+example: |
+  # .github/agents/security-reviewer.agent.md
+  ---
+  name: security-reviewer
+  description: Reviews code changes for security vulnerabilities
+  tools: [read_file, search_code, list_files]
+  ---
+
+  You are a security specialist. Review changes for:
+  - SQL injection and XSS vulnerabilities
+  - Hardcoded secrets or credentials
+  - Insecure deserialization
+  - Missing input validation at system boundaries
+
+  # Using /fleet for parallel execution in CLI:
+  /fleet Implement the auth module: create the middleware,
+  write tests, and update the API docs
+
+  # Copilot decomposes into parallel subagents:
+  # → Agent 1: implement middleware
+  # → Agent 2: write tests (waits for Agent 1)
+  # → Agent 3: update docs (independent)
+
+  # /fleet limitations:
+  # - Subagents share filesystem (no file locking)
+  # - Subagents don't inherit the orchestrator's chat history
+  # - If two subagents write to the same file, last one wins
+  # - Dependency graph tracked in SQLite database
+syntax: markdown
+docUrl: https://docs.github.com/en/copilot/how-tos/copilot-sdk/use-copilot-sdk/custom-agents
+userExtensible: true
+extensibilityNote: "Create custom agents in .github/agents/*.agent.md with scoped tools and prompts"
+customExample: |
+  # .github/agents/db-expert.agent.md
+  ---
+  name: db-expert
+  description: Specializes in SQL optimization and schema design
+  tools: [read_file, search_code, run_terminal_command]
+  ---
+
+  You are a database expert. Focus on:
+  - Query performance and EXPLAIN analysis
+  - Indexing strategies
+  - Schema normalization
+  - Migration safety (lock duration, backfill strategies)
+
+  When reviewing queries, always check for:
+  1. Missing indexes on WHERE/JOIN columns
+  2. N+1 query patterns
+  3. Unbounded SELECT without LIMIT
