@@ -72,6 +72,33 @@ export interface ComparisonMatrix {
   rows: ComparisonRow[];
 }
 
+export interface FullMatrixCellImpl {
+  implementationId: string;
+  implementationName: string;
+  platforms: string[];
+  notes: string;
+}
+
+export interface FullMatrixCell {
+  harnessId: string;
+  harnessName: string;
+  harnessIcon: string;
+  supportedCount: number;
+  totalCount: number;
+  implementations: FullMatrixCellImpl[];
+}
+
+export interface FullMatrixRow {
+  feature: Feature;
+  totalImplementations: number;
+  cells: FullMatrixCell[];
+}
+
+export interface FullMatrix {
+  harnesses: ResolvedHarness[];
+  rows: FullMatrixRow[];
+}
+
 export interface AppData {
   features: Feature[];
   implementations: Implementation[];
