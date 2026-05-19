@@ -3,6 +3,7 @@ import { LandingComponent } from "./pages/landing.component";
 import { CompareListComponent } from "./pages/compare-list.component";
 import { FeatureDetailComponent } from "./pages/feature-detail.component";
 import { HarnessProfileComponent } from "./pages/harness-profile.component";
+import { MatrixViewComponent } from "./pages/matrix-view.component";
 
 export const routes: Routes = [
   { path: "", component: LandingComponent },
@@ -10,5 +11,6 @@ export const routes: Routes = [
   { path: "compare/:featureId", component: FeatureDetailComponent },
   { path: "harness/:harnessId", component: HarnessProfileComponent },
   { path: "harness/:harnessId/:platformId", component: HarnessProfileComponent },
+  { path: "matrix", component: MatrixViewComponent },
   { path: "**", redirectTo: "" },
 ];
