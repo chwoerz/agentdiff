@@ -67,13 +67,9 @@ import { MatrixTooltipComponent } from "../components/matrix-tooltip.component";
                         <span class="inline-flex w-8 h-8 rounded-full bg-gray-100 border border-gray-200 items-center justify-center text-gray-300 text-xs">
                           &mdash;
                         </span>
-                      } @else if (cell.supportedCount === cell.totalCount) {
-                        <span class="inline-flex w-8 h-8 rounded-full bg-green-100 border border-green-300 items-center justify-center text-green-700 text-xs font-bold">
-                          &#10003;
-                        </span>
                       } @else {
-                        <span class="inline-flex w-8 h-8 rounded-full bg-yellow-100 border border-yellow-300 items-center justify-center text-yellow-700 text-xs font-bold">
-                          {{ cell.supportedCount }}/{{ cell.totalCount }}
+                        <span class="inline-flex w-8 h-8 rounded-full bg-green-100 border border-green-300 items-center justify-center text-green-700 text-xs font-bold">
+                          {{ cell.supportedCount }}
                         </span>
                       }
                     </div>
@@ -100,15 +96,11 @@ import { MatrixTooltipComponent } from "../components/matrix-tooltip.component";
 
       <div class="mt-4 flex items-center gap-6 text-xs text-gray-500">
         <div class="flex items-center gap-1.5">
-          <span class="inline-block w-4 h-4 rounded-full bg-green-100 border border-green-300"></span>
-          Full support
+          <span class="inline-flex w-4 h-4 rounded-full bg-green-100 border border-green-300 items-center justify-center text-green-700 text-[8px] font-bold">N</span>
+          Supported (N implementations)
         </div>
         <div class="flex items-center gap-1.5">
-          <span class="inline-block w-4 h-4 rounded-full bg-yellow-100 border border-yellow-300"></span>
-          Partial support
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="inline-block w-4 h-4 rounded-full bg-gray-100 border border-gray-200"></span>
+          <span class="inline-flex w-4 h-4 rounded-full bg-gray-100 border border-gray-200 items-center justify-center text-gray-300 text-[8px]">&mdash;</span>
           Not supported
         </div>
       </div>
