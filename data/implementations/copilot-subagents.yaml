@@ -8,7 +8,9 @@ description: >
   Stored in `.github/agents/` (workspace), `.claude/agents/` (Claude format),
   or `~/.copilot/agents` (user). In VS Code chat they are selected from the
   agents dropdown (not via @-mention); in the Copilot CLI they are picked
-  with `/agent`. An agent can delegate to other agents as subagents by
+  with `/agent`. The CLI also ships six built-in custom agents — explore,
+  task, general-purpose, code-review, research, and rubber-duck — usable
+  out of the box. An agent can delegate to other agents as subagents by
   including the `agent` tool plus an `agents:` list. The cloud Coding Agent
   runs autonomously in GitHub Actions and can be assigned issues directly.
 example: |

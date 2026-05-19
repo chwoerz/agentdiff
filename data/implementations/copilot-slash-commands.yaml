@@ -4,21 +4,44 @@ featureId: skills
 description: >
   GitHub Copilot Chat includes built-in slash commands for common workflows.
   The exact set varies by surface (VS Code, Visual Studio, JetBrains, Xcode,
-  GitHub.com web chat, CLI). VS Code has the fullest set, including /explain,
-  /fix, /tests, /new, /fixTestFailure, /help, and /clear. JetBrains supports a
-  smaller subset. The Copilot CLI has its own slash commands (/model, /mcp,
-  /compact, /context, /feedback, /allow-all, /yolo). Built-in chat commands are
-  not user-extensible directly, but users can author custom commands via prompt
-  files (.prompt.md) and skills (SKILL.md) in supported surfaces.
+  GitHub.com web chat, CLI). VS Code has the fullest set, including
+  /explain, /fix, /tests, /plan, /new, /init, /clear, /compact, /fork,
+  /agents, /prompts, /skills, /hooks, /instructions, and many more.
+  JetBrains supports a smaller subset. The Copilot CLI has a rich set of
+  its own slash commands — including /review, /plan, /diff, /pr, /research,
+  /fleet, /delegate, /agent, /undo, /init, /model, /mcp, /compact,
+  /context, /usage, /feedback, /allow-all, /yolo, and many more (see the
+  CLI command reference). Built-in chat commands are not user-extensible
+  directly, but users can author custom commands via prompt files
+  (.prompt.md) and skills (SKILL.md) in supported surfaces.
 example: |
   # VS Code Copilot Chat built-in slash commands (verified):
-  /clear           — Start a new chat session
-  /explain         — Explain how the code in your active editor works
+  /explain         — Explain code or a programming concept
   /fix             — Propose a fix for problems in the selected code
-  /fixTestFailure  — Find and fix a failing test
-  /help            — Quick reference and basics of using GitHub Copilot
-  /new             — Create a new project
-  /tests           — Generate unit tests for the selected code
+  /tests           — Generate tests for selected methods/functions
+  /setupTests      — Recommend & set up a testing framework
+  /fixTestFailure  — Suggest fixes for failing tests
+  /doc             — Generate doc comments (editor inline chat)
+  /new             — Scaffold a new VS Code workspace or file
+  /newNotebook     — Scaffold a new Jupyter notebook
+  /init            — Generate/update copilot-instructions.md or AGENTS.md
+  /plan            — Run the Plan agent for a complex task
+  /search          — Generate a query for the Search view
+  /startDebugging  — Generate launch.json and start debugging
+  /clear           — Start a new chat session
+  /compact         — Summarize conversation to reduce context
+  /fork            — Fork the current chat into a new session
+  /debug           — Show the Chat Debug view
+  /troubleshoot    — Analyze agent debug logs
+  /agents          — Configure custom agents
+  /hooks           — Configure hooks
+  /instructions    — Configure custom instructions
+  /prompts         — Configure prompt files
+  /skills          — Configure agent skills
+  /create-agent /create-prompt /create-instruction
+  /create-skill /create-hook  — AI-assisted authoring of customizations
+  /yolo /autoApprove           — Global tool auto-approval
+  /disableYolo /disableAutoApprove — Disable global auto-approval
 
   # Visual Studio adds:
   /doc        — Add documentation comment for this symbol
@@ -30,15 +53,39 @@ example: |
   # Xcode supports:
   /doc, /explain, /fix, /simplify, /tests
 
-  # GitHub.com web chat:
-  /clear, /delete, /new, /rename
+  # GitHub.com web chat (https://github.com/copilot):
+  # No slash commands documented; use the conversation UI to start/rename
+  # chats and edit prior messages.
 
-  # Copilot CLI slash commands:
-  /model, /mcp, /compact, /context, /feedback, /allow-all, /yolo
+  # Copilot CLI slash commands (selection — full list in CLI command reference):
+  /agent            — Browse/select custom agents
+  /allow-all, /yolo — Enable all permissions
+  /compact          — Summarize conversation to reduce context
+  /context          — Show context window usage
+  /cwd, /cd         — Change working directory
+  /delegate         — Delegate task to cloud agent (PR)
+  /diff             — Review changes in the current directory
+  /feedback, /bug   — Send feedback
+  /fleet            — Run subagents in parallel
+  /ide              — Connect to an IDE workspace
+  /init             — Initialize Copilot custom instructions for the repo
+  /instructions     — View/toggle custom instruction files
+  /mcp              — Manage MCP servers
+  /model, /models   — Select AI model
+  /plan             — Build an implementation plan before coding
+  /pr               — Manage pull requests (view/create/fix/auto)
+  /research         — Deep research using GitHub + web sources
+  /resume, /continue— Resume a prior session
+  /review           — Run the code review agent on current changes
+  /skills           — Manage skills
+  /tasks            — View/manage subagent + shell tasks
+  /undo, /rewind    — Revert last turn's file changes
+  /usage            — Show session metrics
+  /clear, /new      — Start a new conversation
 
   # Usage:
   /tests Write vitest tests for the UserService class
 syntax: text
-docUrl: https://docs.github.com/en/copilot/reference/cheat-sheet
+docUrl: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
 userExtensible: false
 extensibilityNote: 'Built-in chat commands are predefined per surface; author custom commands via prompt files (.prompt.md) and SKILL.md skills where supported'

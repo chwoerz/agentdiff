@@ -2,31 +2,36 @@ id: copilot-agent-modes
 name: Copilot Agent Modes
 featureId: agent-modes
 description: >
-  Copilot offers several agent surfaces. In the IDE chat, choose an agent
-  from the agents dropdown — built-in options include Ask (Q&A), Agent
-  (multi-step edits and tool use), and Plan (read-only planning). The
-  Copilot CLI runs the same agent loop in the terminal with per-tool
-  approval, controlled via --allow-tool / --deny-tool / --allow-all-tools.
-  Copilot cloud agent (formerly "coding agent") runs autonomously on
-  GitHub Actions runners — assign the "Copilot" user to an issue or mention
-  `@copilot` in a PR comment, and it researches the repo, makes commits on
-  a branch, and opens a draft PR. Third-party agents (Claude Agent preview,
-  OpenAI Codex) can also run inside VS Code chat with your Copilot subscription.
+  Copilot offers several agent surfaces. In VS Code chat, choose an agent
+  from the agents dropdown — built-in options are Agent (multi-step edits
+  and tool use), Plan (read-only research and planning), and Ask (Q&A).
+  The Copilot CLI runs the same agent loop in the terminal with three
+  modes cycled via Shift+Tab — standard (per-tool approval), plan
+  (read-only), and autopilot (no approvals) — and per-tool control via
+  --allow-tool / --deny-tool / --allow-all-tools. Copilot cloud agent
+  (formerly "coding agent") runs autonomously on GitHub Actions runners —
+  assign the "Copilot" user to an issue or mention `@copilot` in a PR
+  comment, and it researches the repo, makes commits on a branch, and
+  opens a draft PR. Third-party agents (Claude Agent preview, OpenAI
+  Codex) can also run inside VS Code chat with your Copilot subscription.
 example: |
-  # IDE: select agent from the agents dropdown in the chat view
-  # Built-in: Ask | Agent | Plan
+  # VS Code: select agent from the agents dropdown in the chat view
+  # Built-in: Agent | Plan | Ask
   # Plus: any .agent.md custom agents and third-party agents
 
-  # Cmd/Ctrl+Shift+I — switch to agent mode quickly
+  # Switch to agent mode shortcut:
+  #   macOS  : ⇧⌘I
+  #   Windows: Ctrl+Shift+I
+  #   Linux  : Ctrl+Shift+Alt+I
   "Add input validation to the registration form"
   # Agent: searches codebase → edits files → runs tests → iterates
 
   # Plan mode (read-only): research and produce an implementation plan
   /plan refactor the auth module to use OAuth2
 
-  # CLI permission control:
+  # CLI modes (Shift+Tab cycles): standard → plan → autopilot
   copilot                                  # default: per-tool approval
-  copilot --allow-all-tools                # bypass approvals (use with care)
+  copilot --allow-all-tools                # autopilot: bypass approvals
   copilot --allow-tool shell --deny-tool 'shell(rm *)'
 
   # Cloud agent (GitHub.com):
@@ -44,7 +49,7 @@ customExample: |
   name: security-reviewer
   description: Reviews code for security vulnerabilities. Read-only.
   tools: [read, search]
-  model: claude-sonnet-4
+  model: claude-sonnet-4.5
   ---
 
   You are a security expert. Analyze code for OWASP Top 10

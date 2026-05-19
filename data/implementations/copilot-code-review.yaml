@@ -2,14 +2,16 @@ id: copilot-code-review
 name: Copilot Code Review
 featureId: code-review
 description: >
-  GitHub Copilot can review pull requests on GitHub.com (and review uncommitted
-  changes in VS Code, Visual Studio, JetBrains, Xcode). On GitHub.com, add
-  "Copilot" as a reviewer and Copilot leaves inline comments — often with
-  one-click suggested changes. Copilot always leaves a "Comment" review (never
-  "Approve" or "Request changes"), so it does not count toward required
-  approvals. When a comment has a suggestion, clicking "Implement suggestion"
-  drafts a request to the Copilot cloud agent, which opens a new PR applying
-  the fix. Customizable via `.github/copilot-instructions.md` and
+  GitHub Copilot can review pull requests on GitHub.com, review uncommitted
+  changes in VS Code/Visual Studio/JetBrains/Xcode, and review changes from
+  the Copilot CLI via the built-in `code-review` agent and `/review` slash
+  command. On GitHub.com, add "Copilot" as a reviewer and Copilot leaves
+  inline comments — often with one-click suggested changes. Copilot always
+  leaves a "Comment" review (never "Approve" or "Request changes"), so it
+  does not count toward required approvals. When a comment has a suggestion,
+  clicking "Implement suggestion" drafts a request to the Copilot cloud
+  agent, which opens a new PR applying the fix. Customizable via
+  `.github/copilot-instructions.md` and
   `.github/instructions/**/*.instructions.md` (first 4000 chars only).
 example: |
   # GitHub.com PR:
@@ -27,6 +29,11 @@ example: |
   # - Editor: select code → right-click → Generate Code → Review
   # - Source Control view → "Copilot Code Review - Uncommitted Changes"
   # Comments appear inline and in the Problems panel.
+
+  # Copilot CLI:
+  copilot
+  > /review                           # review staged/PR changes
+  > /agent code-review                # invoke built-in code-review agent
 
   # Re-request review after pushing changes:
   # Click the sync icon next to "Copilot" in the Reviewers menu.

@@ -3,12 +3,15 @@ name: Copilot CLI
 featureId: cli-features
 description: >
   GitHub Copilot CLI (@github/copilot) is a standalone terminal-based
-  agent installed as the `copilot` binary. It supports interactive chat,
-  a plan mode (Shift+Tab to toggle), agent mode with file editing and
-  shell commands, MCP server support (including the GitHub MCP server),
-  custom AGENTS.md instructions, custom agents, hooks, agent skills,
-  Copilot Memory, automatic context auto-compaction, and per-tool
-  approval modes (--allow-tool / --deny-tool / --allow-all-tools).
+  agent installed as the `copilot` binary. It supports interactive chat
+  and three modes cycled with Shift+Tab — standard (per-tool approval),
+  plan (read-only research/planning), and autopilot (no approval prompts).
+  Features include agent mode with file editing and shell commands, MCP
+  server support (including the GitHub MCP server), custom AGENTS.md
+  instructions, custom agents, hooks, agent skills, Copilot Memory,
+  automatic context auto-compaction, language server (LSP) integration,
+  plugin marketplace, remote steering, fleet/delegate orchestration, and
+  per-tool approval modes (--allow-tool / --deny-tool / --allow-all-tools).
   Trusted-directories prompt protects against running in unsafe folders.
   The default model is Claude Sonnet 4.5; switch with /model or
   --model. ACP server support lets external tools embed Copilot CLI.
@@ -34,11 +37,25 @@ example: |
   # In-session slash commands (selection):
   /model         # switch model (default: Claude Sonnet 4.5)
   /mcp           # manage MCP server configurations
+  /agent         # pick a custom agent
+  /plan          # research-only plan mode
+  /review        # review staged/PR changes
+  /diff          # show working-tree diff
+  /pr            # create or summarize a pull request
+  /research      # deep research subagent
+  /delegate      # delegate task to another agent
+  /fleet         # orchestrate parallel agents
+  /undo /rewind  # session checkpoints
+  /lsp           # language server management
+  /remote        # remote steering
+  /plugin        # plugin marketplace
+  /ide           # connect to IDE
+  /skills        # list/manage agent skills
   /compact       # manually compress context
   /context       # show token usage breakdown
   /feedback      # submit feedback / bug / feature request
   /allow-all     # allow all tools for this session
-  /yolo          # bypass approvals
+  /yolo          # bypass approvals (autopilot)
 
   # Custom model provider (OpenAI-compatible, Azure, Anthropic, Ollama):
   export COPILOT_PROVIDER_BASE_URL=https://api.example.com
